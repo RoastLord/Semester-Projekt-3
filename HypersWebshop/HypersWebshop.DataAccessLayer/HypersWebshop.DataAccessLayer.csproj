@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBCustomer.cs" />
+    <Compile Include="DBEmployee.cs" />
+    <Compile Include="DBOrder.cs" />
+    <Compile Include="DBPriceLog.cs" />
     <Compile Include="DBProduct.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

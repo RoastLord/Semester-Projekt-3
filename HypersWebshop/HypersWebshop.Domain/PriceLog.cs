@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    class PriceLog
+    public class PriceLog
     {
+        public DateTime Date { get; set; }
+        public float SalesPrice { get; set; }
+
+        public PriceLog(DateTime date, float salesPrice)
+        {
+            Date = date;
+            SalesPrice = salesPrice;
+        }
+
     }
 }
