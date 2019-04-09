@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    class Product_Status
+     public enum Product_Status
     {
+        Sold,
+        Published,
+        Unpublished,
+        Tested,
+        Untested,
+        Rejected
     }
 }

@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    class Product_Description
+    public enum Product_Description
     {
+        Harddisk,
+        RAM,
+        Batteri,
+        Strømforsyning,
+        GPU,
+        CPU_Køling,
+        Motherboard,
+        CPU,
+        Optisk_Drev
     }
 }
