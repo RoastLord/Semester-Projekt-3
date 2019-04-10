@@ -14,5 +14,14 @@ namespace HypersWebshop.Domain
         Tested,
         Untested,
         Rejected
+        
+        //evt med tal?
+
+        //Sold = 1,
+        //Published = 2,
+        //Unpublished = 3,
+        //Tested = 4,
+        //Untested = 5,
+        //Rejected = 6
     }
 }

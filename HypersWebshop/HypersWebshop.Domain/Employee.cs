@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    class Employee : Person
+    public class Employee : Person
     { 
         public Boolean IsAdmin { get; set; }
         public DateTime Birthday { get; set; }

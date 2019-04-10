@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    class Order
+    public class Order
     {
         public int OrderNo { get; set; }
         public float totalPrice { get; set; }

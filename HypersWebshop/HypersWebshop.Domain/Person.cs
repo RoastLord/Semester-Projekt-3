@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    public class Person
+    public abstract class Person
     {
         public string Name { get; set; }
         public string Address { get; set; }
