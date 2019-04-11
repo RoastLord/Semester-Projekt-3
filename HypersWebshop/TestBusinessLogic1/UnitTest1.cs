@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using HypersWebshop.Domain;
 
 namespace TestBusinessLogic
 {
@@ -9,6 +10,19 @@ namespace TestBusinessLogic
         [TestMethod]
         public void TestMethod1()
         {
+        }
+        [TestMethod]
+        public void TestSale()
+        {
+            //arrange
+            Customer customer1 = new Customer("testn", "testad", "testpn", "testemail", 9000, "testcity");
+            Product product1 = new Product(1, "testproduct", 1, 100, 50, Product_Description.Harddisk, Product_Status.Published);
+            Boolean isItSold = false;
+
+            //act
+            HypersWebshop.BusinessLogic.ProductController.changeProductStatusSold(product1);
+            //assert
+            Assert.AreEqual ( Product_Status.Sold, product1.ProductStatus);
         }
     }
 }
