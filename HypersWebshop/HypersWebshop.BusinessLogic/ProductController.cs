@@ -33,5 +33,42 @@ namespace HypersWebshop.BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        //public Product changeProductStatus(Product product, Product_Status newStatus)
+        //{
+        //    Product p = product;
+
+        //    p.ProductStatus = newStatus;
+        //    DBProduct dBProduct = new DBProduct():
+        //    dbProduct.Update(product, p);
+        //}
+
+        public Product changeProductStatusSold(Product product)
+        {
+            Product p = product;
+            Boolean paid = true;
+
+
+            if (paid)
+            {
+
+                if (p.ProductStatus != Product_Status.Published)
+                {
+                    //Skal eftertjekkes
+                    Console.WriteLine("Error, produktet er ikke tilgængeligt");
+                }
+                else
+                {
+                    //Sætter produktets status til solgt
+                    p.ProductStatus = Product_Status.Sold;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Betalingen gik ikke gennem");
+            }
+
+            return p;
+        }
     }
 }
