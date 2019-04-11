@@ -33,6 +33,5 @@ namespace HypersWebshop.BusinessLogic
         {
             throw new NotImplementedException();
         }
-        public void Product
     }
 }
