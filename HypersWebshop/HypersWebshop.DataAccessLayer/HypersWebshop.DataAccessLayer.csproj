@@ -49,5 +49,11 @@
     <Compile Include="Interfaces\ICRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HypersWebshop.Domain\HypersWebshop.Domain.csproj">
+      <Project>{2C43AA65-180A-4C9F-AF1C-7B99874F1D82}</Project>
+      <Name>HypersWebshop.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,6 +13,9 @@ namespace TestBusinessLogic1
         {
             Product product = new Product(1, "RAM", 3, 300, 200, Product_Description.RAM, Product_Status.Tested);
             ProductController productController = new ProductController();
+            productController.ChangeProductStatus(product, Product_Status.Published);
+
+            Assert.AreEqual(product.ProductStatus, Product_Status.Published);
 
         }
 
