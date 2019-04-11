@@ -11,7 +11,11 @@ namespace HypersWebshop.DataAccessLayer
     {
         public  Product Update(Product product, Product UpdatedProduct)
         {
+            
             return UpdatedProduct;
+
+
+
         }
     }
 }
