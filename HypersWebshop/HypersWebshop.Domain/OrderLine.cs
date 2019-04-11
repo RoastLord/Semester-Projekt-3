@@ -11,12 +11,15 @@ namespace HypersWebshop.Domain
         public int Amount { get; set; }
         public float Price { get; set; }
         public float TotalPrice { get; set; }
+        public Product Product { get; set; }
 
-        public OrderLine(int amount, float price, float totalPrice)
+        public OrderLine(int amount, float price, float totalPrice, Product product)
         {
             Amount = amount;
             Price = price;
             TotalPrice = totalPrice;
+            Product = product;
+            
         }
     }
 }

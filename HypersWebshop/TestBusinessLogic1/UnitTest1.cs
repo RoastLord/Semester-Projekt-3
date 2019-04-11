@@ -9,21 +9,21 @@ namespace TestBusinessLogic
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
-        {
-        }
-        [TestMethod]
         public void TestSale()
         {
-            //arrange
+            // Arrange
             Customer customer1 = new Customer("testn", "testad", "testpn", "testemail", 9000, "testcity");
             Product product1 = new Product(1, "testproduct", 1, 100, 50, Product_Description.Harddisk, Product_Status.Published);
+            OrderLine orderLine = new OrderLine(1, 100, 100, product1);
+            Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer1);
+            order.AddToOrderLine(orderLine);
+            OrderController orderController = new OrderController();
 
-            //act
-            //ProductController.changeProductStatusSold(product1);
+            // Act
+            orderController.ProcessSale(order);
 
-            //assert
-            Assert.AreEqual ( Product_Status.Sold, product1.ProductStatus);
+            // Assert
+            Assert.AreEqual(Product_Status.Sold, product1.ProductStatus);
         }
     }
 }
