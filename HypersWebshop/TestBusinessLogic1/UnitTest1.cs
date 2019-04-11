@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HypersWebshop.Domain;
+using HypersWebshop.BusinessLogic;
 
 namespace TestBusinessLogic
 {
@@ -19,7 +20,8 @@ namespace TestBusinessLogic
             Product product1 = new Product(1, "testproduct", 1, 100, 50, Product_Description.Harddisk, Product_Status.Published);
 
             //act
-            HypersWebshop.BusinessLogic.ProductController.changeProductStatusSold(product1);
+            ProductController.changeProductStatusSold(product1);
+
             //assert
             Assert.AreEqual ( Product_Status.Sold, product1.ProductStatus);
         }
