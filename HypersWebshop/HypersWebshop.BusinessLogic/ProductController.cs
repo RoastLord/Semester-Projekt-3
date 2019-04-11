@@ -1,4 +1,5 @@
-﻿using HypersWebshop.Domain;
+﻿using HypersWebshop.DataAccessLayer;
+using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,16 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        //public Product changeProductStatus(Product product, Product_Status newStatus)
-        //{
-        //    Product p = product;
+        public Product ChangeProductStatus(Product product, Product_Status newStatus)
+        {
+            Product p = product;
 
-        //    p.ProductStatus = newStatus;
-        //    DBProduct dBProduct = new DBProduct():
-        //    dbProduct.Update(product, p);
-        //}
+            p.ProductStatus = newStatus;
+            DBProduct dBProduct = new DBProduct();
+            dBProduct.Update(product, p);
+
+            return p;
+        }
 
         public Product changeProductStatusSold(Product product)
         {
