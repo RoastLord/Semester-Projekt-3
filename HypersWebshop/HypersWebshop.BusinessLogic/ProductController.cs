@@ -1,4 +1,5 @@
-﻿using HypersWebshop.Domain;
+﻿using HypersWebshop.DataAccessLayer;
+using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,45 @@ namespace HypersWebshop.BusinessLogic
         public void Update(Product entity)
         {
             throw new NotImplementedException();
+        }
+
+        public Product ChangeProductStatus(Product product, Product_Status newStatus)
+        {
+            Product p = product;
+
+            p.ProductStatus = newStatus;
+            DBProduct dBProduct = new DBProduct();
+            dBProduct.Update(product, p);
+
+            return p;
+        }
+
+        public Product changeProductStatusSold(Product product)
+        {
+            Product p = product;
+            Boolean paid = true;
+
+
+            if (paid)
+            {
+
+                if (p.ProductStatus != Product_Status.Published)
+                {
+                    //Skal eftertjekkes
+                    Console.WriteLine("Error, produktet er ikke tilgængeligt");
+                }
+                else
+                {
+                    //Sætter produktets status til solgt
+                    p.ProductStatus = Product_Status.Sold;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Betalingen gik ikke gennem");
+            }
+
+            return p;
         }
     }
 }

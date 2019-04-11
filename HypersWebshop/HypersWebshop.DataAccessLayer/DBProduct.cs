@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HypersWebshop.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,13 @@ namespace HypersWebshop.DataAccessLayer
 {
     public class DBProduct
     {
+        public  Product Update(Product product, Product UpdatedProduct)
+        {
+            
+            return UpdatedProduct;
+
+
+
+        }
     }
 }
