@@ -60,6 +60,10 @@
       <Project>{bce89715-5119-4d79-b97f-78fa42f748d2}</Project>
       <Name>HypersWebshop.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HypersWebshop.Domain\HypersWebshop.Domain.csproj">
+      <Project>{2c43aa65-180a-4c9f-af1c-7b99874f1d82}</Project>
+      <Name>HypersWebshop.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
