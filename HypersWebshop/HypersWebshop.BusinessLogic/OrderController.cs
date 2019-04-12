@@ -34,39 +34,45 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Product ProcessSale(Order order)
+        public void ProcessSale(Order order)
         {
             OrderLine orderLine = order.OrderLines.Peek();
             Product product = orderLine.Product;
             Customer customer = order.Customer;
-            Boolean paid = true;
             ProductController productController = new ProductController();
 
-            if (paid)
+            if (product.AmountInStock < orderLine.Amount)
             {
+                throw new Exception("Det er lidt en cancer");
+            }
 
-                if (product.ProductStatus != Product_Status.Published)
-                {
-                    //Skal eftertjekkes
-                    Console.WriteLine("Error, produktet er ikke tilgængeligt");
-                }
-                else
-                {
-                    //Sætter produktets status til solgt
-                    productController.ChangeProductStatus(product, Product_Status.Sold);
-                }
-            }
-            else
+            if(IsPaid(order))
             {
-                Console.WriteLine("Betalingen gik ikke gennem");
+                productController.ChangeProductStatus(product, Product_Status.Sold);
+                PrintReceipt(order);
+                
             }
-            PrintReceipt(order);
-            return product;
+            
+        }
+
+        private bool IsPaid(Order order)
+        {
+            //NETS logik
+            return true;
         }
 
         private string PrintReceipt(Order order)
         {
             StringBuilder stringBuilder = new StringBuilder();
+
+            
+            stringBuilder.AppendLine(order.OrderNo.ToString());
+            stringBuilder.AppendLine(order.Customer.Name);
+            stringBuilder.AppendLine(order.Customer.Address);
+            stringBuilder.AppendLine(order.Customer.City);
+            stringBuilder.AppendLine(order.Customer.Email);
+            stringBuilder.AppendLine(order.Customer.PhoneNo);
+            stringBuilder.AppendLine();
 
             foreach (OrderLine orderLine in order.OrderLines)
             {
@@ -74,15 +80,12 @@ namespace HypersWebshop.BusinessLogic
                 stringBuilder.AppendLine(orderLine.Price.ToString());
                 stringBuilder.AppendLine(orderLine.Product.Name);
                 stringBuilder.AppendLine(orderLine.TotalPrice.ToString());
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine(order.Customer.Name);
-                stringBuilder.AppendLine(order.Customer.Address);
-                stringBuilder.AppendLine(order.Customer.City);
-                stringBuilder.AppendLine(order.Customer.Email);
-                stringBuilder.AppendLine(order.Customer.PhoneNo);
+
             }
 
             return stringBuilder.ToString();
+
+            
 
         }
     }
