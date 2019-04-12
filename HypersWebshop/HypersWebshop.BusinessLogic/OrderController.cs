@@ -65,21 +65,27 @@ namespace HypersWebshop.BusinessLogic
         {
             StringBuilder stringBuilder = new StringBuilder();
 
+            
+            stringBuilder.AppendLine(order.OrderNo.ToString());
+            stringBuilder.AppendLine(order.Customer.Name);
+            stringBuilder.AppendLine(order.Customer.Address);
+            stringBuilder.AppendLine(order.Customer.City);
+            stringBuilder.AppendLine(order.Customer.Email);
+            stringBuilder.AppendLine(order.Customer.PhoneNo);
+            stringBuilder.AppendLine();
+
             foreach (OrderLine orderLine in order.OrderLines)
             {
                 stringBuilder.AppendLine(orderLine.Amount.ToString());
                 stringBuilder.AppendLine(orderLine.Price.ToString());
                 stringBuilder.AppendLine(orderLine.Product.Name);
                 stringBuilder.AppendLine(orderLine.TotalPrice.ToString());
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine(order.Customer.Name);
-                stringBuilder.AppendLine(order.Customer.Address);
-                stringBuilder.AppendLine(order.Customer.City);
-                stringBuilder.AppendLine(order.Customer.Email);
-                stringBuilder.AppendLine(order.Customer.PhoneNo);
+
             }
 
             return stringBuilder.ToString();
+
+            
 
         }
     }
