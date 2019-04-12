@@ -9,16 +9,25 @@ namespace HypersWebshop.Domain
     public class Order
     {
         public int OrderNo { get; set; }
-        public float totalPrice { get; set; }
+        public float TotalPrice { get; set; }
         public DateTime Date { get; set; }
         public DateTime DeliveryDate { get; set; }
+        public Customer Customer { get; set; }
+        public Stack<OrderLine> OrderLines { get; set; }
 
-        public Order(int orderNo, float totalPrice, DateTime date, DateTime deliveryDate)
+        public Order(int orderNo, float totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
         {
             OrderNo = orderNo;
-            this.totalPrice = totalPrice;
+            TotalPrice = totalPrice;
             Date = date;
             DeliveryDate = deliveryDate;
+            Customer = customer;
+            OrderLines = new Stack<OrderLine>();
+        }
+
+        public void AddToOrderLine(OrderLine orderLine)
+        {
+            OrderLines.Push(orderLine);
         }
     }
 }
