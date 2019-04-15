@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBConnection.cs" />
     <Compile Include="DBCustomer.cs" />
     <Compile Include="DBEmployee.cs" />
     <Compile Include="DBOrder.cs" />
