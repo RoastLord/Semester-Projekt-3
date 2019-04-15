@@ -18,6 +18,14 @@ namespace HypersWebshop.DataAccessLayer
             connection.Open();
         }
 
+        public void OpenConnection(String dinEgenConnectionStreng)
+        {
+            // Her er en kopi af min connection-string. Ændre "CoolShop" til hvad-end jeres egen database hedder, som i tester på
+            // "Data Source=.\\SQLExpress;Initial Catalog = CoolShop; Integrated Security = True"
+            connection = new SqlConnection(dinEgenConnectionStreng);
+            connection.Open();
+        }
+
         public void CloseConnection()
         {
             connection.Close();
@@ -32,9 +40,9 @@ namespace HypersWebshop.DataAccessLayer
             cmd.ExecuteNonQuery();
         }
 
-        public SqlDataReader DataReader(string Query_)
+        public SqlDataReader DataReader(string query)
         {
-            SqlCommand cmd = new SqlCommand(Query_, connection);
+            SqlCommand cmd = new SqlCommand(query, connection);
             SqlDataReader dr = cmd.ExecuteReader();
             return dr;
         }
