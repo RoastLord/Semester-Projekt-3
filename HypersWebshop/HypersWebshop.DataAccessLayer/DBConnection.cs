@@ -47,6 +47,11 @@ namespace HypersWebshop.DataAccessLayer
             return dr;
         }
 
+        public SqlConnection GetConnection()
+        {
+            return connection;
+        }
+
 
     }
 }
