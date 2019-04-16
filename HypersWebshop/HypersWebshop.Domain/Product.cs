@@ -26,6 +26,15 @@ namespace HypersWebshop.Domain
             ProductDescription = productDescription;
             ProductStatus = productStatus;
         }
-        
+        public Product(string name, int amountInStock, float price, float purchasePrice, Product_Description productDescription, Product_Status productStatus)
+        {
+            Name = name;
+            AmountInStock = amountInStock;
+            Price = price;
+            PurchasePrice = purchasePrice;
+            ProductDescription = productDescription;
+            ProductStatus = productStatus;
+        }
+
     }
 }

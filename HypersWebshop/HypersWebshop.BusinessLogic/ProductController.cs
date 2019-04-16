@@ -10,9 +10,11 @@ namespace HypersWebshop.BusinessLogic
 {
     public class ProductController : ICRUD<Product>
     {
+        DBProduct dbProduct = new DBProduct();
+
         public void create(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.CreateProduct(entity);
         }
 
         public void Delete(Product entity)
@@ -41,7 +43,7 @@ namespace HypersWebshop.BusinessLogic
 
             p.ProductStatus = newStatus;
             DBProduct dBProduct = new DBProduct();
-            dBProduct.Update(product, p);
+            //dBProduct.Update(product, p);
 
             return p;
         }
