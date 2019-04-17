@@ -29,6 +29,8 @@ namespace HypersWebshop.DataAccessLayer
          */
         private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @AmountInStock, @Price, @PurchasePrice, @Description, @Status)";
         private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
+        private string DELETE_PRODUCT = "DELETE FROM Product WHERE ID = (@id)";
+        private string FIND_PRODUCTS_BY_DESCRIPTION = "SELECT * from Product WHERE description = @description";
         private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, amountInStock = @amountInStock," +
                                      " price = @price, purchasePrice = @PurchasePrice, description = @description, status = @status WHERE id = @id;";
         public DBProduct()
@@ -68,7 +70,23 @@ namespace HypersWebshop.DataAccessLayer
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(DELETE_PRODUCT, con);
+                        command.Parameters.AddWithValue("id", entity.ProductId);
+                        command.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+                Console.WriteLine("Connection fra Delete() er: " + dBConnection.connection.State);
+            }
+            catch (TransactionAbortedException)
+            {
+            }
         }
 
         public Product Get(int id)
@@ -115,9 +133,33 @@ namespace HypersWebshop.DataAccessLayer
             //}
         
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(Enum productDescription)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                List<Product> products = new List<Product>();
+                SqlCommand command = new SqlCommand(FIND_PRODUCTS_BY_DESCRIPTION, con);
+                command.Parameters.AddWithValue("description", productDescription);
+                SqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    Product product = new Product()
+                    {
+                        ProductId = dr.GetInt32(0),
+                        Name = dr.GetString(1),
+                        AmountInStock = dr.GetInt32(2),
+                        Price = dr.GetInt64(3),
+                        PurchasePrice = dr.GetInt64(4),
+                        ProductDescription = (Product_Description)dr.GetInt32(5),
+                        ProductStatus = (Product_Status)dr.GetInt32(6)
+                        
+                    };
+                    products.Add(product);
+                    
+                }
+                return products;
+                
+            }
         }
 
         public void Update(Product oldProduct, Product newProduct)
@@ -138,7 +180,6 @@ namespace HypersWebshop.DataAccessLayer
                         command.Parameters.AddWithValue("Status", newProduct.ProductStatus);
                         command.Parameters.AddWithValue("id", oldProduct.ProductId);
 
-                        // ExecuteScalar sætter alt til 0.. Hvorfor??
                         command.ExecuteNonQuery();
                     }
                     scope.Complete();

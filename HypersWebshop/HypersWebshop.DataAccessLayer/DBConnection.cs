@@ -13,11 +13,6 @@ namespace HypersWebshop.DataAccessLayer
         private string _connectionString = "Data Source=.\\SQLExpress;Initial Catalog = Hypers; Integrated Security = True";
         public SqlConnection connection;
 
-        public DBConnection()
-        {
-
-        }
-
         public SqlConnection OpenConnection()
         {
             connection = new SqlConnection(_connectionString);
@@ -34,18 +29,5 @@ namespace HypersWebshop.DataAccessLayer
         {
             connection.Close();
         }
-
-        public SqlConnection GetConnection()
-        {
-            return connection;
-        }
-
-        public SqlDataReader DataReader(string Query_)
-        {
-            SqlCommand cmd = new SqlCommand(Query_, connection);
-            SqlDataReader dr = cmd.ExecuteReader();
-            return dr;
-        }
-
     }
 }

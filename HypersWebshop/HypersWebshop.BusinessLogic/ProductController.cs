@@ -19,7 +19,7 @@ namespace HypersWebshop.BusinessLogic
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.Delete(entity);
         }
 
         public Product Get(int id)
@@ -27,14 +27,10 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Get(id);
         }
 
-        public IEnumerable<Product> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.Update(entity, entity);
         }
 
         public void ChangeProductStatus(Product product, Product_Status newStatus)
@@ -43,6 +39,11 @@ namespace HypersWebshop.BusinessLogic
             newProduct.ProductStatus = newStatus;
 
             dbProduct.Update(product, newProduct);
+        }
+
+        public IEnumerable<Product> GetAll(Enum productDescription)
+        {
+            return dbProduct.GetAll(productDescription);
         }
     }
 }

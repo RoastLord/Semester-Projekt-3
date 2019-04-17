@@ -29,6 +29,11 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Customer> GetAll(Enum productDescription)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Customer entity)
         {
             throw new NotImplementedException();

@@ -10,7 +10,7 @@ namespace HypersWebshop.DataAccessLayer.Interfaces
     {
         void Create(T entity);
         T Get(int id);
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(Enum productDescription);
         void Update(T entity, T oldEntity);
         void Delete(T entity);
     }

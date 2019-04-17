@@ -104,5 +104,10 @@ namespace HypersWebshop.BusinessLogic
             
 
         }
+
+        public IEnumerable<Order> GetAll(Enum productDescription)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
