@@ -80,6 +80,7 @@ namespace HypersWebshop.DataAccessLayer
                 SqlDataReader dr = command.ExecuteReader();
                 while (dr.Read())
                 {
+                    Console.WriteLine("ID:" + dr.GetInt32(0));
                     Console.WriteLine("Navn: " + dr.GetString(1));
                     Console.WriteLine("Stock: " + dr.GetInt32(2));
                     Console.WriteLine("Pris: " + dr.GetInt64(3));
@@ -88,6 +89,7 @@ namespace HypersWebshop.DataAccessLayer
                     Console.WriteLine("Status: " + (Product_Status)dr.GetInt32(6));
                     product = new Product()
                     {
+                        ProductId = dr.GetInt32(0),
                         Name = dr.GetString(1),
                         AmountInStock = dr.GetInt32(2),
                         Price = dr.GetInt64(3),

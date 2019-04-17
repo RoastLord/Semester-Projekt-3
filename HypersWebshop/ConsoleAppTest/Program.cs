@@ -15,7 +15,7 @@ namespace ConsoleAppTest
             //Arrange
             Product product = new Product()
             {
-                Name = "Navn",
+                Name = "Skovl",
                 AmountInStock = 5,
                 Price = 120,
                 PurchasePrice = 100,
@@ -27,8 +27,15 @@ namespace ConsoleAppTest
 
             //Act
             productController.Create(product);
+            Product theShit = productController.Get(3);
 
-            Console.WriteLine("Produkt med id 1: " + productController.Get(1).ProductId);
+            Console.WriteLine("Produkt med id 3: " + theShit.ProductId);
+            Console.WriteLine("Produkt med id 3: " + theShit.Name);
+            Console.WriteLine("Produkt med id 3: " + theShit.AmountInStock);
+            Console.WriteLine("Produkt med id 3: " + theShit.Price);
+            
+            Console.WriteLine("Produkt med id 3: " + theShit.ProductDescription);
+            Console.WriteLine("Produkt med id 3: " + theShit.ProductStatus);
             Console.ReadKey();
         }
     }
