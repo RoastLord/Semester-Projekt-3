@@ -9,9 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.BusinessLogic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.DataAccessLayer", "HypersWebshop.DataAccessLayer\HypersWebshop.DataAccessLayer.csproj", "{3FBE2322-42A3-4D63-AFB1-663E6015D593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.Service", "HypersWebshop.Service\HypersWebshop.Service.csproj", "{C3D12760-58B8-4B0C-BD9D-E116D80E9920}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBusinessLogic", "TestBusinessLogic1\TestBusinessLogic.csproj", "{A35684EE-C668-4515-A77E-627541685529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.DTTestTab", "HypersWebshop.DTTestTab\HypersWebshop.DTTestTab.csproj", "{6C09B60E-AE0B-4DC8-8430-574E05ABBF83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D9B5261-E85F-4AFF-BE66-550DF1AC993F} = {1D9B5261-E85F-4AFF-BE66-550DF1AC993F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.ServiceLib", "HypersWebshop.ServiceLib\HypersWebshop.ServiceLib.csproj", "{1D9B5261-E85F-4AFF-BE66-550DF1AC993F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.WebApp", "HypersWebshop.WebApp\HypersWebshop.WebApp.csproj", "{1FF14DDC-065B-4E88-891F-37C1DA35FD89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypersWebshop.WebApp.Tests", "HypersWebshop.WebApp.Tests\HypersWebshop.WebApp.Tests.csproj", "{D0B6C9CE-AB0D-4152-A2D9-D85396B3FB02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +40,26 @@ Global
 		{3FBE2322-42A3-4D63-AFB1-663E6015D593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FBE2322-42A3-4D63-AFB1-663E6015D593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FBE2322-42A3-4D63-AFB1-663E6015D593}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3D12760-58B8-4B0C-BD9D-E116D80E9920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3D12760-58B8-4B0C-BD9D-E116D80E9920}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3D12760-58B8-4B0C-BD9D-E116D80E9920}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3D12760-58B8-4B0C-BD9D-E116D80E9920}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A35684EE-C668-4515-A77E-627541685529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A35684EE-C668-4515-A77E-627541685529}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35684EE-C668-4515-A77E-627541685529}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35684EE-C668-4515-A77E-627541685529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C09B60E-AE0B-4DC8-8430-574E05ABBF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C09B60E-AE0B-4DC8-8430-574E05ABBF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C09B60E-AE0B-4DC8-8430-574E05ABBF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C09B60E-AE0B-4DC8-8430-574E05ABBF83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D9B5261-E85F-4AFF-BE66-550DF1AC993F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D9B5261-E85F-4AFF-BE66-550DF1AC993F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D9B5261-E85F-4AFF-BE66-550DF1AC993F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D9B5261-E85F-4AFF-BE66-550DF1AC993F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF14DDC-065B-4E88-891F-37C1DA35FD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF14DDC-065B-4E88-891F-37C1DA35FD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF14DDC-065B-4E88-891F-37C1DA35FD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF14DDC-065B-4E88-891F-37C1DA35FD89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B6C9CE-AB0D-4152-A2D9-D85396B3FB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B6C9CE-AB0D-4152-A2D9-D85396B3FB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B6C9CE-AB0D-4152-A2D9-D85396B3FB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B6C9CE-AB0D-4152-A2D9-D85396B3FB02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

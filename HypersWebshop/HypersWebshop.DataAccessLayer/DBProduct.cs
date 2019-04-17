@@ -9,9 +9,9 @@ namespace HypersWebshop.DataAccessLayer
 {
     public class DBProduct
     {
-        public  Product Update(Product product, Product UpdatedProduct)
+        public Product Update(Product product, Product UpdatedProduct)
         {
-            
+
             return UpdatedProduct;
 
 
