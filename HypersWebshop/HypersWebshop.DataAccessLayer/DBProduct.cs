@@ -1,4 +1,5 @@
-﻿using HypersWebshop.Domain;
+﻿using HypersWebshop.DataAccessLayer.Interfaces;
+using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -9,19 +10,34 @@ using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
-    public class DBProduct
+    public static class Util
+    {
+        // Extension method for SqlCommand, made to prettify ident return
+        public static int ExecuteWithIdentity(this SqlCommand cmd)
+        {
+            int tempID = -1;
+            int.TryParse(cmd.ExecuteScalar()?.ToString(), out tempID);
+            return tempID;
+        }
+    }
+
+    public class DBProduct : ICRUD<Product>
     {
         DBConnection dBConnection;
-        private string CREATE_PRODUCT = "INSERT INTO Product VALUES (@Description, @Status, @Price, @PurchasePrice, @AmountInStock";
-
+        /* Spacemagic to product key output:
+         * 'OUTPUT IDENT_CURRENT('Product')'
+         */
+        private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @AmountInStock, @Price, @PurchasePrice, @Description, @Status)";
+        private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
         public DBProduct()
         {
             dBConnection = new DBConnection();
         }
 
-        public void CreateProduct(Product product)
+
+
+        public void Create(Product entity)
         {
-            int returnValue = 0;
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -29,34 +45,88 @@ namespace HypersWebshop.DataAccessLayer
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand command = new SqlCommand(CREATE_PRODUCT, con);
-                        command.Parameters.AddWithValue("Description", product.ProductDescription);
-                        command.Parameters.AddWithValue("Status", product.ProductStatus);
-                        command.Parameters.AddWithValue("Price", product.Price);
-                        command.Parameters.AddWithValue("PurchasePrice", product.PurchasePrice);
-                        command.Parameters.AddWithValue("AmountInStock", product.AmountInStock);
+                        command.Parameters.AddWithValue("Name", entity.Name);
+                        command.Parameters.AddWithValue("AmountInStock", entity.AmountInStock);
+                        command.Parameters.AddWithValue("Price", entity.Price);
+                        command.Parameters.AddWithValue("PurchasePrice", entity.PurchasePrice);
+                        command.Parameters.AddWithValue("Description", entity.ProductDescription);
+                        command.Parameters.AddWithValue("Status", entity.ProductStatus);
 
-                        //Hvis returnValue > 0 er der sket en ændring
-                        returnValue = command.ExecuteNonQuery();
-                        Console.WriteLine(returnValue);
+                        // ExecuteScalar sætter alt til 0.. Hvorfor??
+                        entity.ProductId = command.ExecuteWithIdentity();
+                        Console.WriteLine("Produkt ID: " + entity.ProductId);
                     }
                     scope.Complete();
                 }
-                Console.WriteLine("Connection is now " + dBConnection.connection.State);
+                Console.WriteLine("Connection fra Create() er: " + dBConnection.connection.State);
             }
             catch (TransactionAbortedException)
             {
             }
         }
 
+        public void Delete(Product entity)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void DbAction(Action<SqlCommand> action)
-        //{
-        //    using (SqlConnection con = dBConnection.OpenConnection())
-        //    using (var comm = con.CreateCommand())
-        //    {
-        //        action(comm);
-        //        con.Close();
-        //    }
-        //}
+        public Product Get(int id)
+        {
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                Product product;
+                SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
+                command.Parameters.AddWithValue("id", id);
+                SqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    Console.WriteLine("Navn: " + dr.GetString(1));
+                    Console.WriteLine("Stock: " + dr.GetInt32(2));
+                    Console.WriteLine("Pris: " + dr.GetInt64(3));
+                    Console.WriteLine("Indkøbspris: " + dr.GetInt64(4));
+                    Console.WriteLine("Beskrivelse: " + (Product_Description)dr.GetInt32(5));
+                    Console.WriteLine("Status: " + (Product_Status)dr.GetInt32(6));
+                    product = new Product()
+                    {
+                        Name = dr.GetString(1),
+                        AmountInStock = dr.GetInt32(2),
+                        Price = dr.GetInt64(3),
+                        PurchasePrice = dr.GetInt64(4),
+                        ProductDescription = (Product_Description)dr.GetInt32(5),
+                        ProductStatus = (Product_Status)dr.GetInt32(6)
+                    };
+                    return product;
+                }
+                // Måske yikes kode
+                dBConnection.CloseConnection();
+                Console.WriteLine("Connection fra Get() er:  " + dBConnection.connection.State);
+            }
+            // Hvordan kan jeg return produktet jeg instanstiere i while loop.
+            Product dummy = new Product();
+            return dummy;
+
+
+
+        }
+            //public void DbAction(Action<SqlCommand> action)
+            //{
+            //    using (SqlConnection con = dBConnection.OpenConnection())
+            //    using (var comm = con.CreateCommand())
+            //    {
+            //        action(comm);
+            //        con.Close();
+            //    }
+            //}
+        
+
+        public IEnumerable<Product> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Product entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

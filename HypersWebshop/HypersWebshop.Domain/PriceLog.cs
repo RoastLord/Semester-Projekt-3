@@ -9,9 +9,9 @@ namespace HypersWebshop.Domain
     public class PriceLog
     {
         public DateTime Date { get; set; }
-        public float SalesPrice { get; set; }
+        public long SalesPrice { get; set; }
 
-        public PriceLog(DateTime date, float salesPrice)
+        public PriceLog(DateTime date, long salesPrice)
         {
             Date = date;
             SalesPrice = salesPrice;

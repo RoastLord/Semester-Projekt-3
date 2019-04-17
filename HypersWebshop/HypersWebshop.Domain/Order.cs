@@ -9,13 +9,13 @@ namespace HypersWebshop.Domain
     public class Order
     {
         public int OrderNo { get; set; }
-        public float TotalPrice { get; set; }
+        public long TotalPrice { get; set; }
         public DateTime Date { get; set; }
         public DateTime DeliveryDate { get; set; }
         public Customer Customer { get; set; }
         public Stack<OrderLine> OrderLines { get; set; }
 
-        public Order(int orderNo, float totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
+        public Order(int orderNo, long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
         {
             OrderNo = orderNo;
             TotalPrice = totalPrice;

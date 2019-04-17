@@ -8,8 +8,8 @@ namespace HypersWebshop.BusinessLogic
 {
     interface ICRUD<T>
     {
-        void create(T entity);
-        T Get(string phoneNo);
+        void Create(T entity);
+        T Get(int id);
         IEnumerable<T> GetAll();
         void Update(T entity);
         void Delete(T entity);

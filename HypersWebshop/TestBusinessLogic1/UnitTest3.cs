@@ -11,11 +11,23 @@ namespace TestBusinessLogic1
         [TestMethod]
         public void TestMethod1()
         {
-            Product product = new Product("navn", 5, 100, 50, Product_Description.Batteri, Product_Status.Published);
+            //Arrange
+            Product product = new Product()
+            {
+                Name = "TestProdukt9000",
+                AmountInStock = 1,
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Harddisk,
+                ProductStatus = Product_Status.Published
+            };
             ProductController productController = new ProductController();
-            productController.create(product);
 
-            Assert.AreEqual(product, product);
+            //Act
+            productController.Create(product);
+
+            //Assert
+            Assert.AreEqual(productController.Get(1), product);
         }
     }
 }

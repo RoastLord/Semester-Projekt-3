@@ -9,7 +9,7 @@ namespace HypersWebshop.BusinessLogic
 {
     class CustomerController : ICRUD<Customer>
     {
-        public void create(Customer entity)
+        public void Create(Customer entity)
         {
             throw new NotImplementedException();
         }
@@ -19,7 +19,7 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Customer Get(string phoneNo)
+        public Customer Get(int id)
         {
             throw new NotImplementedException();
         }

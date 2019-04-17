@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-     public enum Product_Status
+     public enum Product_Status : int
     {
         Sold,
         Published,
@@ -14,14 +14,5 @@ namespace HypersWebshop.Domain
         Tested,
         Untested,
         Rejected
-        
-        //evt med tal?
-
-        //Sold = 1,
-        //Published = 2,
-        //Unpublished = 3,
-        //Tested = 4,
-        //Untested = 5,
-        //Rejected = 6
     }
 }

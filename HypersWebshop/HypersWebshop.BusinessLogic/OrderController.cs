@@ -9,7 +9,7 @@ namespace HypersWebshop.BusinessLogic
 {
     public class OrderController : ICRUD<Order>
     {
-        public void create(Order entity)
+        public void Create(Order entity)
         {
             throw new NotImplementedException();
         }
@@ -19,7 +19,7 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Order Get(string phoneNo)
+        public Order Get(int id)
         {
             throw new NotImplementedException();
         }

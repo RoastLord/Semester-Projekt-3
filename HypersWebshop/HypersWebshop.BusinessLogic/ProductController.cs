@@ -12,9 +12,9 @@ namespace HypersWebshop.BusinessLogic
     {
         DBProduct dbProduct = new DBProduct();
 
-        public void create(Product entity)
+        public void Create(Product entity)
         {
-            dbProduct.CreateProduct(entity);
+            dbProduct.Create(entity);
         }
 
         public void Delete(Product entity)
@@ -22,9 +22,9 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Product Get(string phoneNo)
+        public Product Get(int id)
         {
-            throw new NotImplementedException();
+            return dbProduct.Get(id);
         }
 
         public IEnumerable<Product> GetAll()

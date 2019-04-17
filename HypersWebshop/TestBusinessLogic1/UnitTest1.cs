@@ -13,7 +13,15 @@ namespace TestBusinessLogic
         {
             // Arrange
             Customer customer1 = new Customer("testn", "testad", "testpn", "testemail", 9000, "testcity");
-            Product product1 = new Product(1, "testproduct", 1, 100, 50, Product_Description.Harddisk, Product_Status.Published);
+            Product product1 = new Product()
+            {
+                Name = "testproduct",
+                AmountInStock = 1,
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Harddisk,
+                ProductStatus = Product_Status.Published
+            };
             OrderLine orderLine = new OrderLine(1, 100, 100, product1);
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer1);
             order.AddToOrderLine(orderLine);
