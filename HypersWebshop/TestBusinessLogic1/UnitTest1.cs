@@ -26,12 +26,12 @@ namespace TestBusinessLogic
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer1);
             order.AddToOrderLine(orderLine);
             OrderController orderController = new OrderController();
-
+            ProductController productController = new ProductController();
             // Act
             orderController.ProcessSale(order);
 
             // Assert
-            Assert.AreEqual(Product_Status.Sold, product1.ProductStatus);
+            Assert.AreEqual(Product_Status.Sold, productController.Get(product1.ProductId).ProductStatus);
         }
     }
 }

@@ -37,15 +37,12 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Product ChangeProductStatus(Product product, Product_Status newStatus)
+        public void ChangeProductStatus(Product product, Product_Status newStatus)
         {
-            Product p = product;
+            Product newProduct = product;
+            newProduct.ProductStatus = newStatus;
 
-            p.ProductStatus = newStatus;
-            DBProduct dBProduct = new DBProduct();
-            //dBProduct.Update(product, p);
-
-            return p;
+            dbProduct.Update(product, newProduct);
         }
     }
 }

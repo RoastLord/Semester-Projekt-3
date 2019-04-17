@@ -29,6 +29,8 @@ namespace HypersWebshop.DataAccessLayer
          */
         private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @AmountInStock, @Price, @PurchasePrice, @Description, @Status)";
         private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
+        private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, amountInStock = @amountInStock," +
+                                     " price = @price, purchasePrice = @PurchasePrice, description = @description, status = @status WHERE id = @id;";
         public DBProduct()
         {
             dBConnection = new DBConnection();
@@ -118,9 +120,34 @@ namespace HypersWebshop.DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public void Update(Product entity)
+        public void Update(Product oldProduct, Product newProduct)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
+                        
+                        command.Parameters.AddWithValue("Name", newProduct.Name);
+                        command.Parameters.AddWithValue("AmountInStock", newProduct.AmountInStock);
+                        command.Parameters.AddWithValue("Price", newProduct.Price);
+                        command.Parameters.AddWithValue("PurchasePrice", newProduct.PurchasePrice);
+                        command.Parameters.AddWithValue("Description", newProduct.ProductDescription);
+                        command.Parameters.AddWithValue("Status", newProduct.ProductStatus);
+                        command.Parameters.AddWithValue("id", oldProduct.ProductId);
+
+                        // ExecuteScalar sætter alt til 0.. Hvorfor??
+                        command.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+                Console.WriteLine("Connection fra Update() er: " + dBConnection.connection.State);
+            }
+            catch (TransactionAbortedException)
+            {
+            }
         }
     }
 }

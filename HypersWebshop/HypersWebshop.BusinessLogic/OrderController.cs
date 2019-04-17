@@ -1,4 +1,5 @@
-﻿using HypersWebshop.Domain;
+﻿using HypersWebshop.DataAccessLayer;
+using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,29 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
+        private bool CheckAmount(int productId, int amount)
+        {
+            bool check = false;
+
+            DBProduct dBProduct = new DBProduct();
+            if(dBProduct.Get(productId).AmountInStock < amount)
+            {
+                return check = true;
+            }
+
+            return check;
+
+        }
+
         public void ProcessSale(Order order)
         {
             OrderLine orderLine = order.OrderLines.Peek();
             Product product = orderLine.Product;
             Customer customer = order.Customer;
             ProductController productController = new ProductController();
+            
 
-            if (product.AmountInStock < orderLine.Amount)
+            if (CheckAmount(product.ProductId, orderLine.Amount))
             {
                 throw new Exception("Det er lidt en cancer");
             }
