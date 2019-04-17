@@ -27,15 +27,14 @@ namespace ConsoleAppTest
 
             //Act
             productController.Create(product);
-            Product theShit = productController.Get(3);
+            Product theShit = productController.Get(1);
 
-            Console.WriteLine("Produkt med id 3: " + theShit.ProductId);
-            Console.WriteLine("Produkt med id 3: " + theShit.Name);
-            Console.WriteLine("Produkt med id 3: " + theShit.AmountInStock);
-            Console.WriteLine("Produkt med id 3: " + theShit.Price);
-            
-            Console.WriteLine("Produkt med id 3: " + theShit.ProductDescription);
-            Console.WriteLine("Produkt med id 3: " + theShit.ProductStatus);
+            Console.WriteLine("Produkt ID: " + theShit.ProductId);
+            Console.WriteLine("Produkt Navn: " + theShit.Name);
+            Console.WriteLine("Produkt Stock: " + theShit.AmountInStock);
+            Console.WriteLine("Produkt Pris : " + theShit.Price);
+            Console.WriteLine("Produkt Beskrivelse: " + theShit.ProductDescription);
+            Console.WriteLine("Produkt Status: " + theShit.ProductStatus);
             Console.ReadKey();
         }
     }

@@ -54,7 +54,6 @@ namespace HypersWebshop.DataAccessLayer
 
                         // ExecuteScalar sætter alt til 0.. Hvorfor??
                         entity.ProductId = command.ExecuteWithIdentity();
-                        Console.WriteLine("Produkt ID: " + entity.ProductId);
                     }
                     scope.Complete();
                 }
@@ -80,13 +79,6 @@ namespace HypersWebshop.DataAccessLayer
                 SqlDataReader dr = command.ExecuteReader();
                 while (dr.Read())
                 {
-                    Console.WriteLine("ID:" + dr.GetInt32(0));
-                    Console.WriteLine("Navn: " + dr.GetString(1));
-                    Console.WriteLine("Stock: " + dr.GetInt32(2));
-                    Console.WriteLine("Pris: " + dr.GetInt64(3));
-                    Console.WriteLine("Indkøbspris: " + dr.GetInt64(4));
-                    Console.WriteLine("Beskrivelse: " + (Product_Description)dr.GetInt32(5));
-                    Console.WriteLine("Status: " + (Product_Status)dr.GetInt32(6));
                     product = new Product()
                     {
                         ProductId = dr.GetInt32(0),
@@ -100,8 +92,8 @@ namespace HypersWebshop.DataAccessLayer
                     return product;
                 }
                 // Måske yikes kode
-                dBConnection.CloseConnection();
-                Console.WriteLine("Connection fra Get() er:  " + dBConnection.connection.State);
+                //dBConnection.CloseConnection();
+                //Console.WriteLine("Connection fra Get() er:  " + dBConnection.connection.State);
             }
             // Hvordan kan jeg return produktet jeg instanstiere i while loop.
             Product dummy = new Product();
