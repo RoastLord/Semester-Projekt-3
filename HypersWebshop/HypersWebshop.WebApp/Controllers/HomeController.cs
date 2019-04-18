@@ -8,6 +8,8 @@ namespace HypersWebshop.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        ServiceReference1.ProductInterfaceClient myProxy = new ServiceReference1.ProductInterfaceClient();
+
         public ActionResult Index()
         {
             return View();
@@ -15,7 +17,7 @@ namespace HypersWebshop.WebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = myProxy.FindProduct(1).Name;
 
             return View();
         }
@@ -26,5 +28,6 @@ namespace HypersWebshop.WebApp.Controllers
 
             return View();
         }
+        
     }
 }

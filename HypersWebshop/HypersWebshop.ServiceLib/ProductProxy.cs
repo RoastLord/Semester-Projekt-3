@@ -4,12 +4,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using HypersWebshop.BusinessLogic;
+using HypersWebshop.Domain;
 
 namespace HypersWebshop.ServiceLib
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
-    public class Service1 : ITestInterface
+    public class ProductProxy : IProductInterface
     {
+        ProductController productController = new ProductController();
+
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -28,9 +32,20 @@ namespace HypersWebshop.ServiceLib
             return composite;
         }
 
-        public DateTime TestMethod()
+
+        public void CreateProduct(Product product)
         {
-            return DateTime.Now;
+            productController.Create(product);
+        }
+
+        public Product FindProduct(int id)
+        {
+            return productController.Get(id);
+        }
+
+        public void ggwp()
+        {
+            throw new NotImplementedException();
         }
     }
 }
