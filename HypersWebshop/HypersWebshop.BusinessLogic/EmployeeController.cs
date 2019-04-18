@@ -9,7 +9,7 @@ namespace HypersWebshop.BusinessLogic
 {
     class EmployeeController : ICRUD<Employee>
     {
-        public void create(Employee entity)
+        public void Create(Employee entity)
         {
             throw new NotImplementedException();
         }
@@ -19,12 +19,17 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Employee Get(string phoneNo)
+        public Employee Get(int id)
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Employee> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Employee> GetAll(Enum productDescription)
         {
             throw new NotImplementedException();
         }

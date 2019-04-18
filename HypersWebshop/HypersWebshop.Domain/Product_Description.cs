@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.Domain
 {
-    public enum Product_Description
+    public enum Product_Description : int
     {
         Harddisk,
         RAM,
