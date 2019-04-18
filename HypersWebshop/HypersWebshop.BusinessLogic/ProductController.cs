@@ -10,40 +10,40 @@ namespace HypersWebshop.BusinessLogic
 {
     public class ProductController : ICRUD<Product>
     {
-        public void create(Product entity)
+        DBProduct dbProduct = new DBProduct();
+
+        public void Create(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.Create(entity);
         }
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.Delete(entity);
         }
 
-        public Product Get(string phoneNo)
+        public Product Get(int id)
         {
-            throw new NotImplementedException();
+            return dbProduct.Get(id);
         }
 
-        public IEnumerable<Product> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
+        // Skal fixes, evt have en ny paramter der indikerer hvad der skal ændres
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            dbProduct.Update(entity, entity);
         }
 
-        public Product ChangeProductStatus(Product product, Product_Status newStatus)
+        public void ChangeProductStatus(Product product, Product_Status newStatus)
         {
-            Product p = product;
+            Product newProduct = product;
+            newProduct.ProductStatus = newStatus;
 
-            p.ProductStatus = newStatus;
-            DBProduct dBProduct = new DBProduct();
-            dBProduct.Update(product, p);
+            dbProduct.Update(product, newProduct);
+        }
 
-            return p;
+        public IEnumerable<Product> GetAll(Enum productDescription)
+        {
+            return dbProduct.GetAll(productDescription);
         }
     }
 }

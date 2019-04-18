@@ -8,10 +8,10 @@ namespace HypersWebshop.DataAccessLayer.Interfaces
 {
     interface ICRUD<T>
     {
-        void create(T entity);
-        T Get(int phoneNo);
-        IEnumerable<T> GetAll();
-        void Update(T entity);
+        void Create(T entity);
+        T Get(int id);
+        IEnumerable<T> GetAll(Enum productDescription);
+        void Update(T entity, T oldEntity);
         void Delete(T entity);
     }
 }
