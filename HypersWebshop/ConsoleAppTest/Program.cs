@@ -36,6 +36,7 @@ namespace ConsoleAppTest
 
             //Act
             productController.Create(product);
+            productController.Create(product2);
             Product testProdukt = productController.Get(1);
 
             Console.WriteLine("Produkt ID: " + testProdukt.ProductId);
@@ -44,16 +45,17 @@ namespace ConsoleAppTest
             Console.WriteLine("Produkt Pris : " + testProdukt.Price);
             Console.WriteLine("Produkt Beskrivelse: " + testProdukt.ProductDescription);
             Console.WriteLine("Produkt Status: " + testProdukt.ProductStatus);
+
             productController.ChangeProductStatus(testProdukt, Product_Status.Tested);
             Console.WriteLine("testProdukt efter update: " + testProdukt.ProductStatus);
             
 
-            productController.Delete(productController.Get(2));
-            Console.WriteLine("ID 2 er slettet");
+            productController.Delete(productController.Get(1));
+            Console.WriteLine("ID 3 er slettet");
 
             foreach (Product p in productController.GetAll(Product_Description.CPU))
             {
-                Console.WriteLine(p.Name + "" + p.ProductDescription);
+                Console.WriteLine(p.Name + " " + p.ProductDescription);
             }
             Console.ReadKey();
         }

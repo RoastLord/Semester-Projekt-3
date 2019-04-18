@@ -135,9 +135,10 @@ namespace HypersWebshop.DataAccessLayer
 
         public IEnumerable<Product> GetAll(Enum productDescription)
         {
+            List<Product> products = new List<Product>();
+
             using (SqlConnection con = dBConnection.OpenConnection())
             {
-                List<Product> products = new List<Product>();
                 SqlCommand command = new SqlCommand(FIND_PRODUCTS_BY_DESCRIPTION, con);
                 command.Parameters.AddWithValue("description", productDescription);
                 SqlDataReader dr = command.ExecuteReader();
@@ -155,11 +156,9 @@ namespace HypersWebshop.DataAccessLayer
                         
                     };
                     products.Add(product);
-                    
                 }
-                return products;
-                
             }
+            return products;
         }
 
         public void Update(Product oldProduct, Product newProduct)
