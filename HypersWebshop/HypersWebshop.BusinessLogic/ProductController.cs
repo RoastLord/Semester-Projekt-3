@@ -27,7 +27,7 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Get(id);
         }
 
-
+        // Skal fixes, evt have en ny paramter der indikerer hvad der skal ændres
         public void Update(Product entity)
         {
             dbProduct.Update(entity, entity);

@@ -16,6 +16,7 @@ namespace HypersWebshop.DataAccessLayer
         public static int ExecuteWithIdentity(this SqlCommand cmd)
         {
             int tempID = -1;
+            // ?-tegnet stoppet programmet fra at crashe, hvis ExecuteScalar returnerer null.
             int.TryParse(cmd.ExecuteScalar()?.ToString(), out tempID);
             return tempID;
         }
@@ -56,11 +57,11 @@ namespace HypersWebshop.DataAccessLayer
                         command.Parameters.AddWithValue("Description", entity.ProductDescription);
                         command.Parameters.AddWithValue("Status", entity.ProductStatus);
 
-                        // ExecuteScalar sætter alt til 0.. Hvorfor??
                         entity.ProductId = command.ExecuteWithIdentity();
                     }
                     scope.Complete();
                 }
+                //Check om connection er lukket efter transaktionen
                 Console.WriteLine("Connection fra Create() er: " + dBConnection.connection.State);
             }
             catch (TransactionAbortedException)
@@ -91,9 +92,10 @@ namespace HypersWebshop.DataAccessLayer
 
         public Product Get(int id)
         {
+            Product product;
             using (SqlConnection con = dBConnection.OpenConnection())
             {
-                Product product;
+                
                 SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
                 command.Parameters.AddWithValue("id", id);
                 SqlDataReader dr = command.ExecuteReader();
@@ -107,7 +109,7 @@ namespace HypersWebshop.DataAccessLayer
                         Price = dr.GetInt64(3),
                         PurchasePrice = dr.GetInt64(4),
                         ProductDescription = (Product_Description)dr.GetInt32(5),
-                        ProductStatus = (Product_Status)dr.GetInt32(6)
+                        ProductStatus = (Product_Status) dr.GetInt32(6)
                     };
                     return product;
                 }
@@ -115,7 +117,7 @@ namespace HypersWebshop.DataAccessLayer
                 //dBConnection.CloseConnection();
                 //Console.WriteLine("Connection fra Get() er:  " + dBConnection.connection.State);
             }
-            // Hvordan kan jeg return produktet jeg instanstiere i while loop.
+            // Hvordan kan jeg return produktet jeg instanstiere i while loop. ??Exception
             Product dummy = new Product();
             return dummy;
 
@@ -136,7 +138,7 @@ namespace HypersWebshop.DataAccessLayer
         public IEnumerable<Product> GetAll(Enum productDescription)
         {
             List<Product> products = new List<Product>();
-
+            // MANGLER TRANSACTION
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(FIND_PRODUCTS_BY_DESCRIPTION, con);
@@ -179,7 +181,8 @@ namespace HypersWebshop.DataAccessLayer
                         command.Parameters.AddWithValue("Status", newProduct.ProductStatus);
                         command.Parameters.AddWithValue("id", oldProduct.ProductId);
 
-                        command.ExecuteNonQuery();
+                        //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
+                        int noOfRowsAffected = command.ExecuteNonQuery();
                     }
                     scope.Complete();
                 }

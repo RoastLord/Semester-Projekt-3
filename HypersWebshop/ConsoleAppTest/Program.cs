@@ -47,11 +47,12 @@ namespace ConsoleAppTest
             Console.WriteLine("Produkt Status: " + testProdukt.ProductStatus);
 
             productController.ChangeProductStatus(testProdukt, Product_Status.Tested);
+
             Console.WriteLine("testProdukt efter update: " + testProdukt.ProductStatus);
             
 
             productController.Delete(productController.Get(1));
-            Console.WriteLine("ID 3 er slettet");
+            Console.WriteLine("ID 1 er slettet");
 
             foreach (Product p in productController.GetAll(Product_Description.CPU))
             {
