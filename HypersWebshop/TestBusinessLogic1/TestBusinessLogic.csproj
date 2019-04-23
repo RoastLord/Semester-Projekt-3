@@ -47,16 +47,22 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrderControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductControllerTest.cs" />
+    <Compile Include="DBConnecetionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HypersWebshop.BusinessLogic\HypersWebshop.BusinessLogic.csproj">
       <Project>{bce89715-5119-4d79-b97f-78fa42f748d2}</Project>
       <Name>HypersWebshop.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HypersWebshop.DataAccessLayer\HypersWebshop.DataAccessLayer.csproj">
+      <Project>{3FBE2322-42A3-4D63-AFB1-663E6015D593}</Project>
+      <Name>HypersWebshop.DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\HypersWebshop.Domain\HypersWebshop.Domain.csproj">
       <Project>{2C43AA65-180A-4C9F-AF1C-7B99874F1D82}</Project>
