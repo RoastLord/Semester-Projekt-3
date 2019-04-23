@@ -23,11 +23,5 @@ namespace HypersWebshop.DataAccessLayer
             }
             return connection;
         }
-
-
-        public void CloseConnection()
-        {
-            connection.Close();
-        }
     }
 }

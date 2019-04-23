@@ -27,18 +27,16 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Get(id);
         }
 
-        // Skal fixes, evt have en ny paramter der indikerer hvad der skal ændres
+        // Skal kaldes med en opdateret lokalvariabel
         public void Update(Product entity)
         {
-            dbProduct.Update(entity, entity);
+            dbProduct.Update(entity);
         }
 
         public void ChangeProductStatus(Product product, Product_Status newStatus)
         {
-            Product newProduct = product;
-            newProduct.ProductStatus = newStatus;
-
-            dbProduct.Update(product, newProduct);
+            product.ProductStatus = newStatus;
+            dbProduct.Update(product);
         }
 
         public IEnumerable<Product> GetAll(Enum productDescription)

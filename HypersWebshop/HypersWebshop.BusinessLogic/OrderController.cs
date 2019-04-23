@@ -65,6 +65,8 @@ namespace HypersWebshop.BusinessLogic
             if(IsPaid(order))
             {
                 productController.ChangeProductStatus(product, Product_Status.Sold);
+                product.AmountInStock -= orderLine.Amount;
+                productController.Update(product);
                 PrintReceipt(order);
                 
             }
