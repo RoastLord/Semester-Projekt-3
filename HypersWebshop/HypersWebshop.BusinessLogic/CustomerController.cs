@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HypersWebshop.DataAccessLayer;
 
 namespace HypersWebshop.BusinessLogic
 {
-    class CustomerController : ICRUD<Customer>
+    public class CustomerController : ICRUD<Customer>
     {
+        DBCustomer dBCustomer = new DBCustomer();
+
         public void Create(Customer entity)
         {
-            throw new NotImplementedException();
+            dBCustomer.Create(entity);
+            dBCustomer.CreateCustomer();
         }
 
         public void Delete(Customer entity)
