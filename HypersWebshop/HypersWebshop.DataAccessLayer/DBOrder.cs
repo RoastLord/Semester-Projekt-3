@@ -11,13 +11,17 @@ using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
-    class DBOrder : ICRUD<Order>
+    public class DBOrder : ICRUD<Order>
     {
 
         DBConnection dBConnection;
 
         private string CREATE_ORDER = "INSERT INTO salesOrder OUTPUT IDENT_CURRENT('salesOrder') VALUES (@totalPrice, @date, @deliveryDate)";
-        private string CREATE_ORDERLINE = "INSERT INTO orderLine OUTPUT IDENT_CURRENT('orderLine') VALUES(@o_id, @pr_id, @price, @amount)";
+        private string CREATE_ORDERLINE = "INSERT INTO orderLine OUTPUT IDENT_CURRENT('orderLine') VALUES(@price, @amount, @o_id, @pr_id)";
+        private string GET_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
+            " INNER JOIN Person ON Customer.pe_id = Person.id" +
+            " WHERE SalesOrder.OrderNo = @OrderNo";
+
         public DBOrder()
         {
             dBConnection = new DBConnection();
@@ -63,6 +67,7 @@ namespace HypersWebshop.DataAccessLayer
                         {"price", product.Price },
                         {"amount", amount }
                     });
+                    command.ExecuteNonQuery();
 
                 }
             }
@@ -82,9 +87,28 @@ namespace HypersWebshop.DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public Order Get(int id)
+        public Order Get(int orderNo)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand command = new SqlCommand(GET_ORDER, con);
+                command.Parameters.AddWithValue("OrderNo", orderNo);
+                SqlDataReader dr = command.ExecuteReader();
+                DBCustomer dBCustomer = new DBCustomer();
+                while (dr.Read())
+                {
+                    Order order = new Order(
+                        dr.GetInt("id"),
+                        dr.GetLong("totalPrice"),
+                        dr.GetDateTime("date"),
+                        dr.GetDateTime("deliveryDate"),
+                        dBCustomer.Get(dr.GetInt("pe_id"))
+                        );
+                    return order;
+                }
+                
+            }
+            return null;
         }
 
         public IEnumerable<Order> GetAll(Enum productDescription)
