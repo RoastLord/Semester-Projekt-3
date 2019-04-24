@@ -63,10 +63,23 @@ namespace ConsoleAppTest
             //    Console.WriteLine(p.Name + " " + p.ProductDescription);
             //}
 
-            Customer customer = new Customer("JacobFraC#", "Annebergvej 33", "42310631", "jacobkjaer@outlook.dk", 9000, "Aalborg");
+            Customer customer = new Customer()
+            {
+                Name = "Per",
+                Address = "Vej",
+                PhoneNo = "123",
+                Email = "email",
+                Zipcode = 9000,
+
+
+            };
             CustomerController customerController = new CustomerController();
             customerController.Create(customer);
             Console.WriteLine("gg");
+            Customer newCust = customerController.Get(customer.PhoneNo);
+            string test = customerController.GetCityByZipCode(newCust.Zipcode);
+            Console.WriteLine(test);
+            
 
             Console.ReadKey();
         }

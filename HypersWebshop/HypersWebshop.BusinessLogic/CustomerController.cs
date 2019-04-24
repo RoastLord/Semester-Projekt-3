@@ -15,7 +15,6 @@ namespace HypersWebshop.BusinessLogic
         public void Create(Customer entity)
         {
             dBCustomer.Create(entity);
-            dBCustomer.CreateCustomer();
         }
 
         public void Delete(Customer entity)
@@ -23,11 +22,15 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Customer Get(int id)
+        public Customer Get(string phoneNo)
         {
-            throw new NotImplementedException();
+            return dBCustomer.Get(phoneNo);
         }
 
+        public string GetCityByZipCode(int zipcode)
+        {
+            return dBCustomer.GetCityByZipCode(zipcode);
+        }
         public IEnumerable<Customer> GetAll()
         {
             throw new NotImplementedException();

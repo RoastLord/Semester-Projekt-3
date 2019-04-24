@@ -13,12 +13,58 @@ namespace HypersWebshop.DataAccessLayer
     {
         DBConnection dBConnection;
         private string CREATE_PERSON = "INSERT INTO Person OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode)";
-        private string CREATE_CUSTOMER = "INSERT INTO Customer VALUES (@pe_id, @o_id)";
-        //Evt. ON DELETE SET NULL på Order Id???
-
+        private string CREATE_CUSTOMER = "INSERT INTO Customer (pe_id) VALUES (@pe_id)";
+        private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
+        private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
         public DBCustomer()
         {
             dBConnection = new DBConnection();
+        }
+        
+        public Customer Get(string phoneNo)
+        {
+            using(SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
+                cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+
+                    Customer customer = new Customer()
+                    {
+                        Name = dr.GetString("name"),
+                        Address = dr.GetString("address"),
+                        PhoneNo = dr.GetString("phoneNo"),
+                        Email = dr.GetString("email"),
+                        Zipcode = dr.GetInt("zipcode"),
+
+                    };
+                    customer.City = GetCityByZipCode(9000);
+                    return customer;
+                }
+                
+                
+            }
+            return null;
+        }
+
+        public string GetCityByZipCode(int zipcode)
+        {
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
+                cmd.Parameters.AddWithValue("zipcode", zipcode);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while(dr.Read())
+                {
+                    string city = dr.GetString("city");
+                    return city;
+                }
+                 
+            }
+            return null;
+
         }
 
         public void Create(Customer customer)
@@ -37,29 +83,13 @@ namespace HypersWebshop.DataAccessLayer
                         });
 
                 int tempId = cmd.ExecuteWithIdentity();
-                Console.WriteLine("ID på Person: " + tempId);
+                
                 SqlCommand cmd2 = new SqlCommand(CREATE_CUSTOMER, con);
                 cmd2.AddMultipleWithValue(new Dictionary<string, object>()
                         {
                             {"pe_id",          tempId },
-                            {"o_id",           null },
-
                         });
                 cmd2.ExecuteWithIdentity();
-                
-
-
-            }
-        }
-
-
-        public void CreateCustomer()
-        {
-            using (SqlConnection con = dBConnection.OpenConnection())
-            {
-
-
-
             }
         }
     }
