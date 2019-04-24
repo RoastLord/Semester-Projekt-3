@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="fu2CnFM0ecOWvUEnd9/agEY49WM=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="BCK0WrlqugOfx2xHjMtZeoEKgDQ=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IProductInterface1">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IProductInterface1" contract="ServiceReference1.IProductInterface" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/" bindingConfiguration="BasicHttpBinding_IProductInterface1">
+    <endpoint name="BasicHttpBinding_IProductInterface" contract="ServiceReference1.IProductInterface" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/" bindingConfiguration="BasicHttpBinding_IProductInterface1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IProductInterface1</serializedValue>
+          <serializedValue>BasicHttpBinding_IProductInterface</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
