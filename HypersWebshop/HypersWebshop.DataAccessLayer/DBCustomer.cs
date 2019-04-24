@@ -16,21 +16,21 @@ namespace HypersWebshop.DataAccessLayer
         private string CREATE_CUSTOMER = "INSERT INTO Customer (pe_id) VALUES (@pe_id)";
         private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
         private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
+
         public DBCustomer()
         {
             dBConnection = new DBConnection();
         }
-        
+
         public Customer Get(string phoneNo)
         {
-            using(SqlConnection con = dBConnection.OpenConnection())
+            using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
                 cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-
                     Customer customer = new Customer()
                     {
                         Name = dr.GetString("name"),
@@ -40,11 +40,9 @@ namespace HypersWebshop.DataAccessLayer
                         Zipcode = dr.GetInt("zipcode"),
 
                     };
-                    customer.City = GetCityByZipCode(9000);
+                    customer.City = GetCityByZipCode(customer.Zipcode);
                     return customer;
                 }
-                
-                
             }
             return null;
         }
@@ -56,12 +54,12 @@ namespace HypersWebshop.DataAccessLayer
                 SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
                 cmd.Parameters.AddWithValue("zipcode", zipcode);
                 SqlDataReader dr = cmd.ExecuteReader();
-                while(dr.Read())
+                while (dr.Read())
                 {
                     string city = dr.GetString("city");
                     return city;
                 }
-                 
+
             }
             return null;
 
@@ -83,7 +81,7 @@ namespace HypersWebshop.DataAccessLayer
                         });
 
                 int tempId = cmd.ExecuteWithIdentity();
-                
+
                 SqlCommand cmd2 = new SqlCommand(CREATE_CUSTOMER, con);
                 cmd2.AddMultipleWithValue(new Dictionary<string, object>()
                         {
