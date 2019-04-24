@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Text;
+using HypersWebshop.BusinessLogic;
+using HypersWebshop.Domain;
 
-namespace HypersWebshop.Service
+namespace HypersWebshop.ServiceLib
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IService1
+    public class ProductProxy : IProductInterface
     {
+        ProductController productController = new ProductController();
+
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -30,9 +32,20 @@ namespace HypersWebshop.Service
             return composite;
         }
 
-        public string TestMethod()
+
+        public void CreateProduct(Product product)
         {
-            return string.Format("You pressed my button");
+            productController.Create(product);
+        }
+
+        public Product FindProduct(int id)
+        {
+            return productController.Get(id);
+        }
+
+        public void ggwp()
+        {
+            throw new NotImplementedException();
         }
     }
 }

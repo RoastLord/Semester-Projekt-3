@@ -19,6 +19,9 @@ namespace HypersWebshop.Service
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
+        [OperationContract]
+        string TestMethod();
+
         // TODO: Add your service operations here
     }
 
