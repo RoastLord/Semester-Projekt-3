@@ -13,19 +13,21 @@ namespace TestBusinessLogic1
         [TestMethod]
         public void RegisterAsCustomerTest()
         {
+            //Arrange
             Customer customer = new Customer()
             {
                 Name = "Per",
                 Address = "Vej",
                 PhoneNo = "Nummer",
                 Email = "email",
-                Zipcode = 9000,
-
-
+                Zipcode = 9000
             };
+
+            //Act
             customerController.Create(customer);
 
-            Assert.AreEqual(customer, customerController.Get(customer.PhoneNo));
+            //Assert
+            Assert.AreEqual(customer.PhoneNo, customerController.Get(customer.PhoneNo).PhoneNo);
         }
-}
+    }
 }
