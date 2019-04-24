@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="DBConnecetionTest.cs" />
+    <Compile Include="DBCustomerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HypersWebshop.BusinessLogic\HypersWebshop.BusinessLogic.csproj">

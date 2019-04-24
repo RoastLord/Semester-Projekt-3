@@ -14,7 +14,14 @@ namespace TestBusinessLogic
             // Arrange
             OrderController orderController = new OrderController();
             ProductController productController = new ProductController();
-            Customer customer = new Customer("Per", "Hadsundvej 30", "12341234", "per@mail.dk", 9000, "Aalborg");
+            Customer customer = new Customer()
+            {
+                Name = "Per",
+                Address = "Hadsundvej 30",
+                PhoneNo = "12341234",
+                Email = "per@mail.dk",
+                Zipcode = 9000,
+            };
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
             Product product = new Product()
             {

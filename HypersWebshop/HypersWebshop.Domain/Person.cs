@@ -8,6 +8,7 @@ namespace HypersWebshop.Domain
 {
     public abstract class Person
     {
+        //Ændre zipcode til string
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNo { get; set; }
@@ -15,14 +16,5 @@ namespace HypersWebshop.Domain
         public int Zipcode { get; set; }
         public string City { get; set; }
 
-        public Person(string name, string address, string phoneNo, string email, int zipcode, string city)
-        {
-            Name = name;
-            Address = address;
-            PhoneNo = phoneNo;
-            Email = email;
-            Zipcode = zipcode;
-            City = city;
-        }
     }
 }

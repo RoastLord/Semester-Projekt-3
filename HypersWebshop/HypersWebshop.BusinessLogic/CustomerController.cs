@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HypersWebshop.DataAccessLayer;
 
 namespace HypersWebshop.BusinessLogic
 {
-    class CustomerController : ICRUD<Customer>
+    public class CustomerController : ICRUD<Customer>
     {
+        DBCustomer dBCustomer = new DBCustomer();
+
         public void Create(Customer entity)
         {
-            throw new NotImplementedException();
+            dBCustomer.Create(entity);
         }
 
         public void Delete(Customer entity)
@@ -19,11 +22,15 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Customer Get(int id)
+        public Customer Get(string phoneNo)
         {
-            throw new NotImplementedException();
+            return dBCustomer.Get(phoneNo);
         }
 
+        public string GetCityByZipCode(int zipcode)
+        {
+            return dBCustomer.GetCityByZipCode(zipcode);
+        }
         public IEnumerable<Customer> GetAll()
         {
             throw new NotImplementedException();

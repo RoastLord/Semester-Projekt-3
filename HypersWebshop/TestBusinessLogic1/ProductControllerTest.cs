@@ -22,12 +22,12 @@ namespace TestBusinessLogic1
                 ProductDescription = Product_Description.Harddisk,
                 ProductStatus = Product_Status.Published
             };
-            
+
             //Act
             productController.Create(product);
 
             //Assert
-            Assert.AreEqual(product, productController.Get(product.ProductId));
+            Assert.AreEqual(product.ProductId, productController.Get(product.ProductId).ProductId);
         }
 
         [TestMethod]
@@ -55,30 +55,30 @@ namespace TestBusinessLogic1
 
         }
 
-        [TestMethod]
-        public void TestDelete()
-        {
-            //Arrange
-            ProductController productController = new ProductController();
-            Product product = new Product()
-            {
-                Name = "Intel Core CPU",
-                AmountInStock = 15,
-                Price = 50000,
-                PurchasePrice = 35000,
-                ProductDescription = Product_Description.CPU,
-                ProductStatus = Product_Status.Published
-            };
-            productController.Create(product);
+        //[TestMethod]
+        //public void TestDelete()
+        //{
+        //    //Arrange
+        //    ProductController productController = new ProductController();
+        //    Product product = new Product()
+        //    {
+        //        Name = "Intel Core CPU",
+        //        AmountInStock = 15,
+        //        Price = 50000,
+        //        PurchasePrice = 35000,
+        //        ProductDescription = Product_Description.CPU,
+        //        ProductStatus = Product_Status.Published
+        //    };
+        //    productController.Create(product);
 
 
-            //Act
-            productController.Delete(product);
+        //    //Act
+        //    productController.Delete(product);
 
 
-            //Assert
-            Assert.AreNotEqual(product, productController.Get(product.ProductId));
+        //    //Assert
+        //    Assert.AreNotEqual(product, productController.Get(product.ProductId));
 
-        }
+        //}
     }
 }

@@ -38,13 +38,14 @@ namespace HypersWebshop.DataAccessLayer
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand command = new SqlCommand(CREATE_PRODUCT, con);
-                        command.Parameters.AddWithValue("Name", entity.Name);
-                        command.Parameters.AddWithValue("AmountInStock", entity.AmountInStock);
-                        command.Parameters.AddWithValue("Price", entity.Price);
-                        command.Parameters.AddWithValue("PurchasePrice", entity.PurchasePrice);
-                        command.Parameters.AddWithValue("Description", entity.ProductDescription);
-                        command.Parameters.AddWithValue("Status", entity.ProductStatus);
-
+                        command.AddMultipleWithValue(new Dictionary<string, object>() {
+                                { "name",           entity.Name },
+                                { "amountInStock",  entity.AmountInStock },
+                                { "price",          entity.Price },
+                                { "purchasePrice",  entity.PurchasePrice },
+                                { "description",    entity.ProductDescription },
+                                { "status",         entity.ProductStatus },
+                        });
                         entity.ProductId = command.ExecuteWithIdentity();
                     }
                     scope.Complete();
@@ -55,6 +56,7 @@ namespace HypersWebshop.DataAccessLayer
             }
         }
 
+        // Skal evt ikke bruges
         public void Delete(Product entity)
         {
             try
@@ -74,34 +76,6 @@ namespace HypersWebshop.DataAccessLayer
             {
             }
         }
-
-        //public Product Get(int id)
-        //{
-        //    Product product;
-        //    using (SqlConnection con = dBConnection.OpenConnection())
-        //    {
-
-        //        SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
-        //        command.Parameters.AddWithValue("id", id);
-        //        SqlDataReader dr = command.ExecuteReader();
-        //        while (dr.Read())
-        //        {
-        //            product = new Product()
-        //            {
-        //                ProductId = dr.GetInt32(0),
-        //                Name = dr.GetString(1),
-        //                AmountInStock = dr.GetInt32(2),
-        //                Price = dr.GetInt64(3),
-        //                PurchasePrice = dr.GetInt64(4),
-        //                ProductDescription = (Product_Description)dr.GetInt32(5),
-        //                ProductStatus = (Product_Status) dr.GetInt32(6)
-        //            };
-        //            return product;
-        //        }
-        //    }
-        //    Product dummy = new Product();
-        //    return dummy;
-        //}
 
         public Product Get(int id)
         {
@@ -127,8 +101,7 @@ namespace HypersWebshop.DataAccessLayer
                     return product;
                 }
             }
-            Product dummy = new Product();
-            return dummy;
+            return null;
         }
 
             public IEnumerable<Product> GetAll(Enum productDescription)
@@ -159,6 +132,7 @@ namespace HypersWebshop.DataAccessLayer
 
                             };
                             products.Add(product);
+                            return products;
                         }
                     }
                     scope.Complete();
@@ -167,7 +141,7 @@ namespace HypersWebshop.DataAccessLayer
             catch (TransactionAbortedException)
             {
             }
-            return products;
+            return null;
 
         }
 
@@ -180,26 +154,15 @@ namespace HypersWebshop.DataAccessLayer
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                             SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
-                        //    command.AddMultipleWithValue(new Dictionary <string, object>() {
-                        //        { "name",           product.Name },
-                        //        { "amountInStock",  product.AmountInStock },
-                        //        { "price",          product.Price },
-                        //        { "purchasePrice",  product.PurchasePrice },
-                        //        { "description",    product.ProductDescription },
-                        //        { "status",         product.ProductStatus },
-                        //        { "id",             product.ProductId },
-                        //});
-
-
-
-                        command.Parameters.AddWithValue("name", product.Name);
-                        command.Parameters.AddWithValue("amountInStock", product.AmountInStock);
-                        command.Parameters.AddWithValue("price", product.Price);
-                        command.Parameters.AddWithValue("purchasePrice", product.PurchasePrice);
-                        command.Parameters.AddWithValue("description", product.ProductDescription);
-                        command.Parameters.AddWithValue("status", product.ProductStatus);
-                        command.Parameters.AddWithValue("id", product.ProductId);
-
+                        command.AddMultipleWithValue(new Dictionary<string, object>() {
+                                { "name",           product.Name },
+                                { "amountInStock",  product.AmountInStock },
+                                { "price",          product.Price },
+                                { "purchasePrice",  product.PurchasePrice },
+                                { "description",    product.ProductDescription },
+                                { "status",         product.ProductStatus },
+                                { "id",             product.ProductId },
+                        });
                         //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
                         int noOfRowsAffected = command.ExecuteNonQuery();
                     }
