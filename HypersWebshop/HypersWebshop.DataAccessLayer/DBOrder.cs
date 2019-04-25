@@ -101,7 +101,7 @@ namespace HypersWebshop.DataAccessLayer
                         dr.GetLong("totalPrice"),
                         dr.GetDateTime("date"),
                         dr.GetDateTime("deliveryDate"),
-                        dBCustomer.Get(dr.GetInt("pe_id"))
+                        dBCustomer.Get(dr.GetString("phoneNo"))
                         );
                     return order;
                 }
