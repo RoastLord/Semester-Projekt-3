@@ -25,6 +25,15 @@ namespace HypersWebshop.Domain
             OrderLines = new Stack<OrderLine>();
         }
 
+        public Order(long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
+        {
+            TotalPrice = totalPrice;
+            Date = date;
+            DeliveryDate = deliveryDate;
+            Customer = customer;
+            OrderLines = new Stack<OrderLine>();
+        }
+
         public void AddToOrderLine(OrderLine orderLine)
         {
             OrderLines.Push(orderLine);
