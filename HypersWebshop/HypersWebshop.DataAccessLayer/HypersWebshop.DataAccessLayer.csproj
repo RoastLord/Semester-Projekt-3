@@ -45,6 +45,7 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBCustomer.cs" />
     <Compile Include="DBEmployee.cs" />
+    <Compile Include="DBLogin.cs" />
     <Compile Include="DBOrder.cs" />
     <Compile Include="DBPriceLog.cs" />
     <Compile Include="DBProduct.cs" />

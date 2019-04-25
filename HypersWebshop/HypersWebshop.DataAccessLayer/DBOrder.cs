@@ -39,6 +39,7 @@ namespace HypersWebshop.DataAccessLayer
                     command.Parameters.AddWithValue("deliveryDate", entity.DeliveryDate);
 
                     entity.OrderNo = command.ExecuteWithIdentity();
+                    
                 }
             }
             catch

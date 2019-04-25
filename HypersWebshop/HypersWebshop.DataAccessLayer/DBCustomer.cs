@@ -12,7 +12,7 @@ namespace HypersWebshop.DataAccessLayer
     public class DBCustomer
     {
         DBConnection dBConnection;
-        private string CREATE_PERSON = "INSERT INTO Person OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode)";
+        private string CREATE_PERSON = "INSERT INTO Person OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode, @password)";
         private string CREATE_CUSTOMER = "INSERT INTO Customer (pe_id) VALUES (@pe_id)";
         private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
         private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
@@ -38,6 +38,7 @@ namespace HypersWebshop.DataAccessLayer
                         PhoneNo = dr.GetString("phoneNo"),
                         Email = dr.GetString("email"),
                         Zipcode = dr.GetInt("zipcode"),
+                        Password = dr.GetString("password")
 
                     };
                     customer.City = GetCityByZipCode(customer.Zipcode);
@@ -78,6 +79,7 @@ namespace HypersWebshop.DataAccessLayer
                             {"phoneNo",        customer.PhoneNo },
                             {"email",          customer.Email },
                             {"zipcode",        customer.Zipcode },
+                            {"password",        customer.Password }
                         });
 
                 int tempId = cmd.ExecuteWithIdentity();

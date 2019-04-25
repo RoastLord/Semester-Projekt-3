@@ -20,7 +20,8 @@ namespace TestBusinessLogic1
                 Address = "Vej",
                 PhoneNo = "Nummer",
                 Email = "email",
-                Zipcode = 9000
+                Zipcode = 9000,
+                Password = "hunter"
             };
 
             //Act

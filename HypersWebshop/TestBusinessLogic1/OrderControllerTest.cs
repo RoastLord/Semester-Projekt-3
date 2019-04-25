@@ -22,6 +22,7 @@ namespace TestBusinessLogic
                 PhoneNo = "12341234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
+                Password = "hunter"
             };
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
             Product product = new Product()
@@ -60,7 +61,8 @@ namespace TestBusinessLogic
                 PhoneNo = "12341234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
-                City = "Aalborg"
+                City = "Aalborg",
+                Password = "hunter2"
             };
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
             dBConnection =  new DBConnection();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppTest
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -63,23 +63,33 @@ namespace ConsoleAppTest
             //    Console.WriteLine(p.Name + " " + p.ProductDescription);
             //}
 
-            Customer customer = new Customer()
+            //Customer customer = new Customer()
+            //{
+            //    Name = "Per",
+            //    Address = "Vej",
+            //    PhoneNo = "123",
+            //    Email = "email",
+            //    Zipcode = 9000,
+            //    Password = "hunter2"
+            //};
+            //CustomerController customerController = new CustomerController();
+            //customerController.Create(customer);
+
+            string txtUsername = "123";
+            string txtPassword = "hunter2";
+
+            LoginController loginController = new LoginController();
+
+            if (loginController.CheckLogin(txtUsername, txtPassword))
             {
-                Name = "Per",
-                Address = "Vej",
-                PhoneNo = "123",
-                Email = "email",
-                Zipcode = 9000,
+                // accessGranted();
+                Console.WriteLine("Velkommen mydude");
+            }
 
-
-            };
-            CustomerController customerController = new CustomerController();
-            customerController.Create(customer);
-            Console.WriteLine("gg");
-            Customer newCust = customerController.Get(customer.PhoneNo);
-            string test = customerController.GetCityByZipCode(newCust.Zipcode);
-            Console.WriteLine(test);
-            
+            else
+            {
+                Console.WriteLine("Nixen bixen");
+            }
 
             Console.ReadKey();
         }
