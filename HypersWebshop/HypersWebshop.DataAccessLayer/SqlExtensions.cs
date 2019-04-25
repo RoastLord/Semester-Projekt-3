@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -48,6 +49,13 @@ namespace HypersWebshop.DataAccessLayer
         public static string GetString(this SqlDataReader dr, string columnName)
         {
             return dr.GetString(dr.GetOrdinal(columnName));
+        }
+
+        public static DateTime GetDateTime(this SqlDataReader dr, string columnName)
+        {
+
+            return dr.GetDateTime(dr.GetOrdinal(columnName));
+
         }
     }
 }
