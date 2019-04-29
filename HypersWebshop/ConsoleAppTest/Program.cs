@@ -63,25 +63,30 @@ namespace ConsoleAppTest
             //    Console.WriteLine(p.Name + " " + p.ProductDescription);
             //}
 
-            Customer customer = new Customer()
-            {
-                Name = "Per",
-                Address = "Vej",
-                PhoneNo = "123",
-                Email = "email",
-                Zipcode = 9000,
+            //    Customer customer = new Customer()
+            //    {
+            //        Name = "Per",
+            //        Address = "Vej",
+            //        PhoneNo = "123",
+            //        Email = "email",
+            //        Zipcode = 9000,
 
 
-            };
-            CustomerController customerController = new CustomerController();
-            customerController.Create(customer);
-            Console.WriteLine("gg");
-            Customer newCust = customerController.Get(customer.PhoneNo);
-            string test = customerController.GetCityByZipCode(newCust.Zipcode);
-            Console.WriteLine(test);
-            
+            //    };
+            //    CustomerController customerController = new CustomerController();
+            //    customerController.Create(customer);
+            //    Console.WriteLine("gg");
+            //    Customer newCust = customerController.Get(customer.PhoneNo);
+            //    string test = customerController.GetCityByZipCode(newCust.Zipcode);
+            //    Console.WriteLine(test);
 
+
+            //    Console.ReadKey();
+            //
+            OrderController orderController = new OrderController();
+            orderController.RemoveProductFromShoppingcart(1, 2);
             Console.ReadKey();
+
         }
     }
 }

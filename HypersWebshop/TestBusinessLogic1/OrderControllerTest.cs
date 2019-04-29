@@ -87,14 +87,64 @@ namespace TestBusinessLogic
             productController.Create(product2);
             order.AddToOrderLine(orderLine);
             int expectedAmount = product.AmountInStock - orderLine.Amount;
-            //Act
             DBOrder dBOrder = new DBOrder();
+            //Act
             dBOrder.Create(order);
             dBOrder.CreateOrderline(product, order, 1);
             dBOrder.CreateOrderline(product2, order, 1);
             //Assert
             Assert.AreEqual(order.OrderNo, 1);
             Assert.AreEqual(orderLine.Product.Name, product.Name);
+        }
+        [TestMethod]
+        public void TestRemoveProductFromOrderline()
+        {
+            //Arrange
+            DBConnection dBConnection;
+            OrderController orderController = new OrderController();
+            dBConnection = new DBConnection();
+            DBOrder dBOrder = new DBOrder();
+            Customer customer = new Customer()
+            {
+                Name = "testRemoveProductPerson",
+                Address = "Hadsundvej 30",
+                PhoneNo = "12341234",
+                Email = "per@mail.dk",
+                Zipcode = 9000,
+                City = "Aalborg"
+            };
+            Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
+            Product product1 = new Product()
+            {
+                Name = "testRemoveProductproduct",
+                AmountInStock = 10,
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Batteri,
+                ProductStatus = Product_Status.Published
+            };
+            Product product2 = new Product()
+            {
+                Name = "testRemoveProductproduct2",
+                AmountInStock = 10,
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Batteri,
+                ProductStatus = Product_Status.Published
+            };
+            ProductController productController = new ProductController();
+            productController.Create(product1);
+            productController.Create(product2);
+            dBOrder.CreateOrderline(product1, order, 1);
+            dBOrder.CreateOrderline(product2, order, 1);
+            order.AddToOrderLine(dBOrder.)
+
+            order.AddToOrderLine(d)
+
+            //Act
+            orderController.RemoveProductFromShoppingcart(order.OrderNo, product1.ProductId);
+            //Assert
+            Assert.Equals(order.OrderLines.Peek().Product, product2);
         }
     }
 }

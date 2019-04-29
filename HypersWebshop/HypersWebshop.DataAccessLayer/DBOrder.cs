@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
@@ -20,7 +21,7 @@ namespace HypersWebshop.DataAccessLayer
         private string GET_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
             " INNER JOIN Person ON Customer.pe_id = Person.id" +
             " WHERE SalesOrder.OrderNo = @OrderNo";
-
+        private string REMOVE_PRODUCT = "DELETE FROM OrderLine WHERE o_id = (@o_id) AND pr_id = (@pr_id)";
         public DBOrder()
         {
             dBConnection = new DBConnection();
@@ -105,20 +106,43 @@ namespace HypersWebshop.DataAccessLayer
                         );
                     return order;
                 }
-                
+
             }
             return null;
         }
+        public void RemoveProduct(int orderNo, int productID)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(REMOVE_PRODUCT, con);
+                        command.AddMultipleWithValue(new Dictionary<string, object>(){
+                            {"o_id", orderNo},
+                            {"pr_id", productID}
+                        });
+                        int numberOfRows = command.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+            }
+            catch(TransactionAbortedException)
+            {
+
+            }
+        }
 
         public IEnumerable<Order> GetAll(Enum productDescription)
-        {
-            throw new NotImplementedException();
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Update(Order entity)
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public void Update(Order entity)
-        {
-            throw new NotImplementedException();
-        }
     }
-
-}

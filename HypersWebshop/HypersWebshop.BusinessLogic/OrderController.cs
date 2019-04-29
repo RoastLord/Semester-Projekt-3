@@ -10,6 +10,11 @@ namespace HypersWebshop.BusinessLogic
 {
     public class OrderController : ICRUD<Order>
     {
+        DBOrder dBorder = new DBOrder();
+        public void RemoveProductFromShoppingcart(int orderNo, int productId)
+        {
+            dBorder.RemoveProduct(orderNo, productId);
+        }
         public void Create(Order entity)
         {
             throw new NotImplementedException();
