@@ -15,9 +15,5 @@ namespace HypersWebshop.Domain
         public long PurchasePrice { get; set; }
         public Product_Description ProductDescription { get; set; }
         public Product_Status ProductStatus { get; set; } 
-
-
-        
-
     }
 }

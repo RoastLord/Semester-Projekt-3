@@ -54,7 +54,7 @@ namespace HypersWebshop.DataAccessLayer
             //TODO
             throw new NotImplementedException();
         }
-        public void CreateOrderline(Product product, Order order, int amount)
+        public void CreateOrderline(int orderNo, OrderLine orderLine)
         {
             try
             {
@@ -63,10 +63,10 @@ namespace HypersWebshop.DataAccessLayer
                     SqlCommand command = new SqlCommand(CREATE_ORDERLINE, con);
                     command.AddMultipleWithValue(new Dictionary<string, object>()
                     {
-                        { "o_id", order.OrderNo },
-                        {"pr_id", product.ProductId },
-                        {"price", product.Price },
-                        {"amount", amount }
+                        { "o_id", orderNo },
+                        {"pr_id", orderLine.Product.ProductId },
+                        {"price", orderLine.Product.Price },
+                        {"amount", orderLine.Amount }
                     });
                     command.ExecuteNonQuery();
 
@@ -87,10 +87,12 @@ namespace HypersWebshop.DataAccessLayer
         {
             throw new NotImplementedException();
         }
-        public OrderLine GetOrderLine(int o_id)
+        public List<OrderLine> GetOrderLines(int o_id)
         {
+            List<OrderLine> orderLines = new List<OrderLine>();
             using (SqlConnection con = dBConnection.OpenConnection())
             {
+                
                 SqlCommand command = new SqlCommand(GET_ORDERLINES, con);
                 command.Parameters.AddWithValue("o_id", o_id);
                 SqlDataReader dr = command.ExecuteReader();
@@ -103,11 +105,11 @@ namespace HypersWebshop.DataAccessLayer
                         dr.GetInt("amount") * dr.GetLong("price"),
                         dBProduct.Get(dr.GetInt("pr_id"))
                         );
-                    return orderLine;
+                    orderLines.Add(orderLine);
                 }
                     
             }
-            return null;
+            return orderLines;
         }
         public Order Get(int orderNo)
         {

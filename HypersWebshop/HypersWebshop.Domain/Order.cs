@@ -13,7 +13,8 @@ namespace HypersWebshop.Domain
         public DateTime Date { get; set; }
         public DateTime DeliveryDate { get; set; }
         public Customer Customer { get; set; }
-        public Stack<OrderLine> OrderLines { get; set; }
+        public List<OrderLine> OrderLines { get; set; }
+        
 
         public Order(int orderNo, long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
         {
@@ -22,7 +23,7 @@ namespace HypersWebshop.Domain
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;
-            OrderLines = new Stack<OrderLine>();
+            OrderLines = new List<OrderLine>();
         }
 
         public Order(long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
@@ -31,12 +32,12 @@ namespace HypersWebshop.Domain
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;
-            OrderLines = new Stack<OrderLine>();
+            OrderLines = new List<OrderLine>();
         }
 
         public void AddToOrderLine(OrderLine orderLine)
         {
-            OrderLines.Push(orderLine);
+            OrderLines.Add(orderLine);
         }
     }
 }

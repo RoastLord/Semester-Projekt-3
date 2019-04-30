@@ -10,20 +10,20 @@ namespace HypersWebshop.BusinessLogic
 {
     public class OrderController : ICRUD<Order>
     {
-        DBOrder dBorder = new DBOrder();
+        DBOrder dBOrder = new DBOrder();
+        ProductController productController = new ProductController();
+
         public void RemoveProductFromShoppingcart(int orderNo, int productId)
         {
-            dBorder.RemoveProduct(orderNo, productId);
+            dBOrder.RemoveProduct(orderNo, productId);
         }
         public void Create(Order entity)
         {
             throw new NotImplementedException();
         }
-        public void AddOrderlineToOrder(int orderNo)
-        {
-            DBOrder dBOrder = new DBOrder();
-            Order order = dBOrder.Get(orderNo);
-            OrderLine orderLine = dBOrder.GetOrderLine(orderNo);
+        public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
+        {   
+            dBOrder.CreateOrderline(orderNo, orderLine);
         }
         public void Delete(Order entity)
         {
@@ -45,42 +45,45 @@ namespace HypersWebshop.BusinessLogic
             throw new NotImplementedException();
         }
 
-        private bool CheckAmount(int productId, int amount)
+        private bool CheckAmount(List<OrderLine> orderLines)
         {
             bool check = false;
-
             DBProduct dBProduct = new DBProduct();
-            if(dBProduct.Get(productId).AmountInStock < amount)
+            foreach (OrderLine orderLine in orderLines)
             {
-                return check = true;
+                Product p = dBProduct.Get(orderLine.Product.ProductId);
+                if (p.AmountInStock > orderLine.Amount)
+                {
+                    check = true;
+                }
+                else
+                {
+                    throw new Exception("Der er ikke nok " + p.Name + " på lager");
+                }
+
             }
-
             return check;
-
         }
 
         public void ProcessSale(Order order)
         {
-            OrderLine orderLine = order.OrderLines.Peek();
-            Product product = orderLine.Product;
-            Customer customer = order.Customer;
-            ProductController productController = new ProductController();
-            
-
-            if (CheckAmount(product.ProductId, orderLine.Amount))
+            List<OrderLine> orderLines = order.OrderLines;
+            // Slet tjek om den er på lager
+            if(CheckAmount(orderLines))
             {
-                throw new Exception("Det er lidt en cancer");
-            }
-
-            if(IsPaid(order))
-            {
-                productController.ChangeProductStatus(product, Product_Status.Sold);
-                product.AmountInStock -= orderLine.Amount;
-                productController.Update(product);
+                if (IsPaid(order))
+                {
+                    foreach(OrderLine orderLine in orderLines)
+                    {
+                        Product product = orderLine.Product;
+                        product.ProductStatus = Product_Status.Sold;
+                        //slet amount in stock
+                        product.AmountInStock -= orderLine.Amount;
+                        productController.Update(product);
+                    }
                 PrintReceipt(order);
-                
+                }
             }
-            
         }
 
         private bool IsPaid(Order order)

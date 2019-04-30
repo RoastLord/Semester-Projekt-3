@@ -8,7 +8,6 @@ namespace HypersWebshop.Domain
 {
     public abstract class Person
     {
-        //Ændre zipcode til string
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNo { get; set; }
