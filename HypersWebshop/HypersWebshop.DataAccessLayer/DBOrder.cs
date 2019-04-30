@@ -22,6 +22,7 @@ namespace HypersWebshop.DataAccessLayer
             " INNER JOIN Person ON Customer.pe_id = Person.id" +
             " WHERE SalesOrder.OrderNo = @OrderNo";
         private string REMOVE_PRODUCT = "DELETE FROM OrderLine WHERE o_id = (@o_id) AND pr_id = (@pr_id)";
+        private string GET_ORDERLINES = "SELECT * FROM OrderLine WHERE o_id = (@o_id)";
         public DBOrder()
         {
             dBConnection = new DBConnection();
@@ -86,7 +87,28 @@ namespace HypersWebshop.DataAccessLayer
         {
             throw new NotImplementedException();
         }
-
+        public OrderLine GetOrderLine(int o_id)
+        {
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand command = new SqlCommand(GET_ORDERLINES, con);
+                command.Parameters.AddWithValue("o_id", o_id);
+                SqlDataReader dr = command.ExecuteReader();
+                DBProduct dBProduct = new DBProduct();
+                while (dr.Read())
+                {
+                    OrderLine orderLine = new OrderLine(
+                        dr.GetInt("amount"),
+                        dr.GetLong("price"),
+                        dr.GetInt("amount") * dr.GetLong("price"),
+                        dBProduct.Get(dr.GetInt("pr_id"))
+                        );
+                    return orderLine;
+                }
+                    
+            }
+            return null;
+        }
         public Order Get(int orderNo)
         {
             using (SqlConnection con = dBConnection.OpenConnection())

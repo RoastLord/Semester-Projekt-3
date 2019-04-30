@@ -19,7 +19,12 @@ namespace HypersWebshop.BusinessLogic
         {
             throw new NotImplementedException();
         }
-
+        public void AddOrderlineToOrder(int orderNo)
+        {
+            DBOrder dBOrder = new DBOrder();
+            Order order = dBOrder.Get(orderNo);
+            OrderLine orderLine = dBOrder.GetOrderLine(orderNo);
+        }
         public void Delete(Order entity)
         {
             throw new NotImplementedException();

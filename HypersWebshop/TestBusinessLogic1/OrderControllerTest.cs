@@ -26,7 +26,7 @@ namespace TestBusinessLogic
             Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
             Product product = new Product()
             {
-                Name = "Lenovo Batteri",
+                Name = "TestProcessSaleProduct",
                 AmountInStock = 10,
                 Price = 100,
                 PurchasePrice = 50,
@@ -66,7 +66,7 @@ namespace TestBusinessLogic
             dBConnection =  new DBConnection();
             Product product = new Product()
             {
-                Name = "Lenovo Batteri",
+                Name = "TestShoppingCartProduct",
                 AmountInStock = 10,
                 Price = 100,
                 PurchasePrice = 50,
@@ -75,7 +75,7 @@ namespace TestBusinessLogic
             };
             Product product2 = new Product()
             {
-                Name = "Lenovo",
+                Name = "TestShoppingCartProduct2",
                 AmountInStock = 10,
                 Price = 100,
                 PurchasePrice = 50,
@@ -133,18 +133,17 @@ namespace TestBusinessLogic
                 ProductStatus = Product_Status.Published
             };
             ProductController productController = new ProductController();
-            productController.Create(product1);
-            productController.Create(product2);
-            dBOrder.CreateOrderline(product1, order, 1);
-            dBOrder.CreateOrderline(product2, order, 1);
-            order.AddToOrderLine(dBOrder.)
-
-            order.AddToOrderLine(d)
-
             //Act
             orderController.RemoveProductFromShoppingcart(order.OrderNo, product1.ProductId);
+            productController.Create(product1);
+            productController.Create(product2);
+            dBOrder.Create(order);
+            order = dBOrder.Get(order.OrderNo);
+            dBOrder.CreateOrderline(product1, order, 1);
+            dBOrder.CreateOrderline(product2, order, 1);
+            order.AddToOrderLine(dBOrder.GetOrderLine(2));
             //Assert
-            Assert.Equals(order.OrderLines.Peek().Product, product2);
+            Assert.AreEqual(order.OrderLines.Peek().Product.Name, product1.Name);
         }
     }
 }
