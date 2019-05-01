@@ -40,8 +40,7 @@ namespace HypersWebshop.ServiceLib
 
         public Product FindProduct(int id)
         {
-            //product p = productController.Get(id);
-            return productController.Get(id);
+            return productController.FindProduct(id);
         }
 
         public void ggwp()

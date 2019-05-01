@@ -8,7 +8,7 @@ namespace TestBusinessLogic1
     [TestClass]
     public class DBCustomerTest
     {
-        CustomerController customerController = new CustomerController();
+        PersonController personController = new PersonController();
 
         // Probably Querien i dBCustomer er broken
         //[TestMethod]

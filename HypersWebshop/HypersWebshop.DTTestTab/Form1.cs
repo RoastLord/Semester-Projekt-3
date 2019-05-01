@@ -26,7 +26,6 @@ namespace HypersWebshop.DTTestTab
             Product product = new Product()
             {
                 Name = "Lasse",
-                AmountInStock = 3,
                 Price = 100,
                 PurchasePrice = 50,
                 ProductStatus = Product_Status.Published,

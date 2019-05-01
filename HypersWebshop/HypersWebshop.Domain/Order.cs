@@ -16,19 +16,29 @@ namespace HypersWebshop.Domain
         public List<OrderLine> OrderLines { get; set; }
         
 
-        public Order(int orderNo, long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
+        public Order(int orderNo, DateTime date, DateTime deliveryDate, Customer customer)
         {
+            TotalPrice = 0;
             OrderNo = orderNo;
-            TotalPrice = totalPrice;
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;
             OrderLines = new List<OrderLine>();
         }
 
-        public Order(long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
+        public Order(DateTime date, DateTime deliveryDate, Customer customer)
         {
-            TotalPrice = totalPrice;
+            TotalPrice = 0;
+            Date = date;
+            DeliveryDate = deliveryDate;
+            Customer = customer;
+            OrderLines = new List<OrderLine>();
+        }
+
+        public Order(int orderNo, long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
+        {
+            OrderNo = orderNo;
+            TotalPrice = 0;
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;

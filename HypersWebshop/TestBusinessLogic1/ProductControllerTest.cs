@@ -16,7 +16,6 @@ namespace TestBusinessLogic1
             Product product = new Product()
             {
                 Name = "Seagate Harddisk",
-                AmountInStock = 20,
                 Price = 20000,
                 PurchasePrice = 7500,
                 ProductDescription = Product_Description.Harddisk,
@@ -27,7 +26,7 @@ namespace TestBusinessLogic1
             productController.Create(product);
 
             //Assert
-            Assert.AreEqual(product.ProductId, productController.Get(product.ProductId).ProductId);
+            Assert.AreEqual(product.ProductId, productController.FindProduct(product.ProductId).ProductId);
         }
 
         [TestMethod]
@@ -38,7 +37,6 @@ namespace TestBusinessLogic1
             Product product = new Product()
             {
                 Name = "Toshiba Harddisk",
-                AmountInStock = 15,
                 Price = 19900,
                 PurchasePrice = 7500,
                 ProductDescription = Product_Description.Harddisk,
@@ -48,10 +46,10 @@ namespace TestBusinessLogic1
 
             //Act
             product.Price = 18999;
-            productController.Update(product);
+            productController.UpdateProduct(product);
 
             //Assert
-            Assert.AreEqual(product.Price, productController.Get(product.ProductId).Price);
+            Assert.AreEqual(product.Price, productController.FindProduct(product.ProductId).Price);
 
         }
 

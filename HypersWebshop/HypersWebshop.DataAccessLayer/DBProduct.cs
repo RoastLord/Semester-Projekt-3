@@ -1,5 +1,4 @@
-﻿using HypersWebshop.DataAccessLayer.Interfaces;
-using HypersWebshop.Domain;
+﻿using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,16 +10,16 @@ using System.Transactions;
 namespace HypersWebshop.DataAccessLayer
 { 
 
-    public class DBProduct : ICRUD<Product>
+    public class DBProduct
     {
         DBConnection dBConnection;
         
         // I querien "CREATE_PRODUCT" bliver der kaldt en "OUTPUT IDENT_CURRENT" query, som returnerer ID'et på produktet.
-        private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @AmountInStock, @Price, @PurchasePrice, @Description, @Status)";
+        private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @Price, @PurchasePrice, @Description, @Status)";
         private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
         private string DELETE_PRODUCT = "DELETE FROM Product WHERE ID = (@id)";
         private string FIND_PRODUCTS_BY_DESCRIPTION = "SELECT * from Product WHERE description = @description";
-        private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, amountInStock = @amountInStock," +
+        private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, " +
                                         " price = @price, purchasePrice = @PurchasePrice, " +
                                         "description = @description, status = @status WHERE id = @id;";
         public DBProduct()
@@ -29,8 +28,9 @@ namespace HypersWebshop.DataAccessLayer
         }
 
 
-        public void Create(Product entity)
+        public int Create(Product entity)
         {
+            int productId = -1;
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -40,20 +40,21 @@ namespace HypersWebshop.DataAccessLayer
                         SqlCommand command = new SqlCommand(CREATE_PRODUCT, con);
                         command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           entity.Name },
-                                { "amountInStock",  entity.AmountInStock },
                                 { "price",          entity.Price },
                                 { "purchasePrice",  entity.PurchasePrice },
                                 { "description",    entity.ProductDescription },
                                 { "status",         entity.ProductStatus },
                         });
-                        entity.ProductId = command.ExecuteWithIdentity();
+                        productId = command.ExecuteWithIdentity();
                     }
                     scope.Complete();
+                    
                 }
             }
             catch (TransactionAbortedException)
             {
             }
+        return productId;
         }
 
         // Skal evt ikke bruges
@@ -77,7 +78,7 @@ namespace HypersWebshop.DataAccessLayer
             }
         }
 
-        public Product Get(int id)
+        public Product FindProduct(int id)
         {
             Product product;
             using (SqlConnection con = dBConnection.OpenConnection())
@@ -92,7 +93,6 @@ namespace HypersWebshop.DataAccessLayer
                     {
                         ProductId = dr.GetInt("id"),
                         Name = dr.GetString("name"),
-                        AmountInStock = dr.GetInt("amountInStock"),
                         Price = dr.GetLong("price"),
                         PurchasePrice = dr.GetLong("purchasePrice"),
                         ProductDescription = (Product_Description)dr.GetInt("description"),
@@ -104,10 +104,9 @@ namespace HypersWebshop.DataAccessLayer
             return null;
         }
 
-            public IEnumerable<Product> GetAll(Enum productDescription)
+            public IEnumerable<Product> FindByDescription(Enum productDescription)
         {
             List<Product> products = new List<Product>();
-            // Den rigtige transaktion?
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -124,7 +123,6 @@ namespace HypersWebshop.DataAccessLayer
                             {
                                 ProductId = dr.GetInt("id"),
                                 Name = dr.GetString("name"),
-                                AmountInStock = dr.GetInt("amountInStock"),
                                 Price = dr.GetLong("price"),
                                 PurchasePrice = dr.GetLong("purchasePrice"),
                                 ProductDescription = (Product_Description)dr.GetInt("description"),
@@ -156,7 +154,6 @@ namespace HypersWebshop.DataAccessLayer
                             SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
                         command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
-                                { "amountInStock",  product.AmountInStock },
                                 { "price",          product.Price },
                                 { "purchasePrice",  product.PurchasePrice },
                                 { "description",    product.ProductDescription },

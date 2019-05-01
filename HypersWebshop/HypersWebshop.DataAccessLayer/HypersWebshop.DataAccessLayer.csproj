@@ -43,12 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnection.cs" />
-    <Compile Include="DBCustomer.cs" />
-    <Compile Include="DBEmployee.cs" />
+    <Compile Include="DBPerson.cs" />
     <Compile Include="DBOrder.cs" />
     <Compile Include="DBPriceLog.cs" />
     <Compile Include="DBProduct.cs" />
-    <Compile Include="Interfaces\ICRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlExtensions.cs" />
   </ItemGroup>

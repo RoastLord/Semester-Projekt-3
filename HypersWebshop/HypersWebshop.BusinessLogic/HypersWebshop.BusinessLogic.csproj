@@ -41,9 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerController.cs" />
-    <Compile Include="EmployeeController.cs" />
-    <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="PersonController.cs" />
     <Compile Include="OrderController.cs" />
     <Compile Include="ProductController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

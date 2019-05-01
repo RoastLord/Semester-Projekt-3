@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.BusinessLogic
 {
-    public class ProductController : ICRUD<Product>
+    public class ProductController
     {
         DBProduct dbProduct = new DBProduct();
 
-        public void Create(Product entity)
+        public int Create(Product entity)
         {
-            dbProduct.Create(entity);
+            return dbProduct.Create(entity);
         }
 
-        public void Delete(Product entity)
+        public void DeleteProduct(Product entity)
         {
             dbProduct.Delete(entity);
         }
 
-        public Product Get(int id)
+        public Product FindProduct(int id)
         {
-            return dbProduct.Get(id);
+            return dbProduct.FindProduct(id);
         }
 
         // Skal kaldes med en opdateret lokalvariabel
-        public void Update(Product entity)
+        public void UpdateProduct(Product entity)
         {
             dbProduct.Update(entity);
         }
@@ -39,9 +39,9 @@ namespace HypersWebshop.BusinessLogic
             dbProduct.Update(product);
         }
 
-        public IEnumerable<Product> GetAll(Enum productDescription)
+        public IEnumerable<Product> FindProductsByDescription(Enum productDescription)
         {
-            return dbProduct.GetAll(productDescription);
+            return dbProduct.FindByDescription(productDescription);
         }
     }
 }

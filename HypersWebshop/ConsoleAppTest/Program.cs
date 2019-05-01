@@ -12,6 +12,55 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
+            // Arrange
+            OrderController orderController = new OrderController();
+            ProductController productController = new ProductController();
+            PersonController personController = new PersonController();
+            Customer customer = new Customer()
+            {
+                Name = "Per",
+                Address = "Hadsundvej 30",
+                PhoneNo = "12341234",
+                Email = "per@mail.dk",
+                Zipcode = 9000,
+            };
+            int customerId = personController.CreateCustomer(customer);
+
+            Product product = new Product()
+            {
+                Name = "TestProcessSaleProduct",
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Batteri,
+                ProductStatus = Product_Status.Published
+            };
+            product.ProductId = productController.Create(product);
+            OrderLine orderLine = new OrderLine(product);
+            Order order = new Order(DateTime.Today, DateTime.Today, customer);
+            order.OrderNo = orderController.CreateOrder(order);
+            Console.WriteLine("Skal være 1: " + order.OrderNo);
+            Console.ReadKey();
+            personController.AddOrderToCustomer(order.OrderNo, customer);
+            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
+
+            // Act
+            orderController.ProcessSale(order);
+
+            // Assert
+            Console.WriteLine("Skal være solgt: " + productController.FindProduct(product.ProductId).ProductStatus);
+            Console.ReadKey();
+
+
+
+
+
+
+
+
+
+
+
+
             //Product product = new Product()
             //{
             //    Name = "Skovl",
@@ -80,13 +129,39 @@ namespace ConsoleAppTest
             //    string test = customerController.GetCityByZipCode(newCust.Zipcode);
             //    Console.WriteLine(test);
 
+            //OrderController orderController = new OrderController();
+            //orderController.RemoveProductFromShoppingcart(1, 2);
 
-            //    Console.ReadKey();
-            //
-            OrderController orderController = new OrderController();
-            orderController.RemoveProductFromShoppingcart(1, 2);
-            Console.ReadKey();
 
+            //OrderController orderController = new OrderController();
+            //ProductController productController = new ProductController();
+            //PersonController personController = new PersonController();
+            //Customer customer = new Customer()
+            //{
+            //    Name = "Per",
+            //    Address = "Hadsundvej 30",
+            //    PhoneNo = "123412364",
+            //    Email = "per@mail.dk",
+            //    Zipcode = 9000,
+            //};
+            //personController.CreateCustomer(customer);
+            //Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
+            //Product product = new Product()
+            //{
+            //    Name = "TestProcessSaleProduct",
+            //    Price = 100,
+            //    PurchasePrice = 50,
+            //    ProductDescription = Product_Description.Batteri,
+            //    ProductStatus = Product_Status.Published
+            //};
+            //OrderLine orderLine = new OrderLine(product);
+            //product.ProductId = productController.Create(product);
+            //order.AddToOrderLine(orderLine);
+
+            //orderController.ProcessSale(order);
+
+            //Console.WriteLine(productController.FindProduct(product.ProductId).ProductStatus);
+            //Console.ReadKey();
         }
     }
 }
