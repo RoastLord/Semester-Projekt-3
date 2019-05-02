@@ -39,10 +39,10 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.FindByDescription(productDescription);
         }
 
-        //public void ChangeProductStatus(Product product, Product_Status newStatus)
-        //{
-        //    product.ProductStatus = newStatus;
-        //    dbProduct.Update(product);
-        //}
+        public void ChangeProductStatus(Product product, Product_Status newStatus)
+        {
+            product.ProductStatus = newStatus;
+            dbProduct.Update(product);
+        }
     }
 }
