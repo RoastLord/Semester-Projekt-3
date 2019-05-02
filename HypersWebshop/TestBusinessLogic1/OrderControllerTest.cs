@@ -15,6 +15,7 @@ namespace TestBusinessLogic
             // Arrange
             OrderController orderController = new OrderController();
             ProductController productController = new ProductController();
+            PersonController personController = new PersonController();
             Customer customer = new Customer()
             {
                 Name = "Per",
@@ -23,27 +24,28 @@ namespace TestBusinessLogic
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
-            Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
+            int customerId = personController.CreateCustomer(customer);
+
             Product product = new Product()
             {
                 Name = "TestProcessSaleProduct",
-                AmountInStock = 10,
                 Price = 100,
                 PurchasePrice = 50,
                 ProductDescription = Product_Description.Batteri,
                 ProductStatus = Product_Status.Published
             };
-            OrderLine orderLine = new OrderLine(1, 100, 100, product);
-            productController.Create(product);
-            order.AddToOrderLine(orderLine);
-            int expectedAmount = product.AmountInStock - orderLine.Amount;
+            product.ProductId = productController.Create(product);
+            OrderLine orderLine = new OrderLine(product);
+            Order order = new Order (DateTime.Today, DateTime.Today, customer);
+            order.OrderNo = orderController.CreateOrder(order);
+            personController.AddOrderToCustomer(order.OrderNo, customer);
+            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
 
             // Act
             orderController.ProcessSale(order);
 
             // Assert
-            Assert.AreEqual(Product_Status.Sold, productController.Get(product.ProductId).ProductStatus);
-            Assert.AreEqual(expectedAmount, productController.Get(product.ProductId).AmountInStock);
+            Assert.AreEqual(Product_Status.Sold, productController.FindProduct(product.ProductId).ProductStatus);
         }
 
         //[TestMethod]

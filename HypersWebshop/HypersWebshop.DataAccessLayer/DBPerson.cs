@@ -9,20 +9,17 @@ using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
-    public class DBCustomer
+    public class DBPerson
     {
-        DBConnection dBConnection;
-        private string CREATE_PERSON = "INSERT INTO Person OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode)";
+        DBConnection dBConnection = new DBConnection();
+        private string CREATE_PERSON = "INSERT INTO Person  OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode)";
         private string CREATE_CUSTOMER = "INSERT INTO Customer (pe_id) VALUES (@pe_id)";
+        //private string CREATE_EMPLOYEE = "INSERT INTO Employee (pe_id) VALUES (@pe_id)";
         private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
         private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
+        private string ADD_ORDER_TO_CUSTOMER = "UPDATE Customer SET o_id = @o_id FROM Person WHERE Customer.pe_id = Person.id AND Person.phoneNo = @PhoneNo";
 
-        public DBCustomer()
-        {
-            dBConnection = new DBConnection();
-        }
-
-        public Customer Get(string phoneNo)
+        public Customer FindCustomer(string phoneNo)
         {
             using (SqlConnection con = dBConnection.OpenConnection())
             {
@@ -65,29 +62,40 @@ namespace HypersWebshop.DataAccessLayer
 
         }
 
-        public void Create(Customer customer)
+        public int CreateCustomer(Customer customer)
         {
-
+            int tempId = -1;
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand cmd = new SqlCommand(CREATE_PERSON, con);
                 cmd.AddMultipleWithValue(new Dictionary<string, object>()
                         {
-                            {"name",           customer.Name },
-                            {"address",        customer.Address },
-                            {"phoneNo",        customer.PhoneNo },
-                            {"email",          customer.Email },
-                            {"zipcode",        customer.Zipcode },
+                            {"@name",           customer.Name },
+                            {"@address",        customer.Address },
+                            {"@phoneNo",        customer.PhoneNo },
+                            {"@email",          customer.Email },
+                            {"@zipcode",        customer.Zipcode }
                         });
-
-                int tempId = cmd.ExecuteWithIdentity();
+                tempId = cmd.ExecuteWithIdentity();
 
                 SqlCommand cmd2 = new SqlCommand(CREATE_CUSTOMER, con);
-                cmd2.AddMultipleWithValue(new Dictionary<string, object>()
+                cmd2.Parameters.AddWithValue("pe_id", tempId);
+                cmd2.ExecuteNonQuery();
+            }
+            return tempId;
+        }
+
+        public void AddOrderToCustomer(int orderId, Customer customer)
+        {
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand cmd = new SqlCommand(ADD_ORDER_TO_CUSTOMER, con);
+                cmd.AddMultipleWithValue(new Dictionary<string, object>()
                         {
-                            {"pe_id",          tempId },
+                            {"o_id",            orderId },
+                            {"@phoneNo",        customer.PhoneNo },
                         });
-                cmd2.ExecuteWithIdentity();
+                cmd.ExecuteNonQuery();
             }
         }
     }

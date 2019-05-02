@@ -53,9 +53,7 @@ namespace HypersWebshop.DataAccessLayer
 
         public static DateTime GetDateTime(this SqlDataReader dr, string columnName)
         {
-
             return dr.GetDateTime(dr.GetOrdinal(columnName));
-
         }
     }
 }

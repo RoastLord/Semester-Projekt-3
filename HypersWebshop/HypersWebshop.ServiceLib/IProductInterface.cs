@@ -49,6 +49,8 @@ namespace HypersWebshop.ServiceLib
             set { name = value; }
         }
 
+
+
         [DataMember]
         public long Price
         {
