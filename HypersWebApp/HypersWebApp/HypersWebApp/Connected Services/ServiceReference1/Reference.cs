@@ -23,9 +23,6 @@ namespace HypersWebApp.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountInStockField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -50,19 +47,6 @@ namespace HypersWebApp.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AmountInStock {
-            get {
-                return this.AmountInStockField;
-            }
-            set {
-                if ((this.AmountInStockField.Equals(value) != true)) {
-                    this.AmountInStockField = value;
-                    this.RaisePropertyChanged("AmountInStock");
-                }
             }
         }
         
@@ -219,9 +203,6 @@ namespace HypersWebApp.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountInStockField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool BoolValueField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -249,19 +230,6 @@ namespace HypersWebApp.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AmountInStock {
-            get {
-                return this.AmountInStockField;
-            }
-            set {
-                if ((this.AmountInStockField.Equals(value) != true)) {
-                    this.AmountInStockField = value;
-                    this.RaisePropertyChanged("AmountInStock");
-                }
             }
         }
         

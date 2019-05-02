@@ -1,7 +1,100 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Harddisk";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<head>
+    <style type="text/css">
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            border 0px:
+        }
 
-<p>Use this area to provide additional information.</p>
+        #wrap {
+            width: 950px;
+            margin: 0 0 0 20px;
+            padding: 0;
+            background-color: #fff;
+        }
+
+            #wrap h1 {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 150px;
+                float: left;
+            }
+
+            #wrap #leftcol {
+                width: 300px;
+                background-color: #ffffff;
+                border: 2px solid #000000;
+                height: 123px;
+                float: left;
+            }
+
+            #wrap #rightcol {
+                width: 610px;
+                float: right;
+                margin: 0;
+                padding: 0;
+            }
+
+        #rightcol #rightleft {
+            width: 300px;
+            height: 123px;
+            border: 2px solid #000000;
+            float: left;
+        }
+
+        #rightcol #rightright {
+            width: 300px;
+            height: 123px;
+            border: 2px solid #000000;
+            float: right;
+        }
+
+        #wrap #footer {
+            float: left;
+            width: 870px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1> En harddisk er blablablablablablabla</h1>
+        <div id="leftcol">
+            <p>
+                Det her er den første kolonne!
+            </p>
+        </div>
+        <div id="rightcol">
+            <div id="rightleft">
+                <p>
+                    Det her er den anden kolonne!
+                </p>
+            </div>
+            <div id="rightright">
+                <p>
+                    Det her er den tredje kolonne!
+                </p>
+            </div>
+            </div>
+        <div id="footer">
+            <p>
+                Copyright Jacob og Frederik EZ Clap
+            </p>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <h2 class="col-sm-6 mysquare">@ViewBag.Square1 </h2>
+            <h2 class="col-sm-6 mysquare">@ViewBag.Square2 </h2>
+        </div>
+        <div class="row">
+            <h2 class="col-sm-6 mysquare">@ViewBag.Square3 </h2>
+            <h2 class="col-sm-6 mysquare">@ViewBag.Square4 </h2>
+        </div>
+    </div>
+    
+</body>

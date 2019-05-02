@@ -3,7 +3,6 @@
   <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:complexType name="CompositeType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AmountInStock" type="xs:int" />
       <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" type="xs:long" />
