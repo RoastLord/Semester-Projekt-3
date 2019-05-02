@@ -16,11 +16,11 @@ namespace HypersWebshop.DataAccessLayer
 
         DBConnection dBConnection;
 
-        private string CREATE_ORDER = "INSERT INTO SalesOrder OUTPUT IDENT_CURRENT('SalesOrder') (gdate, deliveryDate) VALUES (@gdate, @deliveryDate)";
+        private string CREATE_ORDER = "INSERT INTO SalesOrder OUTPUT IDENT_CURRENT('SalesOrder') VALUES (@totalPrice, @date, @deliveryDate)";
         private string CREATE_ORDERLINE = "INSERT INTO orderLine VALUES(@o_id, @pr_id)";
         private string FIND_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
                                     " INNER JOIN Person ON Customer.pe_id = Person.id" +
-                                    " WHERE SalesOrder.OrderNo = @OrderNo";
+                                    " WHERE SalesOrder.id = @orderNo";
         private string REMOVE_PRODUCT = "DELETE FROM OrderLine WHERE o_id = (@o_id) AND pr_id = (@pr_id)";
         private string FIND_ORDERLINES = "SELECT * FROM OrderLine WHERE o_id = (@o_id)";
         public DBOrder()
@@ -35,7 +35,8 @@ namespace HypersWebshop.DataAccessLayer
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(CREATE_ORDER, con);
-                command.Parameters.AddWithValue("@gdate", "Date");
+                command.Parameters.AddWithValue("totalPrice", 0);
+                command.Parameters.AddWithValue("@date", "Date");
                 command.Parameters.AddWithValue("@deliveryDate", "Delivery Date");
                 orderNo = command.ExecuteWithIdentity();
                 Console.WriteLine("wtf?: " + orderNo);
@@ -65,13 +66,13 @@ namespace HypersWebshop.DataAccessLayer
                 throw new Exception();
             }
         }
-        public List<OrderLine> FindOrderLines(int o_id)
+        public List<OrderLine> FindOrderLines(int orderNo)
         {
             List<OrderLine> orderLines = new List<OrderLine>();
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(FIND_ORDERLINES, con);
-                command.Parameters.AddWithValue("o_id", o_id);
+                command.Parameters.AddWithValue("o_id", orderNo);
                 SqlDataReader dr = command.ExecuteReader();
                 DBProduct dBProduct = new DBProduct();
                 while (dr.Read())
@@ -90,7 +91,7 @@ namespace HypersWebshop.DataAccessLayer
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(FIND_ORDER, con);
-                command.Parameters.AddWithValue("OrderNo", orderNo);
+                command.Parameters.AddWithValue("orderNo", orderNo);
                 SqlDataReader dr = command.ExecuteReader();
                 DBPerson dBCustomer = new DBPerson();
                 while (dr.Read())
@@ -103,6 +104,8 @@ namespace HypersWebshop.DataAccessLayer
                         dBCustomer.FindCustomer(dr.GetString("phoneNo"))
                         );
                     return order;
+                    // dr.GetDateTime("date"),
+                    //dr.GetDateTime("deliveryDate"),
                 }
 
             }

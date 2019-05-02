@@ -23,10 +23,10 @@ namespace TestBusinessLogic1
             };
 
             //Act
-            productController.Create(product);
+            int productId = productController.Create(product);
 
             //Assert
-            Assert.AreEqual(product.ProductId, productController.FindProduct(product.ProductId).ProductId);
+            Assert.AreEqual(product.Name, productController.FindProduct(productId).Name);
         }
 
         [TestMethod]
@@ -42,14 +42,14 @@ namespace TestBusinessLogic1
                 ProductDescription = Product_Description.Harddisk,
                 ProductStatus = Product_Status.Published
             };
-            productController.Create(product);
+            product.ProductId = productController.Create(product);
 
             //Act
             product.Price = 18999;
             productController.UpdateProduct(product);
 
             //Assert
-            Assert.AreEqual(product.Price, productController.FindProduct(product.ProductId).Price);
+            Assert.AreEqual(18999, productController.FindProduct(product.ProductId).Price);
 
         }
 

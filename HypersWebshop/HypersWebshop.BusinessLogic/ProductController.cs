@@ -28,20 +28,21 @@ namespace HypersWebshop.BusinessLogic
         }
 
         // Skal kaldes med en opdateret lokalvariabel
-        public void UpdateProduct(Product entity)
+        public int UpdateProduct(Product product)
         {
-            dbProduct.Update(entity);
-        }
-
-        public void ChangeProductStatus(Product product, Product_Status newStatus)
-        {
-            product.ProductStatus = newStatus;
-            dbProduct.Update(product);
+            Console.WriteLine("Pris Fra Controller: " + product.Price);
+            return dbProduct.Update(product);
         }
 
         public IEnumerable<Product> FindProductsByDescription(Enum productDescription)
         {
             return dbProduct.FindByDescription(productDescription);
         }
+
+        //public void ChangeProductStatus(Product product, Product_Status newStatus)
+        //{
+        //    product.ProductStatus = newStatus;
+        //    dbProduct.Update(product);
+        //}
     }
 }

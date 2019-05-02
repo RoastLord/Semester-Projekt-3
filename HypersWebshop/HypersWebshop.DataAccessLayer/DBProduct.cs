@@ -1,4 +1,4 @@
-﻿using HypersWebshop.Domain;
+﻿ using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -143,33 +143,38 @@ namespace HypersWebshop.DataAccessLayer
 
         }
 
-        public void Update(Product product)
+        public int Update(Product product)
         {
+            int NoOfRowsAffected = 0;
             try
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
-                            SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
+                        SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
+                        Console.WriteLine("Pris Fra dBProduct: " + product.Price);
+                        Console.WriteLine(product.ProductId);
                         command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
                                 { "price",          product.Price },
-                                { "purchasePrice",  product.PurchasePrice },
+                                { "PurchasePrice",  product.PurchasePrice },
                                 { "description",    product.ProductDescription },
                                 { "status",         product.ProductStatus },
                                 { "id",             product.ProductId },
                         });
                         //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
-                        int noOfRowsAffected = command.ExecuteNonQuery();
+                        NoOfRowsAffected = command.ExecuteNonQuery();
                     }
                     
                     scope.Complete();
                 }
             }
-            catch (TransactionAbortedException)
+            catch (TransactionAbortedException tae)
             {
+                Console.WriteLine(tae.Message);
             }
+            return NoOfRowsAffected;
         }
 
     }

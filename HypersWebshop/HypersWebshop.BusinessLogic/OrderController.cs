@@ -32,10 +32,12 @@ namespace HypersWebshop.BusinessLogic
             {
                 if (IsPaid(order))
                 {
-                    List<OrderLine> orderLines = order.OrderLines;
+                    List<OrderLine> orderLines = dBOrder.FindOrderLines(order.OrderNo);
+                    Console.WriteLine(orderLines.Count);
                     foreach(OrderLine orderLine in orderLines)
                     {
                         productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
+                        Console.WriteLine("Kommer den herind??");
                     }
                     Console.WriteLine("Salg gik igennem");
                 //PrintReceipt(order);
