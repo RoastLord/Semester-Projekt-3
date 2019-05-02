@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HypersWebshop.Domain;
 using HypersWebshop.BusinessLogic;
 using HypersWebshop.DataAccessLayer;
+using System.Collections.Generic;
 
 namespace TestBusinessLogic
 {
@@ -24,11 +25,11 @@ namespace TestBusinessLogic
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
-            int customerId = personController.CreateCustomer(customer);
+            personController.CreateCustomer(customer);
 
             Product product = new Product()
             {
-                Name = "TestProcessSaleProduct",
+                Name = "TestProduct",
                 Price = 100,
                 PurchasePrice = 50,
                 ProductDescription = Product_Description.Batteri,
@@ -48,106 +49,63 @@ namespace TestBusinessLogic
             Assert.AreEqual(Product_Status.Sold, productController.FindProduct(product.ProductId).ProductStatus);
         }
 
-        //[TestMethod]
-        //public void TestShoppingCart()
-        //{
-        //    //Arrange
-        //    DBConnection dBConnection;
-        //    OrderController orderController = new OrderController();
-        //    ProductController productController = new ProductController();
-        //    Customer customer = new Customer()
-        //    {
-        //        Name = "Per",
-        //        Address = "Hadsundvej 30",
-        //        PhoneNo = "12341234",
-        //        Email = "per@mail.dk",
-        //        Zipcode = 9000,
-        //        City = "Aalborg"
-        //    };
-        //    Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
-        //    dBConnection = new DBConnection();
-        //    Product product = new Product()
-        //    {
-        //        Name = "TestShoppingCartProduct",
-        //        AmountInStock = 10,
-        //        Price = 100,
-        //        PurchasePrice = 50,
-        //        ProductDescription = Product_Description.Batteri,
-        //        ProductStatus = Product_Status.Published
-        //    };
-        //    Product product2 = new Product()
-        //    {
-        //        Name = "TestShoppingCartProduct2",
-        //        AmountInStock = 10,
-        //        Price = 100,
-        //        PurchasePrice = 50,
-        //        ProductDescription = Product_Description.Batteri,
-        //        ProductStatus = Product_Status.Published
-        //    };
-        //    OrderLine orderLine = new OrderLine(1, 100, 100, product);
-        //    productController.Create(product);
-        //    productController.Create(product2);
-        //    order.AddToOrderLine(orderLine);
-        //    int expectedAmount = product.AmountInStock - orderLine.Amount;
-        //    DBOrder dBOrder = new DBOrder();
-        //    //Act
-        //    dBOrder.Create(order);
-        //    dBOrder.CreateOrderline(product, order, 1);
-        //    dBOrder.CreateOrderline(product2, order, 1);
-        //    //Assert
-        //    Assert.AreEqual(order.OrderNo, 1);
-        //    Assert.AreEqual(orderLine.Product.Name, product.Name);
-        //}
 
-        //[TestMethod]
-        //public void TestRemoveProductFromOrderline()
-        //{
-        //    //Arrange
-        //    DBConnection dBConnection;
-        //    OrderController orderController = new OrderController();
-        //    dBConnection = new DBConnection();
-        //    DBOrder dBOrder = new DBOrder();
-        //    Customer customer = new Customer()
-        //    {
-        //        Name = "testRemoveProductPerson",
-        //        Address = "Hadsundvej 30",
-        //        PhoneNo = "12341234",
-        //        Email = "per@mail.dk",
-        //        Zipcode = 9000,
-        //        City = "Aalborg"
-        //    };
-        //    Order order = new Order(1, 100, DateTime.Today, DateTime.Today, customer);
-        //    Product product1 = new Product()
-        //    {
-        //        Name = "testRemoveProductproduct",
-        //        AmountInStock = 10,
-        //        Price = 100,
-        //        PurchasePrice = 50,
-        //        ProductDescription = Product_Description.Batteri,
-        //        ProductStatus = Product_Status.Published
-        //    };
-        //    Product product2 = new Product()
-        //    {
-        //        Name = "testRemoveProductproduct2",
-        //        AmountInStock = 10,
-        //        Price = 100,
-        //        PurchasePrice = 50,
-        //        ProductDescription = Product_Description.Batteri,
-        //        ProductStatus = Product_Status.Published
-        //    };
-        //    ProductController productController = new ProductController();
-        //    //Act
-        //    orderController.RemoveProductFromShoppingcart(order.OrderNo, product1.ProductId);
-        //    productController.Create(product1);
-        //    productController.Create(product2);
-        //    dBOrder.Create(order);
-        //    order = dBOrder.Get(order.OrderNo);
-        //    dBOrder.CreateOrderlines(product1, order, 1);
-        //    dBOrder.CreateOrderlines(product2, order, 1);
-        //    order.AddToOrderLine(dBOrder.GetOrderLine(2));
-        //    //Assert
-        //    Assert.AreEqual(order.OrderLines.Peek().Product.Name, product1.Name);
-        //}
+        [TestMethod]
+        public void TestRemoveProductFromOrderline()
+        {
+            //Arrange
+            ProductController productController = new ProductController();
+            OrderController orderController = new OrderController();
+            PersonController personController = new PersonController();
+
+            Customer customer = new Customer()
+            {
+                Name = "JensPer",
+                Address = "Hadsundvej 30",
+                PhoneNo = "12341234",
+                Email = "per@mail.dk",
+                Zipcode = 9000,
+                City = "Aalborg"
+            };
+
+            
+            personController.CreateCustomer(customer);
+            Order order = new Order(0, 100, DateTime.Today, DateTime.Today, customer);
+            
+            Product product = new Product()
+            {
+                Name = "testRemoveProductproduct",
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.Batteri,
+                ProductStatus = Product_Status.Published
+            };
+            OrderLine orderLine = new OrderLine(product);
+            
+            product.ProductId = productController.Create(product);
+            order.OrderNo = orderController.CreateOrder(order);
+            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
+
+            //Act
+            orderController.RemoveProductFromShoppingcart(order.OrderNo, product.ProductId);
+
+            //Assert
+
+            List<OrderLine> list = orderController.GetOrderLines(order.OrderNo);
+            bool check = false;
+            foreach (OrderLine o in list)
+            {
+                
+                if(o.Product.Name == product.Name)
+                {
+
+                    check = true;
+                }
+            }
+
+
+            Assert.AreEqual(false, check);
+        }
     }
 }
 

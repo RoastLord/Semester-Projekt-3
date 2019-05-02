@@ -12,9 +12,9 @@ namespace HypersWebshop.BusinessLogic
     {
         DBPerson dBPerson = new DBPerson();
 
-        public int CreateCustomer(Customer customer)
+        public void CreateCustomer(Customer customer)
         {
-            return dBPerson.CreateCustomer(customer);
+            dBPerson.CreateCustomer(customer);
         }
 
         public void AddOrderToCustomer(int orderNo, Customer customer)

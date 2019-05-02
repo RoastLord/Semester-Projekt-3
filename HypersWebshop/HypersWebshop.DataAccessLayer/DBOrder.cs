@@ -21,6 +21,7 @@ namespace HypersWebshop.DataAccessLayer
         private string FIND_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
                                     " INNER JOIN Person ON Customer.pe_id = Person.id" +
                                     " WHERE SalesOrder.id = @orderNo";
+        private string REMOVE_ALL_PRODUCTS_FROM_ORDER = "DELETE FROM OrderLine WHERE o_id = @o_id";
         private string REMOVE_PRODUCT = "DELETE FROM OrderLine WHERE o_id = (@o_id) AND pr_id = (@pr_id)";
         private string FIND_ORDERLINES = "SELECT * FROM OrderLine WHERE o_id = (@o_id)";
         public DBOrder()
@@ -86,6 +87,30 @@ namespace HypersWebshop.DataAccessLayer
             }
             return orderLines;
         }
+        public int RemoveAllProductsFromOrder(int orderNo)
+            {
+                int NumberOfRowsAffected = 0;
+                try
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        using (SqlConnection con = dBConnection.OpenConnection())
+                        {
+                            SqlCommand command = new SqlCommand(REMOVE_ALL_PRODUCTS_FROM_ORDER, con);
+                            command.Parameters.AddWithValue("o_id", orderNo);
+                            //Evt returner for at vise den er slettet
+                            NumberOfRowsAffected = command.ExecuteNonQuery();
+                        }
+                        scope.Complete();
+                    }
+                }
+                catch (TransactionAbortedException)
+                {
+
+                }
+                return NumberOfRowsAffected;
+            }
+        
         public Order FindOrder(int orderNo)
         {
             using (SqlConnection con = dBConnection.OpenConnection())
