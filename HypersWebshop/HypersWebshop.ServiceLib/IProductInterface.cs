@@ -37,7 +37,6 @@ namespace HypersWebshop.ServiceLib
     public class CompositeType
     {
         public string name;
-        public int amountInStock;
         public long price;
         public long purchasePrice;
         public Product_Description productDescription;
@@ -50,12 +49,7 @@ namespace HypersWebshop.ServiceLib
             set { name = value; }
         }
 
-        [DataMember]
-        public int AmountInStock
-        {
-            get { return amountInStock; }
-            set { amountInStock = value; }
-        }
+
 
         [DataMember]
         public long Price

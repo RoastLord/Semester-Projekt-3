@@ -10,14 +10,9 @@ namespace HypersWebshop.Domain
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public int AmountInStock { get; set; }
         public long Price { get; set; }
         public long PurchasePrice { get; set; }
         public Product_Description ProductDescription { get; set; }
         public Product_Status ProductStatus { get; set; } 
-
-
-        
-
     }
 }

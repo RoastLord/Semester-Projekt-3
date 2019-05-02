@@ -16,7 +16,7 @@ namespace HypersWebshop.ServiceLib
 
         public string GetData(int value)
         {
-            return string.Format("You entered: {0}", value);
+            return "";
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
@@ -35,12 +35,12 @@ namespace HypersWebshop.ServiceLib
 
         public void CreateProduct(Product product)
         {
-            productController.Create(product);
+            //productController.Create(product);
         }
 
         public Product FindProduct(int id)
         {
-            return productController.Get(id);
+            return productController.FindProduct(id);
         }
 
         public void ggwp()

@@ -8,75 +8,41 @@ using System.Threading.Tasks;
 
 namespace HypersWebshop.BusinessLogic
 {
-    public class OrderController : ICRUD<Order>
+    public class OrderController
     {
-        public void Create(Order entity)
+        DBOrder dBOrder = new DBOrder();
+        ProductController productController = new ProductController();
+
+        public void RemoveProductFromShoppingcart(int orderNo, int productId)
         {
-            throw new NotImplementedException();
+            dBOrder.RemoveProductFromOrder(orderNo, productId);
+        }
+        public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
+        {   
+            dBOrder.CreateOrderline(orderNo, orderLine);
         }
 
-        public void Delete(Order entity)
+        public int CreateOrder(Order order)
         {
-            throw new NotImplementedException();
-        }
-
-        public Order Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Order> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Order entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        private bool CheckAmount(int productId, int amount)
-        {
-            bool check = false;
-
-            DBProduct dBProduct = new DBProduct();
-            if(dBProduct.Get(productId).AmountInStock < amount)
-            {
-                return check = true;
-            }
-
-            return check;
-
+            return dBOrder.CreateOrder(order);
         }
 
         public void ProcessSale(Order order)
         {
-            OrderLine orderLine = order.OrderLines.Peek();
-            Product product = orderLine.Product;
-            Customer customer = order.Customer;
-            ProductController productController = new ProductController();
-            
-
-            if (CheckAmount(product.ProductId, orderLine.Amount))
             {
-                throw new Exception("Det er lidt en cancer");
+                if (IsPaid(order))
+                {
+                    List<OrderLine> orderLines = dBOrder.FindOrderLines(order.OrderNo);
+                    Console.WriteLine(orderLines.Count);
+                    foreach(OrderLine orderLine in orderLines)
+                    {
+                        productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
+                        Console.WriteLine("Kommer den herind??");
+                    }
+                    Console.WriteLine("Salg gik igennem");
+                //PrintReceipt(order);
+                }
             }
-
-            if(IsPaid(order))
-            {
-                productController.ChangeProductStatus(product, Product_Status.Sold);
-                product.AmountInStock -= orderLine.Amount;
-                productController.Update(product);
-                PrintReceipt(order);
-                
-            }
-            
-        }
-
-        private bool IsPaid(Order order)
-        {
-            //NETS logik
-            return true;
         }
 
         private string PrintReceipt(Order order)
@@ -90,26 +56,44 @@ namespace HypersWebshop.BusinessLogic
             stringBuilder.AppendLine(order.Customer.City);
             stringBuilder.AppendLine(order.Customer.Email);
             stringBuilder.AppendLine(order.Customer.PhoneNo);
-            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(order.TotalPrice.ToString());
 
             foreach (OrderLine orderLine in order.OrderLines)
             {
-                stringBuilder.AppendLine(orderLine.Amount.ToString());
-                stringBuilder.AppendLine(orderLine.Price.ToString());
+
                 stringBuilder.AppendLine(orderLine.Product.Name);
-                stringBuilder.AppendLine(orderLine.TotalPrice.ToString());
+                stringBuilder.AppendLine(orderLine.Product.Price.ToString());
 
             }
 
             return stringBuilder.ToString();
-
-            
-
         }
 
-        public IEnumerable<Order> GetAll(Enum productDescription)
+        private bool IsPaid(Order order)
         {
-            throw new NotImplementedException();
+            //NETS logik
+            return true;
         }
+
+        //private bool CheckAmount(List<OrderLine> orderLines)
+        //{
+        //    bool check = false;
+        //    DBProduct dBProduct = new DBProduct();
+        //    foreach (OrderLine orderLine in orderLines)
+        //    {
+        //        Product p = dBProduct.Get(orderLine.Product.ProductId);
+        //        if (p.AmountInStock > orderLine.Amount)
+        //        {
+        //            check = true;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Der er ikke nok " + p.Name + " på lager");
+        //        }
+
+        //    }
+        //    return check;
+        //}
+
     }
 }

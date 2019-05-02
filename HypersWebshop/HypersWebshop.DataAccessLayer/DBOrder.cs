@@ -1,58 +1,51 @@
-﻿using HypersWebshop.DataAccessLayer.Interfaces;
-using HypersWebshop.Domain;
+﻿using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
-    public class DBOrder : ICRUD<Order>
+    public class DBOrder
     {
 
         DBConnection dBConnection;
 
-        private string CREATE_ORDER = "INSERT INTO salesOrder OUTPUT IDENT_CURRENT('salesOrder') VALUES (@totalPrice, @date, @deliveryDate)";
-        private string CREATE_ORDERLINE = "INSERT INTO orderLine OUTPUT IDENT_CURRENT('orderLine') VALUES(@price, @amount, @o_id, @pr_id)";
-        private string GET_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
-            " INNER JOIN Person ON Customer.pe_id = Person.id" +
-            " WHERE SalesOrder.OrderNo = @OrderNo";
-
+        private string CREATE_ORDER = "INSERT INTO SalesOrder OUTPUT IDENT_CURRENT('SalesOrder') VALUES (@totalPrice, @date, @deliveryDate)";
+        private string CREATE_ORDERLINE = "INSERT INTO orderLine VALUES(@o_id, @pr_id)";
+        private string FIND_ORDER = "SELECT * FROM SalesOrder INNER JOIN Customer ON SalesOrder.id = Customer.o_id" +
+                                    " INNER JOIN Person ON Customer.pe_id = Person.id" +
+                                    " WHERE SalesOrder.id = @orderNo";
+        private string REMOVE_PRODUCT = "DELETE FROM OrderLine WHERE o_id = (@o_id) AND pr_id = (@pr_id)";
+        private string FIND_ORDERLINES = "SELECT * FROM OrderLine WHERE o_id = (@o_id)";
         public DBOrder()
         {
             dBConnection = new DBConnection();
         }
 
-        public void Create(Order entity)
+        public int CreateOrder(Order order)
         {
+            int orderNo = -1;
 
-            try
+            using (SqlConnection con = dBConnection.OpenConnection())
             {
-                using (SqlConnection con = dBConnection.OpenConnection())
-                {
-                    SqlCommand command = new SqlCommand(CREATE_ORDER, con);
-                    command.Parameters.AddWithValue("totalPrice", entity.TotalPrice);
-                    command.Parameters.AddWithValue("date", entity.Date);
-                    command.Parameters.AddWithValue("deliveryDate", entity.DeliveryDate);
+                SqlCommand command = new SqlCommand(CREATE_ORDER, con);
+                command.Parameters.AddWithValue("totalPrice", 0);
+                command.Parameters.AddWithValue("@date", "Date");
+                command.Parameters.AddWithValue("@deliveryDate", "Delivery Date");
+                orderNo = command.ExecuteWithIdentity();
+                Console.WriteLine("wtf?: " + orderNo);
+            }
 
-                    entity.OrderNo = command.ExecuteWithIdentity();
-                }
-            }
-            catch
-            {
-                throw OrderCreationException();
-            }
+            return orderNo;
         }
 
-        private Exception OrderCreationException()
-        {
-            //TODO
-            throw new NotImplementedException();
-        }
-        public void CreateOrderline(Product product, Order order, int amount)
+        public void CreateOrderline(int orderNo, OrderLine orderLine)
         {
             try
             {
@@ -61,10 +54,8 @@ namespace HypersWebshop.DataAccessLayer
                     SqlCommand command = new SqlCommand(CREATE_ORDERLINE, con);
                     command.AddMultipleWithValue(new Dictionary<string, object>()
                     {
-                        { "o_id", order.OrderNo },
-                        {"pr_id", product.ProductId },
-                        {"price", product.Price },
-                        {"amount", amount }
+                        { "o_id", orderNo },
+                        {"pr_id", orderLine.Product.ProductId },
                     });
                     command.ExecuteNonQuery();
 
@@ -72,28 +63,37 @@ namespace HypersWebshop.DataAccessLayer
             }
             catch
             {
-                throw OrderLineCreationException();
+                throw new Exception();
             }
         }
-        //skal flydtes over i exception class
-        private Exception OrderLineCreationException()
+        public List<OrderLine> FindOrderLines(int orderNo)
         {
-            throw new NotImplementedException();
-        }
+            List<OrderLine> orderLines = new List<OrderLine>();
+            using (SqlConnection con = dBConnection.OpenConnection())
+            {
+                SqlCommand command = new SqlCommand(FIND_ORDERLINES, con);
+                command.Parameters.AddWithValue("o_id", orderNo);
+                SqlDataReader dr = command.ExecuteReader();
+                DBProduct dBProduct = new DBProduct();
+                while (dr.Read())
+                {
+                    OrderLine orderLine = new OrderLine(
+                        dBProduct.FindProduct(dr.GetInt("pr_id"))
+                        );
+                    orderLines.Add(orderLine);
+                }
 
-        public void Delete(Order entity)
-        {
-            throw new NotImplementedException();
+            }
+            return orderLines;
         }
-
-        public Order Get(int orderNo)
+        public Order FindOrder(int orderNo)
         {
             using (SqlConnection con = dBConnection.OpenConnection())
             {
-                SqlCommand command = new SqlCommand(GET_ORDER, con);
-                command.Parameters.AddWithValue("OrderNo", orderNo);
+                SqlCommand command = new SqlCommand(FIND_ORDER, con);
+                command.Parameters.AddWithValue("orderNo", orderNo);
                 SqlDataReader dr = command.ExecuteReader();
-                DBCustomer dBCustomer = new DBCustomer();
+                DBPerson dBCustomer = new DBPerson();
                 while (dr.Read())
                 {
                     Order order = new Order(
@@ -101,23 +101,41 @@ namespace HypersWebshop.DataAccessLayer
                         dr.GetLong("totalPrice"),
                         dr.GetDateTime("date"),
                         dr.GetDateTime("deliveryDate"),
-                        dBCustomer.Get(dr.GetString("phoneNo"))
+                        dBCustomer.FindCustomer(dr.GetString("phoneNo"))
                         );
                     return order;
+                    // dr.GetDateTime("date"),
+                    //dr.GetDateTime("deliveryDate"),
                 }
-                
+
             }
             return null;
         }
-
-        public IEnumerable<Order> GetAll(Enum productDescription)
+        public int RemoveProductFromOrder(int orderNo, int productID)
         {
-            throw new NotImplementedException();
-        }
+            int NumberOfRowsAffected = 0;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(REMOVE_PRODUCT, con);
+                        command.AddMultipleWithValue(new Dictionary<string, object>(){
+                            {"o_id", orderNo},
+                            {"pr_id", productID}
+                        });
+                        //Evt returner for at vise den er slettet
+                        NumberOfRowsAffected = command.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException)
+            {
 
-        public void Update(Order entity)
-        {
-            throw new NotImplementedException();
+            }
+            return NumberOfRowsAffected;
         }
     }
 
