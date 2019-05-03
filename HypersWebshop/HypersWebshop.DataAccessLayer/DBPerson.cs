@@ -62,7 +62,7 @@ namespace HypersWebshop.DataAccessLayer
 
         }
 
-        public int CreateCustomer(Customer customer)
+        public void CreateCustomer(Customer customer)
         {
             int tempId = -1;
             using (SqlConnection con = dBConnection.OpenConnection())
@@ -82,7 +82,6 @@ namespace HypersWebshop.DataAccessLayer
                 cmd2.Parameters.AddWithValue("pe_id", tempId);
                 cmd2.ExecuteNonQuery();
             }
-            return tempId;
         }
 
         public void AddOrderToCustomer(int orderId, Customer customer)

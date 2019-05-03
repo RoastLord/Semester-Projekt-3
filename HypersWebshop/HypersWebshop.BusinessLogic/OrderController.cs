@@ -17,6 +17,11 @@ namespace HypersWebshop.BusinessLogic
         {
             dBOrder.RemoveProductFromOrder(orderNo, productId);
         }
+
+        public int RemoveAllProducts(int orderNo)
+        {
+            return dBOrder.RemoveAllProductsFromOrder(orderNo);
+        }
         public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
         {   
             dBOrder.CreateOrderline(orderNo, orderLine);
@@ -67,6 +72,11 @@ namespace HypersWebshop.BusinessLogic
             }
 
             return stringBuilder.ToString();
+        }
+
+        public List<OrderLine> GetOrderLines(int orderNo)
+        {
+            return dBOrder.FindOrderLines(orderNo);
         }
 
         private bool IsPaid(Order order)

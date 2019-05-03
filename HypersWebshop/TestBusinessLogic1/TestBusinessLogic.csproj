@@ -55,6 +55,7 @@
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="DBConnecetionTest.cs" />
     <Compile Include="DBCustomerTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HypersWebshop.BusinessLogic\HypersWebshop.BusinessLogic.csproj">
