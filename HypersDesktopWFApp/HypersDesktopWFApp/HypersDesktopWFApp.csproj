@@ -86,9 +86,6 @@
     <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.Product.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ServiceReference1\HypersWebshop.Domain.xsd">
       <SubType>Designer</SubType>
     </None>

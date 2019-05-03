@@ -32,28 +32,28 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.amountInStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDescriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchasePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositeTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.compositeTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Product_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Product_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(283, 104);
+            this.textBox1.Location = new System.Drawing.Point(12, 104);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(283, 130);
+            this.button1.Location = new System.Drawing.Point(12, 130);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -63,57 +63,51 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.amountInStockDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.priceDataGridViewTextBoxColumn,
-            this.productDescriptionDataGridViewTextBoxColumn,
-            this.purchasePriceDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.productBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(389, 104);
+            this.Name,
+            this.Price,
+            this.PurchasePrice,
+            this.Product_Description,
+            this.Product_Status});
+            this.dataGridView1.Location = new System.Drawing.Point(118, 104);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(541, 150);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // amountInStockDataGridViewTextBoxColumn
-            // 
-            this.amountInStockDataGridViewTextBoxColumn.DataPropertyName = "AmountInStock";
-            this.amountInStockDataGridViewTextBoxColumn.HeaderText = "AmountInStock";
-            this.amountInStockDataGridViewTextBoxColumn.Name = "amountInStockDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            // 
-            // productDescriptionDataGridViewTextBoxColumn
-            // 
-            this.productDescriptionDataGridViewTextBoxColumn.DataPropertyName = "ProductDescription";
-            this.productDescriptionDataGridViewTextBoxColumn.HeaderText = "ProductDescription";
-            this.productDescriptionDataGridViewTextBoxColumn.Name = "productDescriptionDataGridViewTextBoxColumn";
-            // 
-            // purchasePriceDataGridViewTextBoxColumn
-            // 
-            this.purchasePriceDataGridViewTextBoxColumn.DataPropertyName = "PurchasePrice";
-            this.purchasePriceDataGridViewTextBoxColumn.HeaderText = "PurchasePrice";
-            this.purchasePriceDataGridViewTextBoxColumn.Name = "purchasePriceDataGridViewTextBoxColumn";
-            // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.Product);
             // 
             // compositeTypeBindingSource
             // 
             this.compositeTypeBindingSource.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
+            // 
+            // compositeTypeBindingSource1
+            // 
+            this.compositeTypeBindingSource1.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
+            // 
+            // Name
+            // 
+            this.Name.HeaderText = "Name";
+            this.Name.Name = "Name";
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            // 
+            // PurchasePrice
+            // 
+            this.PurchasePrice.HeaderText = "PurchasePrice";
+            this.PurchasePrice.Name = "PurchasePrice";
+            // 
+            // Product_Description
+            // 
+            this.Product_Description.HeaderText = "Product_Description";
+            this.Product_Description.Name = "Product_Description";
+            // 
+            // Product_Status
+            // 
+            this.Product_Status.HeaderText = "Product_Status";
+            this.Product_Status.Name = "Product_Status";
             // 
             // Form2
             // 
@@ -123,11 +117,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form2";
             this.Text = "Gamer Safespace";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,12 +130,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountInStockDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDescriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn purchasePriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource productBindingSource;
         private System.Windows.Forms.BindingSource compositeTypeBindingSource;
+        private System.Windows.Forms.BindingSource compositeTypeBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Product_Status;
     }
 }

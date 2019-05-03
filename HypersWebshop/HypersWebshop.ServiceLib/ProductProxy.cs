@@ -25,10 +25,10 @@ namespace HypersWebshop.ServiceLib
             {
                 throw new ArgumentNullException("composite");
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
+            //if (composite.BoolValue)
+            //{
+            //    composite.StringValue += "Suffix";
+            //}
             return composite;
         }
 
@@ -38,9 +38,16 @@ namespace HypersWebshop.ServiceLib
             //productController.Create(product);
         }
 
-        public Product FindProduct(int id)
+        public CompositeType FindProduct(int id)
         {
-            return productController.FindProduct(id);
+            Product product = productController.FindProduct(id);
+            CompositeType composite = new CompositeType();
+            composite.Name = product.Name;
+            composite.Price = product.Price;
+            composite.PurchasePrice = product.PurchasePrice;
+            composite.ProductDescription = product.ProductDescription;
+            composite.Product_Status = product.ProductStatus;
+            return composite;
         }
 
         public void ggwp()

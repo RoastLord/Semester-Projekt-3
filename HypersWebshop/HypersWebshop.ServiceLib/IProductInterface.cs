@@ -17,7 +17,7 @@ namespace HypersWebshop.ServiceLib
         void CreateProduct(Product product);
 
         [OperationContract]
-        Product FindProduct(int id);
+        CompositeType FindProduct(int id);
 
         [OperationContract]
         string GetData(int value);
@@ -77,23 +77,6 @@ namespace HypersWebshop.ServiceLib
         {
             get { return productStatus; }
             set { productStatus = value; }
-        }
-
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
         }
     }
 }
