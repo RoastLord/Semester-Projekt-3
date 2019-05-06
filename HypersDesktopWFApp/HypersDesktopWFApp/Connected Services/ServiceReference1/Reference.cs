@@ -303,64 +303,70 @@ namespace HypersDesktopWFApp.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductInterface")]
-    public interface IProductInterface {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
+    public interface IProductService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/CreateProduct", ReplyAction="http://tempuri.org/IProductInterface/CreateProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
         void CreateProduct(HypersDesktopWFApp.ServiceReference1.Product product);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/CreateProduct", ReplyAction="http://tempuri.org/IProductInterface/CreateProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
         System.Threading.Tasks.Task CreateProductAsync(HypersDesktopWFApp.ServiceReference1.Product product);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProduct", ReplyAction="http://tempuri.org/IProductInterface/FindProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         HypersDesktopWFApp.ServiceReference1.CompositeType FindProduct(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProduct", ReplyAction="http://tempuri.org/IProductInterface/FindProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         System.Threading.Tasks.Task<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetData", ReplyAction="http://tempuri.org/IProductInterface/GetDataResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductsByDescription(HypersDesktopWFApp.ServiceReference1.Product_Description description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByDescriptionAsync(HypersDesktopWFApp.ServiceReference1.Product_Description description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetData", ReplyAction="http://tempuri.org/IProductService/GetDataResponse")]
         string GetData(int value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetData", ReplyAction="http://tempuri.org/IProductInterface/GetDataResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetData", ReplyAction="http://tempuri.org/IProductService/GetDataResponse")]
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/ggwp", ReplyAction="http://tempuri.org/IProductInterface/ggwpResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ggwp", ReplyAction="http://tempuri.org/IProductService/ggwpResponse")]
         void ggwp();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/ggwp", ReplyAction="http://tempuri.org/IProductInterface/ggwpResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ggwp", ReplyAction="http://tempuri.org/IProductService/ggwpResponse")]
         System.Threading.Tasks.Task ggwpAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductInterface/GetDataUsingDataContractResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductService/GetDataUsingDataContractResponse")]
         HypersDesktopWFApp.ServiceReference1.CompositeType GetDataUsingDataContract(HypersDesktopWFApp.ServiceReference1.CompositeType composite);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductInterface/GetDataUsingDataContractResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductService/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<HypersDesktopWFApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(HypersDesktopWFApp.ServiceReference1.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductInterfaceChannel : HypersDesktopWFApp.ServiceReference1.IProductInterface, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : HypersDesktopWFApp.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductInterfaceClient : System.ServiceModel.ClientBase<HypersDesktopWFApp.ServiceReference1.IProductInterface>, HypersDesktopWFApp.ServiceReference1.IProductInterface {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<HypersDesktopWFApp.ServiceReference1.IProductService>, HypersDesktopWFApp.ServiceReference1.IProductService {
         
-        public ProductInterfaceClient() {
+        public ProductServiceClient() {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName) : 
+        public ProductServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -378,6 +384,14 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductAsync(int id) {
             return base.Channel.FindProductAsync(id);
+        }
+        
+        public System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductsByDescription(HypersDesktopWFApp.ServiceReference1.Product_Description description) {
+            return base.Channel.FindProductsByDescription(description);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByDescriptionAsync(HypersDesktopWFApp.ServiceReference1.Product_Description description) {
+            return base.Channel.FindProductsByDescriptionAsync(description);
         }
         
         public string GetData(int value) {

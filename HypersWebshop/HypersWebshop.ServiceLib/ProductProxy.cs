@@ -9,7 +9,7 @@ using HypersWebshop.Domain;
 
 namespace HypersWebshop.ServiceLib
 {
-    public class ProductProxy : IProductInterface
+    public class ProductProxy : IProductService
     {
         ProductController productController = new ProductController();
 
@@ -53,6 +53,23 @@ namespace HypersWebshop.ServiceLib
         public void ggwp()
         {
             throw new NotImplementedException();
+        }
+
+        public List<CompositeType> FindProductsByDescription(Product_Description description)
+        {
+            List<Product> oldProducts = productController.FindProductsByDescription(description);
+            List<CompositeType> products = new List<CompositeType>();
+            foreach(Product product in oldProducts)
+            {
+                CompositeType composite = new CompositeType();
+                composite.Name = product.Name;
+                composite.Price = product.Price;
+                composite.PurchasePrice = product.PurchasePrice;
+                composite.ProductDescription = product.ProductDescription;
+                composite.Product_Status = product.ProductStatus;
+                products.Add(composite);
+            }
+            return products;
         }
     }
 }

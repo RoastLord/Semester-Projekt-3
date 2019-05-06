@@ -104,7 +104,7 @@ namespace HypersWebshop.DataAccessLayer
             return null;
         }
 
-            public IEnumerable<Product> FindByDescription(Enum productDescription)
+            public List<Product> FindByDescription(Enum productDescription)
         {
             List<Product> products = new List<Product>();
             try
@@ -130,16 +130,18 @@ namespace HypersWebshop.DataAccessLayer
 
                             };
                             products.Add(product);
-                            return products;
+                            
                         }
+                        
                     }
                     scope.Complete();
+                    
                 }
             }
             catch (TransactionAbortedException)
             {
             }
-            return null;
+            return products;
 
         }
 
