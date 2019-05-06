@@ -32,13 +32,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.compositeTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compositeTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compositeTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.compositeTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource1)).BeginInit();
@@ -75,14 +75,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(541, 150);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // compositeTypeBindingSource
-            // 
-            this.compositeTypeBindingSource.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
-            // 
-            // compositeTypeBindingSource1
-            // 
-            this.compositeTypeBindingSource1.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Name
             // 
@@ -109,6 +102,14 @@
             this.Product_Status.HeaderText = "Product_Status";
             this.Product_Status.Name = "Product_Status";
             // 
+            // compositeTypeBindingSource
+            // 
+            this.compositeTypeBindingSource.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
+            // 
+            // compositeTypeBindingSource1
+            // 
+            this.compositeTypeBindingSource1.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeType);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,6 +118,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Name = "Form2";
             this.Text = "Gamer Safespace";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource)).EndInit();
