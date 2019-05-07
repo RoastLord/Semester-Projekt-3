@@ -63,6 +63,7 @@ namespace HypersWebshop.ServiceLib
             foreach(Product product in products)
             {
                 CompositeType composite = new CompositeType();
+                composite.ProductId = product.ProductId;
                 composite.Name = product.Name;
                 composite.Price = product.Price;
                 composite.PurchasePrice = product.PurchasePrice;
@@ -81,6 +82,7 @@ namespace HypersWebshop.ServiceLib
             foreach(Product product in products)
             {
                 CompositeType composite = new CompositeType();
+                composite.ProductId = product.ProductId;
                 composite.Name = product.Name;
                 composite.Price = product.Price;
                 composite.PurchasePrice = product.PurchasePrice;

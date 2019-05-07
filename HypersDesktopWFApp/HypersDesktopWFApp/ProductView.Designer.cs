@@ -74,7 +74,6 @@ namespace HypersDesktopWFApp
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(923, 452);
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // compositeTypeBindingSource
             // 
@@ -99,6 +98,8 @@ namespace HypersDesktopWFApp
             this.comboBoxProductStatus.Name = "comboBoxProductStatus";
             this.comboBoxProductStatus.Size = new System.Drawing.Size(121, 28);
             this.comboBoxProductStatus.TabIndex = 5;
+            // halleluja
+            this.comboBoxProductStatus.SelectedIndex = 2;
             // 
             // Id
             // 
@@ -154,7 +155,7 @@ namespace HypersDesktopWFApp
         private System.Windows.Forms.BindingSource compositeTypeBindingSource1;
         private System.Windows.Forms.ComboBox comboBoxProductStatus;
         private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Name;
+        private new DataGridViewTextBoxColumn Name;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn PurchasePrice;
         private DataGridViewTextBoxColumn Product_Description;

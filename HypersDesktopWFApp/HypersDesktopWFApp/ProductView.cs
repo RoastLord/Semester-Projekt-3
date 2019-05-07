@@ -31,7 +31,7 @@ namespace HypersDesktopWFApp
             int i = 0;
             foreach (CompositeType product in products)
             {
-                dataGridView1.Rows.Insert(i, 1, product.Name, product.Price, product.PurchasePrice, product.ProductDescription, product.Product_Status);
+                dataGridView1.Rows.Insert(i, product.ProductId, product.Name, product.Price, product.PurchasePrice, product.ProductDescription, product.Product_Status);
                 i++;
             }
         }

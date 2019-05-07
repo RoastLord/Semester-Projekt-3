@@ -212,6 +212,9 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         private HypersDesktopWFApp.ServiceReference1.Product_Description ProductDescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private HypersDesktopWFApp.ServiceReference1.Product_Status Product_StatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -262,6 +265,19 @@ namespace HypersDesktopWFApp.ServiceReference1 {
                 if ((this.ProductDescriptionField.Equals(value) != true)) {
                     this.ProductDescriptionField = value;
                     this.RaisePropertyChanged("ProductDescription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductId {
+            get {
+                return this.ProductIdField;
+            }
+            set {
+                if ((this.ProductIdField.Equals(value) != true)) {
+                    this.ProductIdField = value;
+                    this.RaisePropertyChanged("ProductId");
                 }
             }
         }

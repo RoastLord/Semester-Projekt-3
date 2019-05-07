@@ -42,12 +42,19 @@ namespace HypersWebshop.ServiceLib
     [DataContract]
     public class CompositeType
     {
+        public int productId;
         public string name;
         public long price;
         public long purchasePrice;
         public Product_Description productDescription;
         public Product_Status productStatus;
 
+        [DataMember]
+        public int ProductId
+        {
+            get { return productId; }
+            set { productId = value; }
+        }
         [DataMember]
         public string Name
         {
