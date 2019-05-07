@@ -23,6 +23,9 @@ namespace HypersWebshop.ServiceLib
         List<CompositeType> FindProductsByDescription(Product_Description description);
 
         [OperationContract]
+        List<CompositeType> FindProductsByStatus(Product_Status status);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]
@@ -51,8 +54,6 @@ namespace HypersWebshop.ServiceLib
             get { return name; }
             set { name = value; }
         }
-
-
 
         [DataMember]
         public long Price

@@ -57,9 +57,10 @@ namespace HypersWebshop.ServiceLib
 
         public List<CompositeType> FindProductsByDescription(Product_Description description)
         {
-            List<Product> oldProducts = productController.FindProductsByDescription(description);
-            List<CompositeType> products = new List<CompositeType>();
-            foreach(Product product in oldProducts)
+            List<Product> products = productController.FindProductsByDescription(description);
+            List<CompositeType> compositeProducts = new List<CompositeType>();
+
+            foreach(Product product in products)
             {
                 CompositeType composite = new CompositeType();
                 composite.Name = product.Name;
@@ -67,9 +68,27 @@ namespace HypersWebshop.ServiceLib
                 composite.PurchasePrice = product.PurchasePrice;
                 composite.ProductDescription = product.ProductDescription;
                 composite.Product_Status = product.ProductStatus;
-                products.Add(composite);
+                compositeProducts.Add(composite);
             }
-            return products;
+            return compositeProducts;
+        }
+
+        public List<CompositeType> FindProductsByStatus(Product_Status status)
+        {
+            List<Product> products = productController.FindProductsByStatus(status);
+            List<CompositeType> compositeProducts = new List<CompositeType>();
+
+            foreach(Product product in products)
+            {
+                CompositeType composite = new CompositeType();
+                composite.Name = product.Name;
+                composite.Price = product.Price;
+                composite.PurchasePrice = product.PurchasePrice;
+                composite.ProductDescription = product.ProductDescription;
+                composite.Product_Status = product.ProductStatus;
+                compositeProducts.Add(composite);
+            }
+            return compositeProducts;
         }
     }
 }
