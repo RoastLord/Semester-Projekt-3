@@ -10,14 +10,17 @@ namespace HypersWebshop.ServiceLib
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IProductInterface
+    public interface IProductService
     {
 
         [OperationContract]
         void CreateProduct(Product product);
 
         [OperationContract]
-        Product FindProduct(int id);
+        CompositeType FindProduct(int id);
+
+        [OperationContract]
+        List<CompositeType> FindProductsByDescription(Product_Description description);
 
         [OperationContract]
         string GetData(int value);
@@ -79,21 +82,5 @@ namespace HypersWebshop.ServiceLib
             set { productStatus = value; }
         }
 
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
     }
 }
