@@ -17,19 +17,24 @@ namespace HypersDesktopWFApp
         public Form2()
         {
             InitializeComponent();
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.Rows.Clear();
+            ServiceReference1.Product_Status status = (Product_Status) comboBoxProductStatus.SelectedIndex;
+            // Brug status når metoden er lavet
             List<CompositeType> products = service.FindProductsByDescription(ServiceReference1.Product_Description.Batteri);
 
             int i = 0;
             foreach (CompositeType product in products)
             {
-                dataGridView1.Rows.Insert(i, product.Name, product.Price, product.PurchasePrice, product.ProductDescription.ToString(), product.Product_Status.ToString());
+                dataGridView1.Rows.Insert(i, product.Name, product.Price, product.PurchasePrice, product.ProductDescription, product.Product_Status);
                 i++;
             }
-            
         }
+
     }
 }
