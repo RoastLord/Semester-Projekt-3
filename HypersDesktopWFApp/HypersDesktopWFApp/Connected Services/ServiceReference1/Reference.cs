@@ -324,6 +324,12 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByDescriptionAsync(HypersDesktopWFApp.ServiceReference1.Product_Description description);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductsByStatus(HypersDesktopWFApp.ServiceReference1.Product_Status status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByStatusAsync(HypersDesktopWFApp.ServiceReference1.Product_Status status);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetData", ReplyAction="http://tempuri.org/IProductService/GetDataResponse")]
         string GetData(int value);
         
@@ -392,6 +398,14 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByDescriptionAsync(HypersDesktopWFApp.ServiceReference1.Product_Description description) {
             return base.Channel.FindProductsByDescriptionAsync(description);
+        }
+        
+        public System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType> FindProductsByStatus(HypersDesktopWFApp.ServiceReference1.Product_Status status) {
+            return base.Channel.FindProductsByStatus(status);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeType>> FindProductsByStatusAsync(HypersDesktopWFApp.ServiceReference1.Product_Status status) {
+            return base.Channel.FindProductsByStatusAsync(status);
         }
         
         public string GetData(int value) {

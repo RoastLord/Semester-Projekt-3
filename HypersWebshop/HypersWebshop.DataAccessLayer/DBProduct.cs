@@ -149,7 +149,7 @@ namespace HypersWebshop.DataAccessLayer
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    using (SqlConnection con = dBConnection.connection)
+                    using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
                         sqlCommand.Parameters.AddWithValue("status", productStatus);
@@ -162,8 +162,8 @@ namespace HypersWebshop.DataAccessLayer
                                 Name = dr.GetString("name"),
                                 Price = dr.GetLong("price"),
                                 PurchasePrice = dr.GetLong("purchasePrice"),
-                                ProductDescription = (Product_Description)dr.GetInt("productDescription"),
-                                ProductStatus = (Product_Status)dr.GetInt("productStatus")
+                                ProductDescription = (Product_Description)dr.GetInt("description"),
+                                ProductStatus = (Product_Status)dr.GetInt("status")
                             };
                             productList.Add(product);
                         }
