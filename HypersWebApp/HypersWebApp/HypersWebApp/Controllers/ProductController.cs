@@ -15,7 +15,23 @@ namespace HypersWebApp.Controllers
 
         public ActionResult Harddisk()
         {
-            ViewBag.Message = client.FindProduct(int id);
+            List<Product> products = new List<Product>();
+            Product product1 = new Product(1, "testnavn1", 100, 50);
+            Product product2 = new Product(2, "testnavn2", 50, 100);
+            Product product3 = new Product(3, "testnavn3", 150, 50);
+            Product product4 = new Product(4, "testnavn4", 200, 100);
+            Product product5 = new Product(5, "testnavn5", 10, 50);
+
+            products.Add(product1);
+            products.Add(product2);
+            products.Add(product3);
+            products.Add(product4);
+            products.Add(product5);
+
+            foreach (Product product in products)
+            {
+                ViewBag.Message = product.ToString();
+            }
 
             return View();
         }
