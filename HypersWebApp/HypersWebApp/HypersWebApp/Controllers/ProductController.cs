@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HypersWebApp.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,15 +11,23 @@ namespace HypersWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        ServiceReference1.IProductInterface productInterface = new ServiceReference1.ProductInterfaceClient();
+        ProductInterfaceClient client = new ProductInterfaceClient();
+
         public ActionResult Harddisk()
         {
-            //Under udvikling stadig da database / kodeopbugningen i den anden solution er under opbygning
-            ViewBag.Message = "Harddisk(også disk, fastpladelager, baggrundslager) er et digitalt lagringsmedie -og en almindelig brugt betegnelse " +
-                "for disk.Da den diskenhed en pc er udstyret med, er anbragt i et kabinet(sammen med andre enheder)," +
-                "benyttes betegnelsen også fejlagtigt for kabinettet med indhold.";
+            ViewBag.Message = client.FindProduct(int id);
+
             return View();
         }
+
+        //public ActionResult Harddisk()
+        //{
+        //    //Under udvikling stadig da database / kodeopbugningen i den anden solution er under opbygning
+        //    ViewBag.Message = "Harddisk(også disk, fastpladelager, baggrundslager) er et digitalt lagringsmedie -og en almindelig brugt betegnelse " +
+        //        "for disk.Da den diskenhed en pc er udstyret med, er anbragt i et kabinet(sammen med andre enheder)," +
+        //        "benyttes betegnelsen også fejlagtigt for kabinettet med indhold.";
+        //    return View();
+        //}
         public ActionResult Ram()
         {
             return View();
