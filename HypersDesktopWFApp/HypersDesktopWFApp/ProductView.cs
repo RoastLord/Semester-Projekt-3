@@ -23,17 +23,21 @@ namespace HypersDesktopWFApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
-            ServiceReference1.Product_Status status = (Product_Status) comboBoxProductStatus.SelectedIndex;
-            // Brug status når metoden er lavet
-            List<CompositeType> products = service.FindProductsByStatus(status);
 
-            int i = 0;
-            foreach (CompositeType product in products)
-            {
-                dataGridView1.Rows.Insert(i, product.ProductId, product.Name, product.Price, product.PurchasePrice, product.ProductDescription, product.Product_Status);
-                i++;
-            }
+        }
+
+        private void comboBoxProductStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<CompositeType> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
+            dataGridView1.DataSource = products;
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var CreateProductFrom = new Form();
+            CreateProductFrom.Show();
+
         }
     }
 }

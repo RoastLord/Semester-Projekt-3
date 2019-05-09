@@ -9,7 +9,7 @@ using HypersWebshop.Domain;
 
 namespace HypersWebshop.ServiceLib
 {
-    public class ProductProxy : IProductService
+    public class ProductService : IProductService
     {
         ProductController productController = new ProductController();
 
