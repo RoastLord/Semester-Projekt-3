@@ -3,15 +3,18 @@
   <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:complexType name="CompositeType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AmountInStock" type="xs:int" />
-      <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" type="xs:long" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" minOccurs="0" name="ProductDescription" type="q1:Product_Description" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" minOccurs="0" name="Product_Status" type="q2:Product_Status" />
       <xs:element minOccurs="0" name="PurchasePrice" type="xs:long" />
-      <xs:element minOccurs="0" name="StringValue" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:complexType name="ArrayOfCompositeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositeType" nillable="true" type="tns:CompositeType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompositeType" nillable="true" type="tns:ArrayOfCompositeType" />
 </xs:schema>
