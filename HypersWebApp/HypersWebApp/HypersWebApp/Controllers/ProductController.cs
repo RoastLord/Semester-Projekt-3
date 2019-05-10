@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -28,10 +29,16 @@ namespace HypersWebApp.Controllers
             products.Add(product4);
             products.Add(product5);
 
+            StringBuilder stringBuilder = new StringBuilder();
+
+
             foreach (Product product in products)
             {
-                ViewBag.Message = product.ToString();
+                stringBuilder.AppendLine(product.ToString());
+                stringBuilder.AppendLine("-------------------------------");
             }
+
+            ViewBag.Message = products.ToString();
 
             return View();
         }
