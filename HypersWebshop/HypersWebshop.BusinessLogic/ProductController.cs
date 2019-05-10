@@ -39,6 +39,11 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.FindByDescription(productDescription);
         }
 
+        public List<Product> FindProductsByStatus(Product_Status status)
+        {
+            return dbProduct.FindByStatus(status);
+        }
+
         public void ChangeProductStatus(Product product, Product_Status newStatus)
         {
             product.ProductStatus = newStatus;
