@@ -9,39 +9,25 @@ using HypersWebshop.Domain;
 
 namespace HypersWebshop.ServiceLib
 {
-    public class ProductProxy : IProductService
+    public class ProductService : IProductService
     {
         ProductController productController = new ProductController();
 
-
-        public string GetData(int value)
+        public int CreateProduct(CompositeProduct composite)
         {
-            return "";
+            Product product = new Product();
+            product.Name = composite.Name;
+            product.Price = composite.Price;
+            product.PurchasePrice = composite.PurchasePrice;
+            product.ProductDescription = composite.ProductDescription;
+            product.ProductStatus = composite.Product_Status;
+            return productController.Create(product);
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            //if (composite.BoolValue)
-            //{
-            //    composite.StringValue += "Suffix";
-            //}
-            return composite;
-        }
-
-
-        public void CreateProduct(Product product)
-        {
-            //productController.Create(product);
-        }
-
-        public CompositeType FindProduct(int id)
+        public CompositeProduct FindProduct(int id)
         {
             Product product = productController.FindProduct(id);
-            CompositeType composite = new CompositeType();
+            CompositeProduct composite = new CompositeProduct();
             composite.Name = product.Name;
             composite.Price = product.Price;
             composite.PurchasePrice = product.PurchasePrice;
@@ -50,26 +36,42 @@ namespace HypersWebshop.ServiceLib
             return composite;
         }
 
-        public void ggwp()
+        public List<CompositeProduct> FindProductsByDescription(Product_Description description)
         {
-            throw new NotImplementedException();
-        }
+            List<Product> products = productController.FindProductsByDescription(description);
+            List<CompositeProduct> compositeProducts = new List<CompositeProduct>();
 
-        public List<CompositeType> FindProductsByDescription(Product_Description description)
-        {
-            List<Product> oldProducts = productController.FindProductsByDescription(description);
-            List<CompositeType> products = new List<CompositeType>();
-            foreach(Product product in oldProducts)
+            foreach(Product product in products)
             {
-                CompositeType composite = new CompositeType();
+                CompositeProduct composite = new CompositeProduct();
+                composite.ProductId = product.ProductId;
                 composite.Name = product.Name;
                 composite.Price = product.Price;
                 composite.PurchasePrice = product.PurchasePrice;
                 composite.ProductDescription = product.ProductDescription;
                 composite.Product_Status = product.ProductStatus;
-                products.Add(composite);
+                compositeProducts.Add(composite);
             }
-            return products;
+            return compositeProducts;
+        }
+
+        public List<CompositeProduct> FindProductsByStatus(Product_Status status)
+        {
+            List<Product> products = productController.FindProductsByStatus(status);
+            List<CompositeProduct> compositeProducts = new List<CompositeProduct>();
+
+            foreach(Product product in products)
+            {
+                CompositeProduct composite = new CompositeProduct();
+                composite.ProductId = product.ProductId;
+                composite.Name = product.Name;
+                composite.Price = product.Price;
+                composite.PurchasePrice = product.PurchasePrice;
+                composite.ProductDescription = product.ProductDescription;
+                composite.Product_Status = product.ProductStatus;
+                compositeProducts.Add(composite);
+            }
+            return compositeProducts;
         }
     }
 }

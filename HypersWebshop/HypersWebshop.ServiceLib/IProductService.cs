@@ -14,22 +14,16 @@ namespace HypersWebshop.ServiceLib
     {
 
         [OperationContract]
-        void CreateProduct(Product product);
+        int CreateProduct(CompositeProduct composite);
 
         [OperationContract]
-        CompositeType FindProduct(int id);
+        CompositeProduct FindProduct(int id);
 
         [OperationContract]
-        List<CompositeType> FindProductsByDescription(Product_Description description);
+        List<CompositeProduct> FindProductsByDescription(Product_Description description);
 
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        void ggwp();
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        List<CompositeProduct> FindProductsByStatus(Product_Status status);
 
         // TODO: Add your service operations here
     }
@@ -37,8 +31,9 @@ namespace HypersWebshop.ServiceLib
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "HypersWebshop.ServiceLib.ContractType".
     [DataContract]
-    public class CompositeType
+    public class CompositeProduct
     {
+        public int productId;
         public string name;
         public long price;
         public long purchasePrice;
@@ -46,13 +41,17 @@ namespace HypersWebshop.ServiceLib
         public Product_Status productStatus;
 
         [DataMember]
+        public int ProductId
+        {
+            get { return productId; }
+            set { productId = value; }
+        }
+        [DataMember]
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
-
-
 
         [DataMember]
         public long Price

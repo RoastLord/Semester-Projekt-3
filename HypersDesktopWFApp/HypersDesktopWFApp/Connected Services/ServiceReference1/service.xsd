@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:element name="CreateProduct">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" minOccurs="0" name="product" nillable="true" type="q1:Product" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="composite" nillable="true" type="q1:CompositeProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateProductResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateProductResult" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FindProduct">
@@ -24,7 +26,7 @@
   <xs:element name="FindProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductResult" nillable="true" type="q2:CompositeType" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductResult" nillable="true" type="q2:CompositeProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -38,45 +40,21 @@
   <xs:element name="FindProductsByDescriptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductsByDescriptionResult" nillable="true" type="q4:ArrayOfCompositeType" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductsByDescriptionResult" nillable="true" type="q4:ArrayOfCompositeProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetData">
+  <xs:element name="FindProductsByStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="value" type="xs:int" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" minOccurs="0" name="status" type="q5:Product_Status" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDataResponse">
+  <xs:element name="FindProductsByStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ggwp">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ggwpResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDataUsingDataContract">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="composite" nillable="true" type="q5:CompositeType" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDataUsingDataContractResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q6:CompositeType" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductsByStatusResult" nillable="true" type="q6:ArrayOfCompositeProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
