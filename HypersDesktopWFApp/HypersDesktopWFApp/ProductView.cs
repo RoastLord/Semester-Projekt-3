@@ -39,5 +39,10 @@ namespace HypersDesktopWFApp
             CreateProductFrom.Show();
 
         }
+
+        private void compositeTypeBindingSource2_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
