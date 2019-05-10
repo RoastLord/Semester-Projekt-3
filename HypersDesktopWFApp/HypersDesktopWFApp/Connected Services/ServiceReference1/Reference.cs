@@ -197,6 +197,12 @@ namespace HypersDesktopWFApp.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
     public interface IProductService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
+        void UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
+        System.Threading.Tasks.Task UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
         int CreateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
         
@@ -247,6 +253,14 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         
         public ProductServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public void UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
+            base.Channel.UpdateProduct(composite);
+        }
+        
+        public System.Threading.Tasks.Task UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
+            return base.Channel.UpdateProductAsync(composite);
         }
         
         public int CreateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {

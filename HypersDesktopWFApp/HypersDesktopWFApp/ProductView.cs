@@ -44,9 +44,17 @@ namespace HypersDesktopWFApp
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
-
+            CompositeProduct composite = new CompositeProduct();
+            composite.ProductId = 1;
+            composite.Name = "testenIGEN";
+            composite.Price = 500;
+            composite.PurchasePrice = 450;
+            composite.ProductDescription = (Product_Description)1;
+            composite.Product_Status = (Product_Status)1;
+            
+            service.UpdateProduct(composite);
         }
 
         //private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
