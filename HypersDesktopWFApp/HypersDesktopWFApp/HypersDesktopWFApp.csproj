@@ -53,6 +53,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="CreateProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateProductView.Designer.cs">
+      <DependentUpon>CreateProductView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CreateProductView.resx">
+      <DependentUpon>CreateProductView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductView.resx">
       <DependentUpon>ProductView.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,7 +82,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.CompositeType.datasource">
+    <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.CompositeProduct.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\HypersWebshop.Domain.xsd">

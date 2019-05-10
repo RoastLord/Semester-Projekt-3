@@ -17,32 +17,36 @@ namespace HypersDesktopWFApp
         public ProductView()
         {
             InitializeComponent();
+            comboBoxProductStatus.SelectedIndex = 1;
 
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRefresh(object sender, EventArgs e)
         {
+            comboBoxProductStatus_SelectedIndexChanged(sender, e);
+
 
         }
 
         private void comboBoxProductStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<CompositeType> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
+            List<CompositeProduct> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
             dataGridView1.DataSource = products;
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var CreateProductFrom = new Form();
-            CreateProductFrom.Show();
+            CreateProductView form = new CreateProductView();
+            form.Show();
+
 
         }
 
-        private void compositeTypeBindingSource2_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
+        //private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    MessageBox.Show("Er du sikker på du vil ændre værdien i: " + sender.ToString());
+        //}
     }
 }

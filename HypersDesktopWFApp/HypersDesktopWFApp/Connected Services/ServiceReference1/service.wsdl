@@ -4,8 +4,8 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProductService_CreateProduct_InputMessage">
@@ -32,24 +32,6 @@
   <wsdl:message name="IProductService_FindProductsByStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindProductsByStatusResponse" />
   </wsdl:message>
-  <wsdl:message name="IProductService_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_ggwp_InputMessage">
-    <wsdl:part name="parameters" element="tns:ggwp" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_ggwp_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ggwpResponse" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
-  </wsdl:message>
   <wsdl:portType name="IProductService">
     <wsdl:operation name="CreateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateProduct" message="tns:IProductService_CreateProduct_InputMessage" />
@@ -66,18 +48,6 @@
     <wsdl:operation name="FindProductsByStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProductsByStatus" message="tns:IProductService_FindProductsByStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductsByStatusResponse" message="tns:IProductService_FindProductsByStatus_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetData" message="tns:IProductService_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetDataResponse" message="tns:IProductService_GetData_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ggwp">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/ggwp" message="tns:IProductService_ggwp_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/ggwpResponse" message="tns:IProductService_ggwp_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetDataUsingDataContract" message="tns:IProductService_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetDataUsingDataContractResponse" message="tns:IProductService_GetDataUsingDataContract_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
@@ -111,33 +81,6 @@
     </wsdl:operation>
     <wsdl:operation name="FindProductsByStatus">
       <soap:operation soapAction="http://tempuri.org/IProductService/FindProductsByStatus" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetData">
-      <soap:operation soapAction="http://tempuri.org/IProductService/GetData" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ggwp">
-      <soap:operation soapAction="http://tempuri.org/IProductService/ggwp" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap:operation soapAction="http://tempuri.org/IProductService/GetDataUsingDataContract" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

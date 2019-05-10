@@ -27,8 +27,8 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="e2da0858-648c-4a3c-9b03-604845feed00" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="733342ee-d494-4e6a-90e7-4ee08082a726" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="5617c096-b6cc-4abc-8ac8-7fd8bafa82a2" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
-    <MetadataFile FileName="HypersWebshop.Domain.xsd" MetadataType="Schema" ID="18759ba0-08fa-4f15-96ed-438a706e3f97" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
     <MetadataFile FileName="HypersWebshop.ServiceLib.xsd" MetadataType="Schema" ID="07d60e5c-003f-4348-9cfd-d502fc8a0ab4" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
+    <MetadataFile FileName="HypersWebshop.Domain.xsd" MetadataType="Schema" ID="18759ba0-08fa-4f15-96ed-438a706e3f97" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HypersWebshop.ServiceLib/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
