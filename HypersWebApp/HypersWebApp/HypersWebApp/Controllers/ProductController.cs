@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -30,45 +28,13 @@ namespace HypersWebApp.Controllers
             products.Add(product4);
             products.Add(product5);
 
-
-            StringBuilder stringBuilder = new StringBuilder();
-
             foreach (Product product in products)
             {
-                
-
-                stringBuilder.AppendLine(product.ToString());
-                stringBuilder.AppendLine("-----------------------------------");
-                
-
+                ViewBag.Message = product.ToString();
             }
-
-            ViewBag.List = stringBuilder.ToString();
 
             return View();
         }
-
-        //StringBuilder stringBuilder = new StringBuilder();
-
-
-        //stringBuilder.AppendLine(order.OrderNo.ToString());
-        //    stringBuilder.AppendLine(order.Customer.Name);
-        //    stringBuilder.AppendLine(order.Customer.Address);
-        //    stringBuilder.AppendLine(order.Customer.City);
-        //    stringBuilder.AppendLine(order.Customer.Email);
-        //    stringBuilder.AppendLine(order.Customer.PhoneNo);
-        //    stringBuilder.AppendLine(order.TotalPrice.ToString());
-
-        //    foreach (OrderLine orderLine in order.OrderLines)
-        //    {
-
-        //        stringBuilder.AppendLine(orderLine.Product.Name);
-        //        stringBuilder.AppendLine(orderLine.Product.Price.ToString());
-
-        //    }
-
-        //    return stringBuilder.ToString();
-
 
         //public ActionResult Harddisk()
         //{
@@ -79,36 +45,36 @@ namespace HypersWebApp.Controllers
         //    return View();
         //}
         public ActionResult Ram()
-    {
-        return View();
+        {
+            return View();
+        }
+        public ActionResult Batteri()
+        {
+            return View();
+        }
+        public ActionResult CPU()
+        {
+            return View();
+        }
+        public ActionResult CPU_Køling()
+        {
+            return View();
+        }
+        public ActionResult GPU()
+        {
+            return View();
+        }
+        public ActionResult Motherboard()
+        {
+            return View();
+        }
+        public ActionResult Optisk_Drev()
+        {
+            return View();
+        }
+        public ActionResult Strømforsyning()
+        {
+            return View();
+        }
     }
-    public ActionResult Batteri()
-    {
-        return View();
-    }
-    public ActionResult CPU()
-    {
-        return View();
-    }
-    public ActionResult CPU_Køling()
-    {
-        return View();
-    }
-    public ActionResult GPU()
-    {
-        return View();
-    }
-    public ActionResult Motherboard()
-    {
-        return View();
-    }
-    public ActionResult Optisk_Drev()
-    {
-        return View();
-    }
-    public ActionResult Strømforsyning()
-    {
-        return View();
-    }
-}
 }
