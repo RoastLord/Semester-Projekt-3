@@ -74,6 +74,7 @@ namespace HypersDesktopWFApp
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(615, 294);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ProductId
             // 
@@ -152,11 +153,11 @@ namespace HypersDesktopWFApp
             this.Controls.Add(this.comboBoxProductStatus);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
+            this.Name = "ProductView";
             this.Text = "Hypers Webshop";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).EndInit();
             this.ResumeLayout(false);
-            this.dataGridView1.AllowUserToOrderColumns = true;
 
         }
 

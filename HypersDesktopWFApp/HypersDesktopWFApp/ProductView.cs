@@ -44,6 +44,11 @@ namespace HypersDesktopWFApp
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         //private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         //{
         //    MessageBox.Show("Er du sikker på du vil ændre værdien i: " + sender.ToString());

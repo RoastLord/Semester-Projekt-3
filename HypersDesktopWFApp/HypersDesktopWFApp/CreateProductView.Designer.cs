@@ -71,6 +71,7 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnCreate
             // 
@@ -130,8 +131,6 @@
             // cmbDescription
             // 
             this.cmbDescription.FormattingEnabled = true;
-            this.cmbDescription.Location = new System.Drawing.Point(275, 82);
-            this.cmbDescription.Name = "cmbDescription";
             this.cmbDescription.Items.AddRange(new object[] {
             "Harddisk",
             "RAM",
@@ -142,14 +141,14 @@
             "Motherboard",
             "CPU",
             "Optisk Drev"});
+            this.cmbDescription.Location = new System.Drawing.Point(275, 82);
+            this.cmbDescription.Name = "cmbDescription";
             this.cmbDescription.Size = new System.Drawing.Size(121, 21);
             this.cmbDescription.TabIndex = 12;
             // 
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(275, 123);
-            this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Items.AddRange(new object[] {
             "Sold",
             "Published",
@@ -157,6 +156,8 @@
             "Tested",
             "Untested",
             "Rejected"});
+            this.cmbStatus.Location = new System.Drawing.Point(275, 123);
+            this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(121, 21);
             this.cmbStatus.TabIndex = 13;
             // 
