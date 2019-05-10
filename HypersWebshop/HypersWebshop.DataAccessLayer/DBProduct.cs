@@ -148,7 +148,7 @@ namespace HypersWebshop.DataAccessLayer
 
                 try
                 {
-                    using (TransactionScope scope = new TransactionScope())
+                    using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         using (SqlConnection con = dBConnection.OpenConnection())
                         {
@@ -157,17 +157,14 @@ namespace HypersWebshop.DataAccessLayer
                             SqlDataReader dr = sqlCommand.ExecuteReader();
                             while (dr.Read())
                             {
-                                Product product = new Product()
-                                {
-                                    ProductId = dr.GetInt("id"),
-                                    Name = dr.GetString("name"),
-                                    Price = dr.GetLong("price"),
-                                    PurchasePrice = dr.GetLong("purchasePrice"),
-                                    ProductDescription = (Product_Description)dr.GetInt("description"),
-                                    ProductStatus = (Product_Status)dr.GetInt("status")
-                                };
-                                productList.Add(product);
-                            }
+                                ProductId = dr.GetInt("id"),
+                                Name = dr.GetString("name"),
+                                Price = dr.GetLong("price"),
+                                PurchasePrice = dr.GetLong("purchasePrice"),
+                                ProductDescription = (Product_Description)dr.GetInt("description"),
+                                ProductStatus = (Product_Status)dr.GetInt("status")
+                            };
+                            productList.Add(product);
                         }
                         scope.Complete();
                     }
