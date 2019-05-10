@@ -350,6 +350,12 @@ namespace HypersWebApp.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProduct", ReplyAction="http://tempuri.org/IProductInterface/FindProductResponse")]
         System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.Product> FindProductAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductInterface/FindProductsByStatusResponse")]
+        HypersWebApp.ServiceReference1.CompositeType[] FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductInterface/FindProductsByStatusResponse")]
+        System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType[]> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetData", ReplyAction="http://tempuri.org/IProductInterface/GetDataResponse")]
         string GetData(int value);
         
@@ -410,6 +416,14 @@ namespace HypersWebApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.Product> FindProductAsync(int id) {
             return base.Channel.FindProductAsync(id);
+        }
+        
+        public HypersWebApp.ServiceReference1.CompositeType[] FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status) {
+            return base.Channel.FindProductsByStatus(status);
+        }
+        
+        public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType[]> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status) {
+            return base.Channel.FindProductsByStatusAsync(status);
         }
         
         public string GetData(int value) {

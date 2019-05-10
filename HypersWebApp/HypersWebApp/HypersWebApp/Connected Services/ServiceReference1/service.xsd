@@ -28,6 +28,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindProductsByStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" minOccurs="0" name="status" type="q3:Product_Status" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindProductsByStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductsByStatusResult" nillable="true" type="q4:ArrayOfCompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence>
@@ -55,14 +69,14 @@
   <xs:element name="GetDataUsingDataContract">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="composite" nillable="true" type="q3:CompositeType" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="composite" nillable="true" type="q5:CompositeType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetDataUsingDataContractResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q4:CompositeType" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q6:CompositeType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

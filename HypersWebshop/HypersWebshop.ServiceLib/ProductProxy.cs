@@ -9,7 +9,7 @@ using HypersWebshop.Domain;
 
 namespace HypersWebshop.ServiceLib
 {
-    public class ProductProxy : IProductService
+    public class ProductProxy : IProductInterface
     {
         ProductController productController = new ProductController();
 
@@ -57,7 +57,7 @@ namespace HypersWebshop.ServiceLib
 
         public List<CompositeType> FindProductsByDescription(Product_Description description)
         {
-            List<Product> products = productController.FindProductsByDescription(description);
+            List<Product> products = productController.FindProductsByDescription(description).ToList();
             List<CompositeType> compositeProducts = new List<CompositeType>();
 
             foreach(Product product in products)
@@ -89,6 +89,11 @@ namespace HypersWebshop.ServiceLib
                 compositeProducts.Add(composite);
             }
             return compositeProducts;
+        }
+
+        Product IProductInterface.FindProduct(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
