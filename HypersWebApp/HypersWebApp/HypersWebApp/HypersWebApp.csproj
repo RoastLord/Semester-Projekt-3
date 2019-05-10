@@ -207,10 +207,7 @@
   <ItemGroup>
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
-    <Content Include="Connected Services\ServiceReference1\HypersWebApp.ServiceReference1.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ServiceReference1\HypersWebApp.ServiceReference1.Product.datasource">
+    <Content Include="Connected Services\ServiceReference1\HypersWebApp.ServiceReference1.CompositeProduct.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\ServiceReference1\Reference.svcmap">

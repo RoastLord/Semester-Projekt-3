@@ -12,11 +12,11 @@ namespace HypersWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        ProductInterfaceClient client = new ProductInterfaceClient();
+        ProductServiceClient client = new ProductServiceClient();
 
         public ActionResult Harddisk()
         {
-            List<CompositeType> products = client.FindProductsByStatus(Product_Status.Published).ToList(); 
+            List<CompositeProduct> products = client.FindProductsByStatus(Product_Status.Published); 
             //List<Product> products = new List<Product>();
             //Product product1 = new Product(1, "testnavn1", 100, 50);
             //Product product2 = new Product(2, "testnavn2", 50, 100);
@@ -32,9 +32,9 @@ namespace HypersWebApp.Controllers
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (CompositeType product in products)
+            foreach (CompositeProduct product in products)
             {
-                stringBuilder.AppendLine(product.ToString());
+                stringBuilder.AppendLine(product.Name);
                 stringBuilder.AppendLine("-------------------------------");
             }
 

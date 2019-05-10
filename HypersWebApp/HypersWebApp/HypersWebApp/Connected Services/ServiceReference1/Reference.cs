@@ -15,9 +15,9 @@ namespace HypersWebApp.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Product", Namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeProduct", Namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib")]
     [System.SerializableAttribute()]
-    public partial class Product : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CompositeProduct : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -35,7 +35,7 @@ namespace HypersWebApp.ServiceReference1 {
         private int ProductIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private HypersWebApp.ServiceReference1.Product_Status ProductStatusField;
+        private HypersWebApp.ServiceReference1.Product_Status Product_StatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long PurchasePriceField;
@@ -103,14 +103,14 @@ namespace HypersWebApp.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public HypersWebApp.ServiceReference1.Product_Status ProductStatus {
+        public HypersWebApp.ServiceReference1.Product_Status Product_Status {
             get {
-                return this.ProductStatusField;
+                return this.Product_StatusField;
             }
             set {
-                if ((this.ProductStatusField.Equals(value) != true)) {
-                    this.ProductStatusField = value;
-                    this.RaisePropertyChanged("ProductStatus");
+                if ((this.Product_StatusField.Equals(value) != true)) {
+                    this.Product_StatusField = value;
+                    this.RaisePropertyChanged("Product_Status");
                 }
             }
         }
@@ -193,261 +193,106 @@ namespace HypersWebApp.ServiceReference1 {
         Rejected = 5,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib")]
-    [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
+    public interface IProductService {
         
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
+        void UpdateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
+        System.Threading.Tasks.Task UpdateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
+        int CreateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long PriceField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
+        System.Threading.Tasks.Task<int> CreateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private HypersWebApp.ServiceReference1.Product_Description ProductDescriptionField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
+        HypersWebApp.ServiceReference1.CompositeProduct FindProduct(int id);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private HypersWebApp.ServiceReference1.Product_Status Product_StatusField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
+        System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeProduct> FindProductAsync(int id);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long PurchasePriceField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByDescription(HypersWebApp.ServiceReference1.Product_Description description);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByDescriptionAsync(HypersWebApp.ServiceReference1.Product_Description description);
         
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status);
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
-            get {
-                return this.BoolValueField;
-            }
-            set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Price {
-            get {
-                return this.PriceField;
-            }
-            set {
-                if ((this.PriceField.Equals(value) != true)) {
-                    this.PriceField = value;
-                    this.RaisePropertyChanged("Price");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public HypersWebApp.ServiceReference1.Product_Description ProductDescription {
-            get {
-                return this.ProductDescriptionField;
-            }
-            set {
-                if ((this.ProductDescriptionField.Equals(value) != true)) {
-                    this.ProductDescriptionField = value;
-                    this.RaisePropertyChanged("ProductDescription");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public HypersWebApp.ServiceReference1.Product_Status Product_Status {
-            get {
-                return this.Product_StatusField;
-            }
-            set {
-                if ((this.Product_StatusField.Equals(value) != true)) {
-                    this.Product_StatusField = value;
-                    this.RaisePropertyChanged("Product_Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long PurchasePrice {
-            get {
-                return this.PurchasePriceField;
-            }
-            set {
-                if ((this.PurchasePriceField.Equals(value) != true)) {
-                    this.PurchasePriceField = value;
-                    this.RaisePropertyChanged("PurchasePrice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
-            get {
-                return this.StringValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductInterface")]
-    public interface IProductInterface {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/CreateProduct", ReplyAction="http://tempuri.org/IProductInterface/CreateProductResponse")]
-        void CreateProduct(HypersWebApp.ServiceReference1.Product product);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/CreateProduct", ReplyAction="http://tempuri.org/IProductInterface/CreateProductResponse")]
-        System.Threading.Tasks.Task CreateProductAsync(HypersWebApp.ServiceReference1.Product product);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProduct", ReplyAction="http://tempuri.org/IProductInterface/FindProductResponse")]
-        HypersWebApp.ServiceReference1.Product FindProduct(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProduct", ReplyAction="http://tempuri.org/IProductInterface/FindProductResponse")]
-        System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.Product> FindProductAsync(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductInterface/FindProductsByStatusResponse")]
-        HypersWebApp.ServiceReference1.CompositeType[] FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductInterface/FindProductsByStatusResponse")]
-        System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType[]> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetData", ReplyAction="http://tempuri.org/IProductInterface/GetDataResponse")]
-        string GetData(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetData", ReplyAction="http://tempuri.org/IProductInterface/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/ggwp", ReplyAction="http://tempuri.org/IProductInterface/ggwpResponse")]
-        void ggwp();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/ggwp", ReplyAction="http://tempuri.org/IProductInterface/ggwpResponse")]
-        System.Threading.Tasks.Task ggwpAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductInterface/GetDataUsingDataContractResponse")]
-        HypersWebApp.ServiceReference1.CompositeType GetDataUsingDataContract(HypersWebApp.ServiceReference1.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductInterface/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IProductInterface/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(HypersWebApp.ServiceReference1.CompositeType composite);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductInterfaceChannel : HypersWebApp.ServiceReference1.IProductInterface, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : HypersWebApp.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductInterfaceClient : System.ServiceModel.ClientBase<HypersWebApp.ServiceReference1.IProductInterface>, HypersWebApp.ServiceReference1.IProductInterface {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<HypersWebApp.ServiceReference1.IProductService>, HypersWebApp.ServiceReference1.IProductService {
         
-        public ProductInterfaceClient() {
+        public ProductServiceClient() {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName) : 
+        public ProductServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public void CreateProduct(HypersWebApp.ServiceReference1.Product product) {
-            base.Channel.CreateProduct(product);
+        public void UpdateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite) {
+            base.Channel.UpdateProduct(composite);
         }
         
-        public System.Threading.Tasks.Task CreateProductAsync(HypersWebApp.ServiceReference1.Product product) {
-            return base.Channel.CreateProductAsync(product);
+        public System.Threading.Tasks.Task UpdateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite) {
+            return base.Channel.UpdateProductAsync(composite);
         }
         
-        public HypersWebApp.ServiceReference1.Product FindProduct(int id) {
+        public int CreateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite) {
+            return base.Channel.CreateProduct(composite);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite) {
+            return base.Channel.CreateProductAsync(composite);
+        }
+        
+        public HypersWebApp.ServiceReference1.CompositeProduct FindProduct(int id) {
             return base.Channel.FindProduct(id);
         }
         
-        public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.Product> FindProductAsync(int id) {
+        public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeProduct> FindProductAsync(int id) {
             return base.Channel.FindProductAsync(id);
         }
         
-        public HypersWebApp.ServiceReference1.CompositeType[] FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status) {
+        public System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByDescription(HypersWebApp.ServiceReference1.Product_Description description) {
+            return base.Channel.FindProductsByDescription(description);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByDescriptionAsync(HypersWebApp.ServiceReference1.Product_Description description) {
+            return base.Channel.FindProductsByDescriptionAsync(description);
+        }
+        
+        public System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status) {
             return base.Channel.FindProductsByStatus(status);
         }
         
-        public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType[]> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status) {
             return base.Channel.FindProductsByStatusAsync(status);
-        }
-        
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
-        }
-        
-        public void ggwp() {
-            base.Channel.ggwp();
-        }
-        
-        public System.Threading.Tasks.Task ggwpAsync() {
-            return base.Channel.ggwpAsync();
-        }
-        
-        public HypersWebApp.ServiceReference1.CompositeType GetDataUsingDataContract(HypersWebApp.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
-        }
-        
-        public System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(HypersWebApp.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
 }

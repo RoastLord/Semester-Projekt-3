@@ -105,7 +105,7 @@ namespace HypersWebshop.DataAccessLayer
             return null;
         }
 
-        public IEnumerable<Product> FindByDescription(Enum productDescription)
+        public List<Product> FindByDescription(Enum productDescription)
         {
             List<Product> products = new List<Product>();
             try
@@ -148,14 +148,16 @@ namespace HypersWebshop.DataAccessLayer
 
                 try
                 {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
-                        using (SqlConnection con = dBConnection.OpenConnection())
+                        SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
+                        sqlCommand.Parameters.AddWithValue("status", productStatus);
+                        SqlDataReader dr = sqlCommand.ExecuteReader();
+                        while (dr.Read())
                         {
-                            SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
-                            sqlCommand.Parameters.AddWithValue("status", productStatus);
-                            SqlDataReader dr = sqlCommand.ExecuteReader();
-                            while (dr.Read())
+                            Product product = new Product()
                             {
                                 ProductId = dr.GetInt("id"),
                                 Name = dr.GetString("name"),
@@ -166,6 +168,7 @@ namespace HypersWebshop.DataAccessLayer
                             };
                             productList.Add(product);
                         }
+                    }
                         scope.Complete();
                     }
                 }
