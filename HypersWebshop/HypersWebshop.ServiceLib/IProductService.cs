@@ -12,6 +12,8 @@ namespace HypersWebshop.ServiceLib
     [ServiceContract]
     public interface IProductService
     {
+        [OperationContract]
+        void UpdateProduct(CompositeProduct composite);
 
         [OperationContract]
         int CreateProduct(CompositeProduct composite);

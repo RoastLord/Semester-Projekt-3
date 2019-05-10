@@ -73,5 +73,20 @@ namespace HypersWebshop.ServiceLib
             }
             return compositeProducts;
         }
+
+        public void UpdateProduct(CompositeProduct composite)
+        {
+            Product product = new Product();
+
+            product.Name = composite.Name;
+            product.Price = composite.Price;
+            product.PurchasePrice = composite.PurchasePrice;
+            product.ProductDescription = composite.ProductDescription;
+            product.ProductStatus = composite.Product_Status;
+            product.ProductId = composite.ProductId;
+
+            productController.UpdateProduct(product);
+
+        }
     }
 }
