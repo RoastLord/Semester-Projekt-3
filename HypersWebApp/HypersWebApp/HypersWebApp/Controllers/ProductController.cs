@@ -16,32 +16,7 @@ namespace HypersWebApp.Controllers
 
         public ActionResult Harddisk()
         {
-            List<CompositeProduct> products = client.FindProductsByStatus(Product_Status.Published); 
-            //List<Product> products = new List<Product>();
-            //Product product1 = new Product(1, "testnavn1", 100, 50);
-            //Product product2 = new Product(2, "testnavn2", 50, 100);
-            //Product product3 = new Product(3, "testnavn3", 150, 50);
-            //Product product4 = new Product(4, "testnavn4", 200, 100);
-            //Product product5 = new Product(5, "testnavn5", 10, 50);
-
-            //products.Add(product1);
-            //products.Add(product2);
-            //products.Add(product3);
-            //products.Add(product4);
-            //products.Add(product5);
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (CompositeProduct product in products)
-            {
-                stringBuilder.AppendLine(product.Name);
-                stringBuilder.AppendLine(product.Price.ToString());
-                stringBuilder.AppendLine("-------------------------------");
-            }
-
-            ViewBag.Message = stringBuilder.ToString();
-
-
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList(); 
             return View();
         }
 

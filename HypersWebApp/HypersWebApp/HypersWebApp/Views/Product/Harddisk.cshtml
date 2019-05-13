@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Harddisk";
 }
-
+@using HypersWebApp.ServiceReference1;
 <head>
     <style type="text/css">
         html, body {
@@ -26,30 +26,18 @@
             }
 
             #wrap #leftcol {
-                width: 350px;
+                width: 575px;
                 background-color: #ffffff;
                 height: 500px;
                 float: left;
             }
 
             #wrap #rightcol {
-                width: 800px;
+                width: 575px;
                 float: right;
                 margin: 0;
                 padding: 0;
             }
-
-        #rightcol #rightleft {
-            width: 350px;
-            height: 500px;
-            float: left;
-        }
-
-        #rightcol #rightright {
-            width: 350px;
-            height: 500px;
-            float: right;
-        }
     </style>
 </head>
 
@@ -60,32 +48,38 @@
 
         </h1>
         <div id="leftcol">
-            <p>
-                @ViewBag.Message
-            </p>
-        </div>
-        <div id="rightcol">
-            <div id="rightleft">
-                <p>
-                    Det her er den anden kolonne!
-                </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="1">
+                @foreach (CompositeProduct p in ViewBag.ListProduct)
+                {
+                    if (p.ProductDescription == Product_Description.Harddisk)
+                    {
+                    <tr>
+                    <td>@p.Name </td>
+                    <td>@p.Price </td>
+                    <td>@p.ProductDescription </td>
+                    <td align="center">@Html.ActionLink("Buy Now", "OrderNow", "ShoppingCart", new { id = p.ProductId}, null) </td>
+                    </tr>
+                    }
+                }
+            </table>
             </div>
-            <div id="rightright">
-                <p>
-                    Det her er den tredje kolonne!
-                </p>
+            <div id="rightcol">
+                <div id="rightleft">
+                    <p>
+                        Det her er den anden kolonne!
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div>
-        <div class="row">
-            <h2 class="col-sm-6 mysquare">@ViewBag.Square1 </h2>
-            <h2 class="col-sm-6 mysquare">@ViewBag.Square2 </h2>
+        <div>
+            <div class="row">
+                <h2 class="col-sm-6 mysquare">@ViewBag.Square1 </h2>
+                <h2 class="col-sm-6 mysquare">@ViewBag.Square2 </h2>
+            </div>
+            <div class="row">
+                <h2 class="col-sm-6 mysquare">@ViewBag.Square3 </h2>
+                <h2 class="col-sm-6 mysquare">@ViewBag.Square4 </h2>
+            </div>
         </div>
-        <div class="row">
-            <h2 class="col-sm-6 mysquare">@ViewBag.Square3 </h2>
-            <h2 class="col-sm-6 mysquare">@ViewBag.Square4 </h2>
-        </div>
-    </div>
 
-</body>
+    </body>

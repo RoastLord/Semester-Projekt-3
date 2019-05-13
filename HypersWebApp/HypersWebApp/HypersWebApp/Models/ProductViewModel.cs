@@ -1,10 +1,22 @@
-﻿using System;
+﻿using HypersWebApp.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace HypersWebApp.Models
 {
+    public class ProductViewModel
+    {
+        public CompositeProduct compositeProduct = new CompositeProduct();
+        public ProductViewModel(CompositeProduct compositeProduct)
+        {
+            this.compositeProduct = compositeProduct;
+        }
+    }
+
+
+
     //public class ProductViewModel
     //{
 
