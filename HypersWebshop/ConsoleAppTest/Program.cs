@@ -35,7 +35,7 @@ namespace ConsoleAppTest
                 Name = "testRemoveProductproduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
             Product product2 = new Product()
@@ -43,7 +43,7 @@ namespace ConsoleAppTest
                 Name = "testRemoveProductproduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
             Product product3 = new Product()
@@ -51,7 +51,7 @@ namespace ConsoleAppTest
                 Name = "testRemoveProductproduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
             OrderLine orderLine1 = new OrderLine(product1);

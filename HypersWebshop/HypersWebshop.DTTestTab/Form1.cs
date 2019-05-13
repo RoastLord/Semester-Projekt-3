@@ -29,7 +29,7 @@ namespace HypersWebshop.DTTestTab
                 Price = 100,
                 PurchasePrice = 50,
                 ProductStatus = Product_Status.Published,
-                ProductDescription = Product_Description.Batteri
+                ProductDescription = Product_Description.Battery
             };
             myProxy.CreateProduct(product);
 

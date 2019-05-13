@@ -15,10 +15,10 @@ namespace TestBusinessLogic1
             ProductController productController = new ProductController();
             Product product = new Product()
             {
-                Name = "Seagate Harddisk",
+                Name = "Seagate Harddrive",
                 Price = 20000,
                 PurchasePrice = 7500,
-                ProductDescription = Product_Description.Harddisk,
+                ProductDescription = Product_Description.Harddrive,
                 ProductStatus = Product_Status.Published
             };
 
@@ -36,10 +36,10 @@ namespace TestBusinessLogic1
             ProductController productController = new ProductController();
             Product product = new Product()
             {
-                Name = "Toshiba Harddisk",
+                Name = "Toshiba Harddrive",
                 Price = 19900,
                 PurchasePrice = 7500,
-                ProductDescription = Product_Description.Harddisk,
+                ProductDescription = Product_Description.Harddrive,
                 ProductStatus = Product_Status.Published
             };
             product.ProductId = productController.Create(product);
