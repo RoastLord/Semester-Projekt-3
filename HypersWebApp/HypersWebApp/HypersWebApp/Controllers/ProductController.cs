@@ -35,10 +35,12 @@ namespace HypersWebApp.Controllers
             foreach (CompositeProduct product in products)
             {
                 stringBuilder.AppendLine(product.Name);
+                stringBuilder.AppendLine(product.Price.ToString());
                 stringBuilder.AppendLine("-------------------------------");
             }
 
             ViewBag.Message = stringBuilder.ToString();
+
 
             return View();
         }
