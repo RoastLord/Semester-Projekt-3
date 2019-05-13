@@ -51,5 +51,13 @@ namespace HypersDesktopWFApp
             service.UpdateProduct(composite);
             btnRefresh(sender, e);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateProductView form = new UpdateProductView();
+            
+            form.Show();
+            
+        }
     }
 }
