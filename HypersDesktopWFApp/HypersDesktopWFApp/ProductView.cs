@@ -14,10 +14,12 @@ namespace HypersDesktopWFApp
     public partial class ProductView : Form
     {
         ServiceReference1.IProductService service = new ServiceReference1.ProductServiceClient();
+        
         public ProductView()
         {
             InitializeComponent();
             comboBoxProductStatus.SelectedIndex = 1;
+
         }
 
         private void btnRefresh(object sender, EventArgs e)
@@ -37,27 +39,16 @@ namespace HypersDesktopWFApp
             form.Show();
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            CompositeProduct composite = new CompositeProduct();
-
-            composite.ProductId = (int) dataGridView1.CurrentRow.Cells[0].Value;
-            composite.Name = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            composite.Price = (long)dataGridView1.CurrentRow.Cells[2].Value;
-            composite.PurchasePrice = (long) dataGridView1.CurrentRow.Cells[3].Value;
-            composite.ProductDescription = (Product_Description) (int) dataGridView1.CurrentRow.Cells[4].Value;
-            composite.Product_Status = (Product_Status) (int) dataGridView1.CurrentRow.Cells[5].Value;
-
-            service.UpdateProduct(composite);
-            btnRefresh(sender, e);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateProductView form = new UpdateProductView();
-            
+            form.txtUpdateProductID.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            form.txtUpdateName.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            form.numPrice.Value = Decimal.Parse(dataGridView1.CurrentRow.Cells[2].Value.ToString());
+            form.numPurchasePrice.Value = Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString());
+            form.cmbUpdateDescription.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[4].Value;
+            form.cmbUpdateStatus.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[5].Value;
             form.Show();
-            
         }
     }
 }

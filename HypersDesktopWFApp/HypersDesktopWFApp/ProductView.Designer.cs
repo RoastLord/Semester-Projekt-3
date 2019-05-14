@@ -43,7 +43,6 @@ namespace HypersDesktopWFApp
             this.comboBoxProductStatus = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnUpdateProduct = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).BeginInit();
             this.SuspendLayout();
@@ -74,44 +73,52 @@ namespace HypersDesktopWFApp
             this.dataGridView1.DataSource = this.compositeTypeBindingSource2;
             this.dataGridView1.Location = new System.Drawing.Point(110, 74);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(615, 294);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ProductId
             // 
             this.ProductId.DataPropertyName = "ProductId";
             this.ProductId.HeaderText = "ProductId";
             this.ProductId.Name = "ProductId";
+            this.ProductId.ReadOnly = true;
             // 
             // Name
             // 
             this.Name.DataPropertyName = "Name";
             this.Name.HeaderText = "Name";
             this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
             // 
             // Price
             // 
             this.Price.DataPropertyName = "Price";
             this.Price.HeaderText = "Price";
             this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
             // 
             // PurchasePrice
             // 
             this.PurchasePrice.DataPropertyName = "PurchasePrice";
             this.PurchasePrice.HeaderText = "PurchasePrice";
             this.PurchasePrice.Name = "PurchasePrice";
+            this.PurchasePrice.ReadOnly = true;
             // 
             // ProductDescription
             // 
             this.ProductDescription.DataPropertyName = "ProductDescription";
             this.ProductDescription.HeaderText = "ProductDescription";
             this.ProductDescription.Name = "ProductDescription";
+            this.ProductDescription.ReadOnly = true;
             // 
             // Product_Status
             // 
             this.Product_Status.DataPropertyName = "Product_Status";
             this.Product_Status.HeaderText = "Product_Status";
             this.Product_Status.Name = "Product_Status";
+            this.Product_Status.ReadOnly = true;
             // 
             // compositeTypeBindingSource2
             // 
@@ -153,24 +160,12 @@ namespace HypersDesktopWFApp
             this.btnUpdateProduct.TabIndex = 7;
             this.btnUpdateProduct.Text = "Opdater Produkt";
             this.btnUpdateProduct.UseVisualStyleBackColor = true;
-            this.btnUpdateProduct.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 55);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Opdater Produkt window";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnUpdateProduct);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBoxProductStatus);
@@ -196,6 +191,5 @@ namespace HypersDesktopWFApp
         private DataGridViewTextBoxColumn ProductDescription;
         private DataGridViewTextBoxColumn Product_Status;
         private Button btnUpdateProduct;
-        private Button button1;
     }
 }
