@@ -34,9 +34,9 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Update(product);
         }
 
-        public List<Product> FindProductsByDescription(Product_Description description)
+        public List<Product> FindProductsByDescription(Enum productDescription)
         {
-            return dbProduct.FindByDescription(description);
+            return dbProduct.FindByDescription(productDescription);
         }
 
         public List<Product> FindProductsByStatus(Product_Status status)
