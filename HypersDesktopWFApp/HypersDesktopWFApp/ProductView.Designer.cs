@@ -31,7 +31,7 @@ namespace HypersDesktopWFApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUpdateTable = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,20 +42,20 @@ namespace HypersDesktopWFApp
             this.compositeTypeBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxProductStatus = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnUpdateProduct = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnUpdateTable
             // 
-            this.button1.Location = new System.Drawing.Point(12, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 22);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Opdater";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnRefresh);
+            this.btnUpdateTable.Location = new System.Drawing.Point(12, 114);
+            this.btnUpdateTable.Name = "btnUpdateTable";
+            this.btnUpdateTable.Size = new System.Drawing.Size(81, 34);
+            this.btnUpdateTable.TabIndex = 2;
+            this.btnUpdateTable.Text = "Opdater Tabel";
+            this.btnUpdateTable.UseVisualStyleBackColor = true;
+            this.btnUpdateTable.Click += new System.EventHandler(this.btnRefresh);
             // 
             // dataGridView1
             // 
@@ -73,44 +73,52 @@ namespace HypersDesktopWFApp
             this.dataGridView1.DataSource = this.compositeTypeBindingSource2;
             this.dataGridView1.Location = new System.Drawing.Point(110, 74);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(615, 294);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ProductId
             // 
             this.ProductId.DataPropertyName = "ProductId";
             this.ProductId.HeaderText = "ProductId";
             this.ProductId.Name = "ProductId";
+            this.ProductId.ReadOnly = true;
             // 
             // Name
             // 
             this.Name.DataPropertyName = "Name";
             this.Name.HeaderText = "Name";
             this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
             // 
             // Price
             // 
             this.Price.DataPropertyName = "Price";
             this.Price.HeaderText = "Price";
             this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
             // 
             // PurchasePrice
             // 
             this.PurchasePrice.DataPropertyName = "PurchasePrice";
             this.PurchasePrice.HeaderText = "PurchasePrice";
             this.PurchasePrice.Name = "PurchasePrice";
+            this.PurchasePrice.ReadOnly = true;
             // 
             // ProductDescription
             // 
             this.ProductDescription.DataPropertyName = "ProductDescription";
             this.ProductDescription.HeaderText = "ProductDescription";
             this.ProductDescription.Name = "ProductDescription";
+            this.ProductDescription.ReadOnly = true;
             // 
             // Product_Status
             // 
             this.Product_Status.DataPropertyName = "Product_Status";
             this.Product_Status.HeaderText = "Product_Status";
             this.Product_Status.Name = "Product_Status";
+            this.Product_Status.ReadOnly = true;
             // 
             // compositeTypeBindingSource2
             // 
@@ -136,7 +144,7 @@ namespace HypersDesktopWFApp
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 143);
+            this.button2.Location = new System.Drawing.Point(12, 154);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 23);
             this.button2.TabIndex = 6;
@@ -144,26 +152,25 @@ namespace HypersDesktopWFApp
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // btnUpdateProduct
             // 
-            this.button3.Location = new System.Drawing.Point(12, 193);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.btnUpdateProduct.Location = new System.Drawing.Point(12, 183);
+            this.btnUpdateProduct.Name = "btnUpdateProduct";
+            this.btnUpdateProduct.Size = new System.Drawing.Size(81, 47);
+            this.btnUpdateProduct.TabIndex = 7;
+            this.btnUpdateProduct.Text = "Opdater Produkt";
+            this.btnUpdateProduct.UseVisualStyleBackColor = true;
             // 
             // ProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnUpdateProduct);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBoxProductStatus);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnUpdateTable);
             this.Text = "Hypers Webshop";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).EndInit();
@@ -172,7 +179,7 @@ namespace HypersDesktopWFApp
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpdateTable;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBoxProductStatus;
         private BindingSource compositeTypeBindingSource2;
@@ -183,6 +190,6 @@ namespace HypersDesktopWFApp
         private DataGridViewTextBoxColumn PurchasePrice;
         private DataGridViewTextBoxColumn ProductDescription;
         private DataGridViewTextBoxColumn Product_Status;
-        private Button button3;
+        private Button btnUpdateProduct;
     }
 }
