@@ -130,6 +130,7 @@ namespace HypersWebshop.DataAccessLayer
 
                             };
                             products.Add(product);
+                            return products;
                         }
                     }
                     scope.Complete();
@@ -138,17 +139,17 @@ namespace HypersWebshop.DataAccessLayer
             catch (TransactionAbortedException)
             {
             }
-            return products;
+            return null;
         }
 
-        public List<Product> FindByStatus(Enum productStatus)
-        {
-            List<Product> productList = new List<Product>();
-
-            try
+            public List<Product> FindByStatus(Enum productStatus)
             {
-                using (TransactionScope scope = new TransactionScope())
+                List<Product> productList = new List<Product>();
+
+                try
                 {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
@@ -168,28 +169,28 @@ namespace HypersWebshop.DataAccessLayer
                             productList.Add(product);
                         }
                     }
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            }
-            catch (TransactionAbortedException)
-            {
-            }
-            return productList;
-        }
-
-        public int Update(Product product)
-        {
-            int NoOfRowsAffected = 0;
-            try
-            {
-                using (TransactionScope scope = new TransactionScope())
+                catch (TransactionAbortedException)
                 {
-                    using (SqlConnection con = dBConnection.OpenConnection())
+                }
+                return productList;
+            }
+
+            public int Update(Product product)
+            {
+                int NoOfRowsAffected = 0;
+                try
+                {
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
-                        Console.WriteLine("Pris Fra dBProduct: " + product.Price);
-                        Console.WriteLine(product.ProductId);
-                        command.AddMultipleWithValue(new Dictionary<string, object>() {
+                        using (SqlConnection con = dBConnection.OpenConnection())
+                        {
+                            SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
+                            Console.WriteLine("Pris Fra dBProduct: " + product.Price);
+                            Console.WriteLine(product.ProductId);
+                            command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
                                 { "price",          product.Price },
                                 { "PurchasePrice",  product.PurchasePrice },
@@ -197,19 +198,19 @@ namespace HypersWebshop.DataAccessLayer
                                 { "status",         product.ProductStatus },
                                 { "id",             product.ProductId },
                         });
-                        //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
-                        NoOfRowsAffected = command.ExecuteNonQuery();
+                            //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
+                            NoOfRowsAffected = command.ExecuteNonQuery();
+                        }
+
+                        scope.Complete();
                     }
-
-                    scope.Complete();
                 }
+                catch (TransactionAbortedException tae)
+                {
+                    Console.WriteLine(tae.Message);
+                }
+                return NoOfRowsAffected;
             }
-            catch (TransactionAbortedException tae)
-            {
-                Console.WriteLine(tae.Message);
-            }
-            return NoOfRowsAffected;
-        }
 
+        }
     }
-}
