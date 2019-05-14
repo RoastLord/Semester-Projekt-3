@@ -23,9 +23,6 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountInStockField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -50,19 +47,6 @@ namespace HypersDesktopWFApp.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AmountInStock {
-            get {
-                return this.AmountInStockField;
-            }
-            set {
-                if ((this.AmountInStockField.Equals(value) != true)) {
-                    this.AmountInStockField = value;
-                    this.RaisePropertyChanged("AmountInStock");
-                }
             }
         }
         
@@ -210,8 +194,8 @@ namespace HypersDesktopWFApp.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductInterface")]
-    public interface IProductInterface {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
+    public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
         void UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
@@ -245,29 +229,29 @@ namespace HypersDesktopWFApp.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductInterfaceChannel : HypersDesktopWFApp.ServiceReference1.IProductInterface, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : HypersDesktopWFApp.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductInterfaceClient : System.ServiceModel.ClientBase<HypersDesktopWFApp.ServiceReference1.IProductInterface>, HypersDesktopWFApp.ServiceReference1.IProductInterface {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<HypersDesktopWFApp.ServiceReference1.IProductService>, HypersDesktopWFApp.ServiceReference1.IProductService {
         
-        public ProductInterfaceClient() {
+        public ProductServiceClient() {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName) : 
+        public ProductServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductInterfaceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ProductServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
