@@ -16,6 +16,13 @@ namespace HypersWebApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string Name { get; set; }
+
+        public string Address { get; set; }
+
+        public string PhoneNo { get; set; }
+
+        public int Zipcode { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

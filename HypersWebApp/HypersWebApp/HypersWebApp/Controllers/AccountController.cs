@@ -151,7 +151,13 @@ namespace HypersWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNo,
+                    Name = model.Name,
+                    Address = model.Address,
+                    Zipcode = model.Zipcode
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
