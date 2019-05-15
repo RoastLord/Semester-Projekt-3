@@ -52,5 +52,17 @@ namespace HypersWebApp.Controllers
             }
             return View("Cart");
         }
+
+        public ActionResult BuyView()
+        {
+            return View();
+        }
+
+        public ActionResult Payment()
+        {
+            return View();
+        }
     }
+
+
 }

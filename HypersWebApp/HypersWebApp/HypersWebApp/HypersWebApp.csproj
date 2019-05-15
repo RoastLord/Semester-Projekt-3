@@ -294,6 +294,8 @@
     <Content Include="Views\Product\Optisk_Drev.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\BuyView.cshtml" />
+    <Content Include="Views\ShoppingCart\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
