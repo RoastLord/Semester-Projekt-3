@@ -55,11 +55,13 @@ namespace HypersWebApp.Controllers
 
         public ActionResult BuyView()
         {
+
             return View();
         }
 
         public ActionResult Payment()
         {
+            
             return View();
         }
     }

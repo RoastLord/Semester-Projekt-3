@@ -8,13 +8,21 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Cart</title>
+    <meta name="viewport" content="with" />
+    <title>BuyView</title>
 </head>
 <body>
+    <input id="NameInput", placeholder="Name..." />
+    <input id="LAdresseInput", placeholder="Leveringsadresse..." />
+    <br />
+    <input id="TelefonInput", placeholder="Telefon..." />
+    <input id="EmailInput", placeholder="Email..." />
+    <br />
+    <input id="PostnummerInput", placeholder="Postnummer..." />
+    <input id="ByInput", placeholder="By..." />
+
     <table cellpadding="2" cellspacing="2" border="1">
         <tr>
-            <th>Option</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -24,7 +32,6 @@
         {
             s += productViewModel.compositeProduct.Price;
             <tr>
-                <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = productViewModel.compositeProduct.ProductId }, null)</td>
                 <td>@productViewModel.compositeProduct.Name </td>
                 <td>@productViewModel.compositeProduct.ProductDescription </td>
                 <td>@productViewModel.compositeProduct.Price </td>
@@ -36,8 +43,8 @@
         </tr>
     </table>
     <br /><br />
-    <input type="text" name="firstname"><br>
     @Html.ActionLink("Fortsæt til betaling", "Payment", "ShoppingCart")
+    @Html.
 </body>
 </html>
 

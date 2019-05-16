@@ -12,6 +12,7 @@ namespace HypersWebshop.ServiceLib
     public class ProductService : IProductService
     {
         ProductController productController = new ProductController();
+        PersonController personController = new PersonController();
 
         public int CreateProduct(CompositeProduct composite)
         {
@@ -87,6 +88,20 @@ namespace HypersWebshop.ServiceLib
 
             productController.UpdateProduct(product);
 
+        }
+
+        public void CreateCustomer(CompositeCustomer composite)
+        {
+            Customer customer = new Customer();
+
+            customer.Name = composite.Name;
+            customer.Address = composite.Address;
+            customer.PhoneNo = composite.PhoneNo;
+            customer.Email = composite.Email;
+            customer.Zipcode = composite.Zipcode;
+            customer.City = composite.City;
+
+            personController.CreateCustomer(customer);
         }
     }
 }

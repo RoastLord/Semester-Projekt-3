@@ -27,6 +27,9 @@ namespace HypersWebshop.ServiceLib
         [OperationContract]
         List<CompositeProduct> FindProductsByStatus(Product_Status status);
 
+        [OperationContract]
+
+
         // TODO: Add your service operations here
     }
 
@@ -82,6 +85,43 @@ namespace HypersWebshop.ServiceLib
             get { return productStatus; }
             set { productStatus = value; }
         }
+        
+    }
+    [DataContract]
+    public class CompositeCustomer
+    {
+        public string Name;
+        public string Address;
+        public string PhoneNo;
+        public string Email;
+        public int Zipcode;
+        public string City;
 
+        [DataMember]
+        public string CustomerName
+        {
+            set { CustomerName = value; }
+        }
+
+        public String CustomerAddress
+        {
+            set { CustomerAddress = value; }
+        }
+        public String CustomerPhoneNo
+        {
+            set { CustomerPhoneNo = value; }
+        }
+        public String CustomerEmail
+        {
+            set { CustomerEmail = value; }
+        }
+        public int CustomerZipcode
+        {
+            set { CustomerZipcode = value; }
+        }
+        public String CustomerCity
+        {
+            set { CustomerCity = value; }
+        }
     }
 }
