@@ -103,28 +103,32 @@ namespace HypersWebshop.ServiceLib
             get { return CustomerName; }
             set { CustomerName = value; }
         }
-
-        public String CustomerAddress
+        [DataMember]
+        public string CustomerAddress
         {
             get { return CustomerAddress; }
             set { CustomerAddress = value; }
         }
-        public String CustomerPhoneNo
+        [DataMember]
+        public string CustomerPhoneNo
         {
             get { return CustomerPhoneNo; }
             set { CustomerPhoneNo = value; }
         }
-        public String CustomerEmail
+        [DataMember]
+        public string CustomerEmail
         {
             get { return CustomerEmail; }
             set { CustomerEmail = value; }
         }
+        [DataMember]
         public int CustomerZipcode
         {
             get { return CustomerZipcode; }
             set { CustomerZipcode = value; }
         }
-        public String CustomerCity
+        [DataMember]
+        public string CustomerCity
         {
             get { return CustomerCity; }
             set { CustomerCity = value; }

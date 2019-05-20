@@ -12,38 +12,43 @@
     <title>BuyView</title>
 </head>
 <body>
-    <input id="NameInput", placeholder="Name..." />
-    <input id="LAdresseInput", placeholder="Leveringsadresse..." />
-    <br />
-    <input id="TelefonInput", placeholder="Telefon..." />
-    <input id="EmailInput", placeholder="Email..." />
-    <br />
-    <input id="PostnummerInput", placeholder="Postnummer..." />
-    <input id="ByInput", placeholder="By..." />
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("Name", "", new { @placeholder = "Navn..." })
+        @Html.TextBox("LAdress", "", new { @placeholder = "LeveringsAdresse..." })
+        <br />
+        @Html.TextBox("Phone", "", new { @placeholder = "Telefon..." })
+        @Html.TextBox("Email", "", new { @placeholder = "Email..." })
+        <br />
+        @Html.TextBox("Zip", "", new { @placeholder = "Postnummer..." })
+        @Html.TextBox("City", "", new { @placeholder = "By..." })
 
-    <table cellpadding="2" cellspacing="2" border="1">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-        @{double s = 0; }
-        @foreach (ProductViewModel productViewModel in (List<ProductViewModel>)Session["cart"])
-        {
-            s += productViewModel.compositeProduct.Price;
+        <table cellpadding="2" cellspacing="2" border="1">
             <tr>
-                <td>@productViewModel.compositeProduct.Name </td>
-                <td>@productViewModel.compositeProduct.ProductDescription </td>
-                <td>@productViewModel.compositeProduct.Price </td>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
             </tr>
-        }
-        <tr>
-            <td align="right">Sum</td>
-            <td>@s</td>
-        </tr>
-    </table>
-    <br /><br />
+            @{double s = 0; }
+            @foreach (ProductViewModel productViewModel in (List<ProductViewModel>)Session["cart"])
+            {
+                s += productViewModel.compositeProduct.Price;
+                <tr>
+                    <td>@productViewModel.compositeProduct.Name </td>
+                    <td>@productViewModel.compositeProduct.ProductDescription </td>
+                    <td>@productViewModel.compositeProduct.Price </td>
+                </tr>
+            }
+            <tr>
+                <td align="right">Sum</td>
+                <td>@s</td>
+            </tr>
+        </table>
+        <br /><br />
+        <input type="submit" value="Fortsæt" />
+    }
     @Html.ActionLink("Fortsæt til betaling", "Payment", "ShoppingCart")
+
 </body>
 </html>
 

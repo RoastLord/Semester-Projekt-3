@@ -59,13 +59,34 @@ namespace HypersWebApp.Controllers
             return View();
         }
 
-        public ActionResult CustumerCreation(CompositeCustomer compositeCustomer )
+        [HttpPost]
+        public ActionResult BuyView(FormCollection collection)
         {
-
+            string name = collection["Name"];
+            string lAdress = collection["LAdress"];
+            string phone = collection["Phone"];
+            string email = collection["Email"];
+            string zip = collection["Zip"];
+            string city = collection["City"];
+            int intZip = int.Parse(zip);
+            CustumerCreation(name, lAdress, phone, email, intZip, city);
+            return RedirectToAction("Payment");
         }
+
+        public CompositeCustomer CustumerCreation(string name, string address, string phoneNo, string email, int zip, string city)
+        {
+            CompositeCustomer compositeCustomer = new CompositeCustomer();
+            compositeCustomer.CustomerName = name;
+            compositeCustomer.CustomerAddress = address;
+            compositeCustomer.CustomerPhoneNo = phoneNo;
+            compositeCustomer.CustomerEmail = email;
+            compositeCustomer.CustomerZipcode = zip;
+            compositeCustomer.CustomerCity = city;
+            return compositeCustomer;
+        }
+
         public ActionResult Payment()
         {
-            
             return View();
         }
     }
