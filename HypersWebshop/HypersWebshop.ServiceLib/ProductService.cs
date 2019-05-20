@@ -94,12 +94,12 @@ namespace HypersWebshop.ServiceLib
         {
             Customer customer = new Customer();
 
-            customer.Name = composite.Name;
-            customer.Address = composite.Address;
-            customer.PhoneNo = composite.PhoneNo;
-            customer.Email = composite.Email;
-            customer.Zipcode = composite.Zipcode;
-            customer.City = composite.City;
+            customer.Name = composite.CustomerName;
+            customer.Address = composite.CustomerAddress;
+            customer.PhoneNo = composite.CustomerPhoneNo;
+            customer.Email = composite.CustomerEmail;
+            customer.Zipcode = composite.CustomerZipcode;
+            customer.City = composite.CustomerCity;
 
             personController.CreateCustomer(customer);
         }

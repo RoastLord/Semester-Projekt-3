@@ -59,6 +59,10 @@ namespace HypersWebApp.Controllers
             return View();
         }
 
+        public ActionResult CustumerCreation(CompositeCustomer compositeCustomer )
+        {
+
+        }
         public ActionResult Payment()
         {
             
