@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -130,7 +131,7 @@ namespace HypersWebshop.DataAccessLayer
 
                             };
                             products.Add(product);
-                            return products;
+                            
                         }
                     }
                     scope.Complete();
@@ -139,7 +140,7 @@ namespace HypersWebshop.DataAccessLayer
             catch (TransactionAbortedException)
             {
             }
-            return null;
+            return products;
         }
 
             public List<Product> FindByStatus(Enum productStatus)
@@ -172,8 +173,9 @@ namespace HypersWebshop.DataAccessLayer
                         scope.Complete();
                     }
                 }
-                catch (TransactionAbortedException)
+                catch (TransactionAbortedException tae)
                 {
+                throw new FaultException(tae.Message);
                 }
                 return productList;
             }

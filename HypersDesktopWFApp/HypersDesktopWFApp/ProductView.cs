@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,9 +29,20 @@ namespace HypersDesktopWFApp
         }
 
         private void comboBoxProductStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<CompositeProduct> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
-            dataGridView1.DataSource = products;
+        {        
+            try
+            {
+                dataGridView1.DataSource = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
+            }
+            catch (FaultException fe)
+            {
+                MessageBox.Show(fe.Message);
+            }
+            catch(CommunicationException) 
+            {
+            }
+            
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,5 +62,6 @@ namespace HypersDesktopWFApp
             form.cmbUpdateStatus.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[5].Value;
             form.Show();
         }
+
     }
 }

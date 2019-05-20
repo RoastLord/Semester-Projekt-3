@@ -26,7 +26,7 @@ namespace HypersDesktopWFApp
             compositeProduct.ProductId = Int32.Parse(txtUpdateProductID.Text);
             compositeProduct.Name = txtUpdateName.Text;
             compositeProduct.Price = (int) numPrice.Value;
-            compositeProduct.PurchasePrice = 5;
+            compositeProduct.PurchasePrice = (int) numPurchasePrice.Value;
             compositeProduct.ProductDescription = (Product_Description) cmbUpdateDescription.SelectedIndex;
             compositeProduct.Product_Status = (Product_Status)cmbUpdateStatus.SelectedIndex;
             service.UpdateProduct(compositeProduct);
@@ -35,7 +35,7 @@ namespace HypersDesktopWFApp
 
         private void btnUpdateCancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+           this.Hide();
         }
     }
 }

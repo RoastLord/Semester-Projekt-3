@@ -3,6 +3,7 @@ using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,9 +40,16 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.FindByDescription(productDescription);
         }
 
-        public List<Product> FindProductsByStatus(Product_Status status)
+        public List<Product> FindProductsByStatus(Product_Status status) 
         {
-            return dbProduct.FindByStatus(status);
+            try
+            {
+                return dbProduct.FindByStatus(status);
+            }
+            catch(FaultException)
+            {
+                throw;
+            }
         }
 
         public void ChangeProductStatus(Product product, Product_Status newStatus)

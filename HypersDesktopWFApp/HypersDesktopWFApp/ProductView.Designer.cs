@@ -42,7 +42,6 @@ namespace HypersDesktopWFApp
             this.compositeTypeBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxProductStatus = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnUpdateProduct = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).BeginInit();
             this.SuspendLayout();
@@ -152,21 +151,11 @@ namespace HypersDesktopWFApp
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnUpdateProduct
-            // 
-            this.btnUpdateProduct.Location = new System.Drawing.Point(12, 183);
-            this.btnUpdateProduct.Name = "btnUpdateProduct";
-            this.btnUpdateProduct.Size = new System.Drawing.Size(81, 47);
-            this.btnUpdateProduct.TabIndex = 7;
-            this.btnUpdateProduct.Text = "Opdater Produkt";
-            this.btnUpdateProduct.UseVisualStyleBackColor = true;
-            // 
             // ProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnUpdateProduct);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBoxProductStatus);
             this.Controls.Add(this.dataGridView1);
@@ -190,6 +179,5 @@ namespace HypersDesktopWFApp
         private DataGridViewTextBoxColumn PurchasePrice;
         private DataGridViewTextBoxColumn ProductDescription;
         private DataGridViewTextBoxColumn Product_Status;
-        private Button btnUpdateProduct;
     }
 }

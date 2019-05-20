@@ -57,7 +57,16 @@ namespace HypersWebshop.ServiceLib
 
         public List<CompositeProduct> FindProductsByStatus(Product_Status status)
         {
-            List<Product> products = productController.FindProductsByStatus(status);
+            List<Product> products = new List<Product>();
+            try
+            {
+                products = productController.FindProductsByStatus(status);
+            }
+            catch (FaultException)
+            {
+                throw;
+            }
+            
             List<CompositeProduct> compositeProducts = new List<CompositeProduct>();
 
             foreach(Product product in products)
@@ -71,6 +80,7 @@ namespace HypersWebshop.ServiceLib
                 composite.Product_Status = product.ProductStatus;
                 compositeProducts.Add(composite);
             }
+
             return compositeProducts;
         }
 
