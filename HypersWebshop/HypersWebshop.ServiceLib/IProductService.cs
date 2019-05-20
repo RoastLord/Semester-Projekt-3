@@ -29,6 +29,9 @@ namespace HypersWebshop.ServiceLib
 
         [OperationContract]
         void CreateCustomer(CompositeCustomer composite);
+        [OperationContract]
+        string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer);
+
 
         // TODO: Add your service operations here
     }

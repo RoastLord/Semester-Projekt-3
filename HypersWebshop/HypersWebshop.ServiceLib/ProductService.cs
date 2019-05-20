@@ -97,7 +97,7 @@ namespace HypersWebshop.ServiceLib
             customer.Address = comp.Address;
             customer.PhoneNo = comp.PhoneNo;
             customer.Email = comp.Email;
-            customer.City = comp.City;
+            customer.Zipcode = comp.Zipcode;
             return customer;
         }
 

@@ -44,6 +44,12 @@
   <wsdl:message name="IProductService_CreateCustomer_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateCustomerResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_ProcessSale_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessSale" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_ProcessSale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessSaleResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProductService">
     <wsdl:operation name="UpdateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/UpdateProduct" message="tns:IProductService_UpdateProduct_InputMessage" />
@@ -68,6 +74,10 @@
     <wsdl:operation name="CreateCustomer">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateCustomer" message="tns:IProductService_CreateCustomer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/CreateCustomerResponse" message="tns:IProductService_CreateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessSale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/ProcessSale" message="tns:IProductService_ProcessSale_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/ProcessSaleResponse" message="tns:IProductService_ProcessSale_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
@@ -119,6 +129,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateCustomer">
       <soap:operation soapAction="http://tempuri.org/IProductService/CreateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessSale">
+      <soap:operation soapAction="http://tempuri.org/IProductService/ProcessSale" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

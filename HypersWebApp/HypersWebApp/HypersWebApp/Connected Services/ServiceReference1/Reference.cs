@@ -357,6 +357,12 @@ namespace HypersWebApp.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateCustomer", ReplyAction="http://tempuri.org/IProductService/CreateCustomerResponse")]
         System.Threading.Tasks.Task CreateCustomerAsync(HypersWebApp.ServiceReference1.CompositeCustomer composite);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ProcessSale", ReplyAction="http://tempuri.org/IProductService/ProcessSaleResponse")]
+        string ProcessSale(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ProcessSale", ReplyAction="http://tempuri.org/IProductService/ProcessSaleResponse")]
+        System.Threading.Tasks.Task<string> ProcessSaleAsync(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -432,6 +438,14 @@ namespace HypersWebApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task CreateCustomerAsync(HypersWebApp.ServiceReference1.CompositeCustomer composite) {
             return base.Channel.CreateCustomerAsync(composite);
+        }
+        
+        public string ProcessSale(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer) {
+            return base.Channel.ProcessSale(compProducts, compCustomer);
+        }
+        
+        public System.Threading.Tasks.Task<string> ProcessSaleAsync(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer) {
+            return base.Channel.ProcessSaleAsync(compProducts, compCustomer);
         }
     }
 }

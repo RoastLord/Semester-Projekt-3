@@ -85,8 +85,9 @@ namespace HypersWebApp.Controllers
             return compositeCustomer;
         }
 
-        public ActionResult Payment()
+        public ActionResult Payment(List<CompositeProduct>compositeProducts, CompositeCustomer compositeCustomer)
         {
+            client.ProcessSale(compositeProducts, compositeCustomer);
             return View();
         }
     }
