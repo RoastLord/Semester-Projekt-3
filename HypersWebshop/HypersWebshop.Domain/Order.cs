@@ -16,10 +16,9 @@ namespace HypersWebshop.Domain
         public List<OrderLine> OrderLines { get; set; }
         
 
-        public Order(int orderNo, DateTime date, DateTime deliveryDate, Customer customer)
+        public Order(long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
         {
-            TotalPrice = 0;
-            OrderNo = orderNo;
+            TotalPrice = totalPrice;
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;
@@ -38,7 +37,7 @@ namespace HypersWebshop.Domain
         public Order(int orderNo, long totalPrice, DateTime date, DateTime deliveryDate, Customer customer)
         {
             OrderNo = orderNo;
-            TotalPrice = 0;
+            TotalPrice = totalPrice;
             Date = date;
             DeliveryDate = deliveryDate;
             Customer = customer;

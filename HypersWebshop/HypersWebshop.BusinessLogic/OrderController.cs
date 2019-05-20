@@ -32,7 +32,7 @@ namespace HypersWebshop.BusinessLogic
             return dBOrder.CreateOrder(order);
         }
 
-        public void ProcessSale(Order order)
+        public string ProcessSale(Order order)
         {
             {
                 if (IsPaid(order))
@@ -45,8 +45,9 @@ namespace HypersWebshop.BusinessLogic
                         Console.WriteLine("Kommer den herind??");
                     }
                     Console.WriteLine("Salg gik igennem");
-                //PrintReceipt(order);
+                
                 }
+                return PrintReceipt(order);
             }
         }
 

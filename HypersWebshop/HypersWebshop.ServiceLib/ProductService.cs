@@ -13,6 +13,7 @@ namespace HypersWebshop.ServiceLib
     {
         ProductController productController = new ProductController();
         PersonController personController = new PersonController();
+        OrderController orderController = new OrderController();
 
         public int CreateProduct(CompositeProduct composite)
         {
@@ -36,6 +37,53 @@ namespace HypersWebshop.ServiceLib
             composite.Product_Status = product.ProductStatus;
             return composite;
         }
+
+        public string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer)
+        {
+            Customer customer = CompositeToCustomer(compCustomer);
+            List<Product> products = new List<Product>();
+            long totalPrice = 0;
+            foreach(CompositeProduct compP in compProducts)
+            {
+                products.Add(CompositeToProduct(compP));
+                totalPrice += compP.Price;
+            }
+            
+            Order order = new Order(totalPrice, DateTime.Now, DateTime.Now.AddDays(7), customer);
+            order.OrderNo = orderController.CreateOrder(order);
+            foreach (Product p in products)
+            {
+                OrderLine orderLine = new OrderLine(p);
+                order.AddToOrderLine(orderLine);
+                orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
+            }
+
+            return orderController.ProcessSale(order);
+
+        }
+
+        private Product CompositeToProduct(CompositeProduct comp)
+        {
+            Product product = new Product();
+            product.Name = comp.Name;
+            product.Price = comp.Price;
+            product.PurchasePrice = comp.PurchasePrice;
+            product.ProductDescription = comp.ProductDescription;
+            product.ProductStatus = comp.Product_Status;
+            return product;
+        }
+
+        private Customer CompositeToCustomer(CompositeCustomer comp)
+        {
+            Customer customer = new Customer();
+            customer.Name = comp.Name;
+            customer.Address = comp.Address;
+            customer.PhoneNo = comp.PhoneNo;
+            customer.Email = comp.Email;
+            customer.City = comp.City;
+            return customer;
+        }
+
 
         public List<CompositeProduct> FindProductsByDescription(Product_Description description)
         {

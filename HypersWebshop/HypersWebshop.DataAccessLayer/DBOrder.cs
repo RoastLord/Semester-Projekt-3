@@ -36,11 +36,10 @@ namespace HypersWebshop.DataAccessLayer
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(CREATE_ORDER, con);
-                command.Parameters.AddWithValue("totalPrice", 0);
-                command.Parameters.AddWithValue("@date", "Date");
-                command.Parameters.AddWithValue("@deliveryDate", "Delivery Date");
+                command.Parameters.AddWithValue("totalPrice", order.TotalPrice);
+                command.Parameters.AddWithValue("@date", order.Date);
+                command.Parameters.AddWithValue("@deliveryDate", order.DeliveryDate);
                 orderNo = command.ExecuteWithIdentity();
-                Console.WriteLine("wtf?: " + orderNo);
             }
 
             return orderNo;
