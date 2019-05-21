@@ -3,6 +3,7 @@ using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,9 +33,26 @@ namespace HypersWebshop.BusinessLogic
             return dBOrder.CreateOrder(order);
         }
 
+        private bool IsProductPublished(List<OrderLine> orderLines)
+        {
+            bool check = true;
+            foreach(OrderLine orderLine in orderLines)
+            {
+                if(orderLine.Product.ProductStatus != Product_Status.Published)
+                {
+                    check= false;
+                }
+            }
+            return check;
+        }
+
         public string ProcessSale(Order order)
         {
             {
+                if(!IsProductPublished(order.OrderLines))
+                {
+                    throw new FaultException();
+                }
                 if (IsPaid(order))
                 {
                     List<OrderLine> orderLines = dBOrder.FindOrderLines(order.OrderNo);
@@ -42,7 +60,6 @@ namespace HypersWebshop.BusinessLogic
                     foreach(OrderLine orderLine in orderLines)
                     {
                         productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
-                        Console.WriteLine("Kommer den herind??");
                     }
                     Console.WriteLine("Salg gik igennem");
                 
@@ -56,21 +73,23 @@ namespace HypersWebshop.BusinessLogic
             StringBuilder stringBuilder = new StringBuilder();
 
             
-            stringBuilder.AppendLine(order.OrderNo.ToString());
-            stringBuilder.AppendLine(order.Customer.Name);
-            stringBuilder.AppendLine(order.Customer.Address);
-            stringBuilder.AppendLine(order.Customer.City);
-            stringBuilder.AppendLine(order.Customer.Email);
-            stringBuilder.AppendLine(order.Customer.PhoneNo);
-            stringBuilder.AppendLine(order.TotalPrice.ToString());
+            stringBuilder.AppendLine("Order Number" + order.OrderNo.ToString());
+            stringBuilder.AppendLine("Name: " + order.Customer.Name);
+            stringBuilder.AppendLine("Address: " + order.Customer.Address);
+            stringBuilder.AppendLine("City: " + order.Customer.City);
+            stringBuilder.AppendLine("Email: " + order.Customer.Email);
+            stringBuilder.AppendLine("Phone Number: " + order.Customer.PhoneNo);
+            
 
             foreach (OrderLine orderLine in order.OrderLines)
             {
 
-                stringBuilder.AppendLine(orderLine.Product.Name);
-                stringBuilder.AppendLine(orderLine.Product.Price.ToString());
+                stringBuilder.AppendLine("Product: " + orderLine.Product.Name);
+                stringBuilder.AppendLine("Description: " + orderLine.Product.ProductDescription);
+                stringBuilder.AppendLine("Price: " + orderLine.Product.Price.ToString());
 
             }
+            stringBuilder.AppendLine("Total Price: " + order.TotalPrice.ToString());
 
             return stringBuilder.ToString();
         }
