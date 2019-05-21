@@ -30,6 +30,7 @@ namespace HypersWebshop.ServiceLib
         {
             Product product = productController.FindProduct(id);
             CompositeProduct composite = new CompositeProduct();
+            composite.ProductId = product.ProductId;
             composite.Name = product.Name;
             composite.Price = product.Price;
             composite.PurchasePrice = product.PurchasePrice;
@@ -71,6 +72,7 @@ namespace HypersWebshop.ServiceLib
             foreach (Product p in products)
             {
                 OrderLine orderLine = new OrderLine(p);
+                orderLine.Product = p;
                 order.AddToOrderLine(orderLine);
                 orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
             }
@@ -81,6 +83,7 @@ namespace HypersWebshop.ServiceLib
         private Product CompositeToProduct(CompositeProduct comp)
         {
             Product product = new Product();
+            product.ProductId = comp.ProductId;
             product.Name = comp.Name;
             product.Price = comp.Price;
             product.PurchasePrice = comp.PurchasePrice;
