@@ -61,9 +61,9 @@ namespace HypersWebshop.DataAccessLayer
 
                 }
             }
-            catch
+            catch(SqlException e)
             {
-                throw new Exception();
+                throw e;
             }
         }
         public List<OrderLine> FindOrderLines(int orderNo)
