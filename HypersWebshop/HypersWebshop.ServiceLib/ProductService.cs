@@ -76,7 +76,6 @@ namespace HypersWebshop.ServiceLib
             }
             // Færdiggør salget, dvs ændre alle produkt statusser til "Solgt" + returner en string (kvitteringen)
             return orderController.ProcessSale(order);
-
         }
 
         private Product CompositeToProduct(CompositeProduct comp)
