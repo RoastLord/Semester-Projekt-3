@@ -69,7 +69,15 @@ namespace HypersWebApp.Controllers
             string zip = collection["Zip"];
             string city = collection["City"];
             int intZip = int.Parse(zip);
-            CustumerCreation(name, lAdress, phone, email, intZip, city);
+            List<ProductViewModel> cart = (List<ProductViewModel>)Session["cart"];
+            List<CompositeProduct> compProductList = new List<CompositeProduct>();
+            foreach (ProductViewModel p in cart)
+            {
+                CompositeProduct compProduct = p.compositeProduct;
+                compProductList.Add(compProduct);
+            }
+            CompositeCustomer compCustomer = CustumerCreation(name, lAdress, phone, email, intZip, city);
+            client.ProcessSale(compProductList , compCustomer);
             return RedirectToAction("Payment");
         }
 
@@ -85,9 +93,8 @@ namespace HypersWebApp.Controllers
             return compositeCustomer;
         }
 
-        public ActionResult Payment(List<CompositeProduct>compositeProducts, CompositeCustomer compositeCustomer)
+        public ActionResult Payment(CompositeCustomer compositeCustomer)
         {
-            client.ProcessSale(compositeProducts, compositeCustomer);
             return View();
         }
     }
