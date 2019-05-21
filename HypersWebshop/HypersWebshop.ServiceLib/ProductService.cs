@@ -92,13 +92,14 @@ namespace HypersWebshop.ServiceLib
 
         private Customer CompositeToCustomer(CompositeCustomer comp)
         {
-            Customer customer = new Customer();
-            customer.Name = comp.Name;
-            customer.Address = comp.Address;
-            customer.PhoneNo = comp.PhoneNo;
-            customer.Email = comp.Email;
-            customer.Zipcode = comp.Zipcode;
-            return customer;
+            return new Customer()
+            {
+                Name = comp.CustomerName,
+                Address = comp.CustomerAddress,
+                PhoneNo = comp.CustomerPhoneNo,
+                Email = comp.CustomerEmail,
+                Zipcode = comp.CustomerZipcode
+            };
         }
 
 

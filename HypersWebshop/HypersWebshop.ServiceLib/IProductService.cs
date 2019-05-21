@@ -41,100 +41,37 @@ namespace HypersWebshop.ServiceLib
     [DataContract]
     public class CompositeProduct
     {
-        public int productId;
-        public string name;
-        public long price;
-        public long purchasePrice;
-        public Product_Description productDescription;
-        public Product_Status productStatus;
+        [DataMember]
+        public int ProductId { get; set; }
+        [DataMember]
+        public string Name { get; set; }
 
         [DataMember]
-        public int ProductId
-        {
-            get { return productId; }
-            set { productId = value; }
-        }
-        [DataMember]
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public long Price { get; set; }
 
         [DataMember]
-        public long Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
+        public long PurchasePrice { get; set; }
 
         [DataMember]
-        public long PurchasePrice
-        {
-            get { return purchasePrice; }
-            set { purchasePrice = value; }
-        }
+        public Product_Description ProductDescription { get; set; }
 
         [DataMember]
-        public Product_Description ProductDescription
-        {
-            get { return productDescription; }
-            set { productDescription = value; }
-        }
-
-        [DataMember]
-        public Product_Status Product_Status
-        {
-            get { return productStatus; }
-            set { productStatus = value; }
-        }
-        
+        public Product_Status Product_Status { get; set; }
     }
     [DataContract]
     public class CompositeCustomer
     {
-        public string Name;
-        public string Address;
-        public string PhoneNo;
-        public string Email;
-        public int Zipcode;
-        public string City;
-
         [DataMember]
-        public string CustomerName
-        {
-            get { return CustomerName; }
-            set { CustomerName = value; }
-        }
+        public string CustomerName { get; set; }
         [DataMember]
-        public string CustomerAddress
-        {
-            get { return CustomerAddress; }
-            set { CustomerAddress = value; }
-        }
+        public string CustomerAddress { get; set; }
         [DataMember]
-        public string CustomerPhoneNo
-        {
-            get { return CustomerPhoneNo; }
-            set { CustomerPhoneNo = value; }
-        }
+        public string CustomerPhoneNo { get; set; }
         [DataMember]
-        public string CustomerEmail
-        {
-            get { return CustomerEmail; }
-            set { CustomerEmail = value; }
-        }
+        public string CustomerEmail { get; set; }
         [DataMember]
-        public int CustomerZipcode
-        {
-            get { return CustomerZipcode; }
-            set { CustomerZipcode = value; }
-        }
+        public int CustomerZipcode { get; set; }
         [DataMember]
-        public string CustomerCity
-        {
-            get { return CustomerCity; }
-            set { CustomerCity = value; }
-        }
+        public string CustomerCity { get; set; }
     }
 }
