@@ -11,7 +11,6 @@ namespace HypersWebApp.Controllers
     public class ShoppingCartController : Controller
     {
         ProductServiceClient client = new ProductServiceClient();
-
         public ActionResult Delete(int id)
         {
             int index = isExisting(id);
@@ -77,8 +76,8 @@ namespace HypersWebApp.Controllers
                 compProductList.Add(compProduct);
             }
             CompositeCustomer compCustomer = CustumerCreation(name, lAdress, phone, email, intZip, city);
-            client.ProcessSale(compProductList , compCustomer);
-            return RedirectToAction("Payment");
+            string saleString = client.ProcessSale(compProductList , compCustomer);
+            return RedirectToAction("Payment", new { saleString });
         }
 
         public CompositeCustomer CustumerCreation(string name, string address, string phoneNo, string email, int zip, string city)
@@ -93,8 +92,11 @@ namespace HypersWebApp.Controllers
             return compositeCustomer;
         }
 
-        public ActionResult Payment(CompositeCustomer compositeCustomer)
+        public ActionResult Payment(string saleString)
         {
+
+            ViewBag.saleString = saleString;
+            Session["cart"] = null;
             return View();
         }
     }
