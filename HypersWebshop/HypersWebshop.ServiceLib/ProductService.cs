@@ -17,25 +17,14 @@ namespace HypersWebshop.ServiceLib
 
         public int CreateProduct(CompositeProduct composite)
         {
-            Product product = new Product();
-            product.Name = composite.Name;
-            product.Price = composite.Price;
-            product.PurchasePrice = composite.PurchasePrice;
-            product.ProductDescription = composite.ProductDescription;
-            product.ProductStatus = composite.Product_Status;
+            Product product = CompositeToProduct(composite);
             return productController.Create(product);
         }
 
         public CompositeProduct FindProduct(int id)
         {
             Product product = productController.FindProduct(id);
-            CompositeProduct composite = new CompositeProduct();
-            composite.ProductId = product.ProductId;
-            composite.Name = product.Name;
-            composite.Price = product.Price;
-            composite.PurchasePrice = product.PurchasePrice;
-            composite.ProductDescription = product.ProductDescription;
-            composite.Product_Status = product.ProductStatus;
+            CompositeProduct composite = ProductToComposite(product);
             return composite;
         }
 
@@ -71,7 +60,7 @@ namespace HypersWebshop.ServiceLib
             // Lav OrderLine objekter for hvert produkt, og tilføj dem til lokalvariablen "order" + gem de invidiuelle orderLines i databasen
             foreach (Product p in products)
             {
-                OrderLine orderLine = new OrderLine(p);
+                OrderLine orderLine = new OrderLine();
                 orderLine.Product = p;
                 order.AddToOrderLine(orderLine);
                 orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
@@ -90,6 +79,30 @@ namespace HypersWebshop.ServiceLib
             product.ProductDescription = comp.ProductDescription;
             product.ProductStatus = comp.Product_Status;
             return product;
+        }
+
+        private CompositeProduct ProductToComposite(Product product)
+        {
+            CompositeProduct compositeProduct = new CompositeProduct();
+            compositeProduct.ProductId = product.ProductId;
+            compositeProduct.Name = product.Name;
+            compositeProduct.Price = product.Price;
+            compositeProduct.PurchasePrice = product.PurchasePrice;
+            compositeProduct.ProductDescription = product.ProductDescription;
+            compositeProduct.Product_Status = product.ProductStatus;
+
+            return compositeProduct;
+        }
+
+        private CompositeCustomer CustomerToComposite(Customer customer)
+        {
+            CompositeCustomer compositeCustomer = new CompositeCustomer();
+            compositeCustomer.CustomerAddress = customer.Address;
+            compositeCustomer.CustomerEmail = customer.Email;
+            compositeCustomer.CustomerZipcode = customer.Zipcode;
+            compositeCustomer.CustomerPhoneNo = customer.PhoneNo;
+
+            return compositeCustomer;
         }
 
         private Customer CompositeToCustomer(CompositeCustomer comp)
@@ -112,13 +125,7 @@ namespace HypersWebshop.ServiceLib
 
             foreach(Product product in products)
             {
-                CompositeProduct composite = new CompositeProduct();
-                composite.ProductId = product.ProductId;
-                composite.Name = product.Name;
-                composite.Price = product.Price;
-                composite.PurchasePrice = product.PurchasePrice;
-                composite.ProductDescription = product.ProductDescription;
-                composite.Product_Status = product.ProductStatus;
+                CompositeProduct composite = ProductToComposite(product);
                 compositeProducts.Add(composite);
             }
             return compositeProducts;
@@ -131,13 +138,7 @@ namespace HypersWebshop.ServiceLib
 
             foreach(Product product in products)
             {
-                CompositeProduct composite = new CompositeProduct();
-                composite.ProductId = product.ProductId;
-                composite.Name = product.Name;
-                composite.Price = product.Price;
-                composite.PurchasePrice = product.PurchasePrice;
-                composite.ProductDescription = product.ProductDescription;
-                composite.Product_Status = product.ProductStatus;
+                CompositeProduct composite = ProductToComposite(product);
                 compositeProducts.Add(composite);
             }
             return compositeProducts;
@@ -145,14 +146,7 @@ namespace HypersWebshop.ServiceLib
 
         public void UpdateProduct(CompositeProduct composite)
         {
-            Product product = new Product();
-
-            product.Name = composite.Name;
-            product.Price = composite.Price;
-            product.PurchasePrice = composite.PurchasePrice;
-            product.ProductDescription = composite.ProductDescription;
-            product.ProductStatus = composite.Product_Status;
-            product.ProductId = composite.ProductId;
+            Product product = CompositeToProduct(composite);
 
             productController.UpdateProduct(product);
 
@@ -160,14 +154,7 @@ namespace HypersWebshop.ServiceLib
 
         public void CreateCustomer(CompositeCustomer composite)
         {
-            Customer customer = new Customer();
-
-            customer.Name = composite.CustomerName;
-            customer.Address = composite.CustomerAddress;
-            customer.PhoneNo = composite.CustomerPhoneNo;
-            customer.Email = composite.CustomerEmail;
-            customer.Zipcode = composite.CustomerZipcode;
-            customer.City = composite.CustomerCity;
+            Customer customer = CompositeToCustomer(composite);
 
             personController.CreateCustomer(customer);
         }

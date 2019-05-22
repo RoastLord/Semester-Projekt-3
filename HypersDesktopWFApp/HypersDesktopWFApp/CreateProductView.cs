@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,20 +22,22 @@ namespace HypersDesktopWFApp
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            long tempPrice = 0;
-            Int64.TryParse(txtPrice.Text, out tempPrice);
-            long tempPurchasePrice = 0;
-            Int64.TryParse(txtPurchasePrice.Text, out tempPurchasePrice);
+            try
+            {
+                CompositeProduct product = new CompositeProduct();
+                product.Name = txtName.Text;
+                product.Price = (long)numCreateprice.Value;
+                product.PurchasePrice = (long)numCreatePurchasePrice.Value;
+                product.ProductDescription = (Product_Description)cmbDescription.SelectedIndex;
+                product.Product_Status = (Product_Status)cmbStatus.SelectedIndex;
 
-            CompositeProduct product = new CompositeProduct();
-            product.Name = txtName.Text;
-            product.Price = tempPrice;
-            product.PurchasePrice = tempPurchasePrice;
-            product.ProductDescription = (Product_Description) cmbDescription.SelectedIndex;
-            product.Product_Status = (Product_Status)cmbStatus.SelectedIndex;
-
-            service.CreateProduct(product);
-            this.Close();
+                service.CreateProduct(product);
+                this.Close();
+            }
+            catch(CommunicationException)
+            {
+                MessageBox.Show("Alle felter skal udfyldes før man kan oprette et produkt");
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

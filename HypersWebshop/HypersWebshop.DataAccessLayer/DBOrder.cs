@@ -77,9 +77,8 @@ namespace HypersWebshop.DataAccessLayer
                 DBProduct dBProduct = new DBProduct();
                 while (dr.Read())
                 {
-                    OrderLine orderLine = new OrderLine(
-                        dBProduct.FindProduct(dr.GetInt("pr_id"))
-                        );
+                    OrderLine orderLine = new OrderLine();
+                    orderLine.Product = dBProduct.FindProduct(dr.GetInt("pr_id"));
                     orderLines.Add(orderLine);
                 }
 

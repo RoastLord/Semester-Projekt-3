@@ -143,22 +143,22 @@ namespace HypersWebApp.ServiceReference1 {
     public enum Product_Description : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Harddisk = 0,
+        Harddrive = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         RAM = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Batteri = 2,
+        Battery = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Strømforsyning = 3,
+        Power_Supply = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         GPU = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        CPU_Køling = 5,
+        CPU_Cooling = 5,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Motherboard = 6,
@@ -167,7 +167,7 @@ namespace HypersWebApp.ServiceReference1 {
         CPU = 7,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Optisk_Drev = 8,
+        Disk_Drive = 8,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]

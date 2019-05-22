@@ -34,15 +34,14 @@ namespace HypersDesktopWFApp
             this.btnUpdateTable = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxProductStatus = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Product_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compositeTypeBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.comboBoxProductStatus = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnUpdateProduct = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositeTypeBindingSource2)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +52,7 @@ namespace HypersDesktopWFApp
             this.btnUpdateTable.Name = "btnUpdateTable";
             this.btnUpdateTable.Size = new System.Drawing.Size(81, 34);
             this.btnUpdateTable.TabIndex = 2;
-            this.btnUpdateTable.Text = "Opdater Tabel";
+            this.btnUpdateTable.Text = "Update Table";
             this.btnUpdateTable.UseVisualStyleBackColor = true;
             this.btnUpdateTable.Click += new System.EventHandler(this.btnRefresh);
             // 
@@ -85,13 +84,6 @@ namespace HypersDesktopWFApp
             this.ProductId.Name = "ProductId";
             this.ProductId.ReadOnly = true;
             // 
-            // Name
-            // 
-            this.Name.DataPropertyName = "Name";
-            this.Name.HeaderText = "Name";
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
-            // 
             // Price
             // 
             this.Price.DataPropertyName = "Price";
@@ -105,24 +97,6 @@ namespace HypersDesktopWFApp
             this.PurchasePrice.HeaderText = "PurchasePrice";
             this.PurchasePrice.Name = "PurchasePrice";
             this.PurchasePrice.ReadOnly = true;
-            // 
-            // ProductDescription
-            // 
-            this.ProductDescription.DataPropertyName = "ProductDescription";
-            this.ProductDescription.HeaderText = "ProductDescription";
-            this.ProductDescription.Name = "ProductDescription";
-            this.ProductDescription.ReadOnly = true;
-            // 
-            // Product_Status
-            // 
-            this.Product_Status.DataPropertyName = "Product_Status";
-            this.Product_Status.HeaderText = "Product_Status";
-            this.Product_Status.Name = "Product_Status";
-            this.Product_Status.ReadOnly = true;
-            // 
-            // compositeTypeBindingSource2
-            // 
-            this.compositeTypeBindingSource2.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeProduct);
             // 
             // comboBoxProductStatus
             // 
@@ -146,27 +120,42 @@ namespace HypersDesktopWFApp
             // 
             this.button2.Location = new System.Drawing.Point(12, 154);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 23);
+            this.button2.Size = new System.Drawing.Size(82, 43);
             this.button2.TabIndex = 6;
-            this.button2.Text = "Opret Produkt";
+            this.button2.Text = "Create Product";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnUpdateProduct
+            // Name
             // 
-            this.btnUpdateProduct.Location = new System.Drawing.Point(12, 183);
-            this.btnUpdateProduct.Name = "btnUpdateProduct";
-            this.btnUpdateProduct.Size = new System.Drawing.Size(81, 47);
-            this.btnUpdateProduct.TabIndex = 7;
-            this.btnUpdateProduct.Text = "Opdater Produkt";
-            this.btnUpdateProduct.UseVisualStyleBackColor = true;
+            this.Name.DataPropertyName = "Name";
+            this.Name.HeaderText = "Name";
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            // 
+            // ProductDescription
+            // 
+            this.ProductDescription.DataPropertyName = "ProductDescription";
+            this.ProductDescription.HeaderText = "ProductDescription";
+            this.ProductDescription.Name = "ProductDescription";
+            this.ProductDescription.ReadOnly = true;
+            // 
+            // Product_Status
+            // 
+            this.Product_Status.DataPropertyName = "Product_Status";
+            this.Product_Status.HeaderText = "Product_Status";
+            this.Product_Status.Name = "Product_Status";
+            this.Product_Status.ReadOnly = true;
+            // 
+            // compositeTypeBindingSource2
+            // 
+            this.compositeTypeBindingSource2.DataSource = typeof(HypersDesktopWFApp.ServiceReference1.CompositeProduct);
             // 
             // ProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnUpdateProduct);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBoxProductStatus);
             this.Controls.Add(this.dataGridView1);
@@ -190,6 +179,5 @@ namespace HypersDesktopWFApp
         private DataGridViewTextBoxColumn PurchasePrice;
         private DataGridViewTextBoxColumn ProductDescription;
         private DataGridViewTextBoxColumn Product_Status;
-        private Button btnUpdateProduct;
     }
 }

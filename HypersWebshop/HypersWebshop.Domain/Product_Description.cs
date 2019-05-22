@@ -8,14 +8,14 @@ namespace HypersWebshop.Domain
 {
     public enum Product_Description : int
     {
-        Harddisk,
+        Harddrive,
         RAM,
-        Batteri,
-        Strømforsyning,
-        GPU,
-        CPU_Køling,
+        Battery,
+        Power_Supply,
+        GPU,    
+        CPU_Cooling,
         Motherboard,
         CPU,
-        Optisk_Drev
+        Disk_Drive
     }
 }

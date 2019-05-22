@@ -32,11 +32,12 @@ namespace TestBusinessLogic
                 Name = "TestProduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
             product.ProductId = productController.Create(product);
-            OrderLine orderLine = new OrderLine(product);
+            OrderLine orderLine = new OrderLine();
+            orderLine.Product = product;
             Order order = new Order (DateTime.Today, DateTime.Today, customer);
             order.OrderNo = orderController.CreateOrder(order);
             personController.AddOrderToCustomer(order.OrderNo, customer);
@@ -77,10 +78,11 @@ namespace TestBusinessLogic
                 Name = "testRemoveProductproduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
-            OrderLine orderLine = new OrderLine(product);
+            OrderLine orderLine = new OrderLine();
+            orderLine.Product = product;
             
             product.ProductId = productController.Create(product);
             order.OrderNo = orderController.CreateOrder(order);

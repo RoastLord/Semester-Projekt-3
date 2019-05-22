@@ -46,7 +46,6 @@
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
     <Compile Include="Person.cs" />
-    <Compile Include="PriceLog.cs" />
     <Compile Include="Product_Description.cs" />
     <Compile Include="Product_Status.cs" />
     <Compile Include="Product.cs" />

@@ -59,7 +59,9 @@ namespace HypersWebshop.BusinessLogic
                     Console.WriteLine(orderLines.Count);
                     foreach(OrderLine orderLine in orderLines)
                     {
-                        productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
+                        Product p = orderLine.Product;
+                        p.ProductStatus = Product_Status.Sold;
+                        productController.UpdateProduct(p);
                     }
                     Console.WriteLine("Salg gik igennem");
                 
