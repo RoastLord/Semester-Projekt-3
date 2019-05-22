@@ -46,8 +46,8 @@
   <ItemGroup>
     <Compile Include="DesktopService.cs" />
     <Compile Include="IDesktopService.cs" />
-    <Compile Include="IProductService.cs" />
-    <Compile Include="ProductService.cs" />
+    <Compile Include="IWebService.cs" />
+    <Compile Include="WebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

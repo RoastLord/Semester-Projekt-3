@@ -15,12 +15,10 @@ namespace HypersDesktopWFApp
     public partial class ProductView : Form
     {
         ServiceReference1.IDesktopService service = new DesktopServiceClient();
-        
         public ProductView()
         {
             InitializeComponent();
             comboBoxProductStatus.SelectedIndex = 1;
-
         }
 
         private void btnRefresh(object sender, EventArgs e)
@@ -59,6 +57,5 @@ namespace HypersDesktopWFApp
             form.cmbUpdateStatus.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[5].Value;
             form.Show();
         }
-
     }
 }

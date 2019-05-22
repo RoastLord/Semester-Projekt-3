@@ -9,7 +9,7 @@ using System.Text;
 namespace HypersWebshop.ServiceLib
 {
     [ServiceContract]
-    public interface IProductService
+    public interface IWebService
     {
         
 
