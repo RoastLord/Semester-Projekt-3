@@ -21,6 +21,7 @@ namespace HypersWebshop.BusinessLogic
         {
             dBPerson.AddOrderToCustomer(orderNo, customer);
         }
+
         public Customer GetCustomer(string phoneNo)
         {
             return dBPerson.FindCustomer(phoneNo);

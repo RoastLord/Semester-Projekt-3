@@ -8,15 +8,10 @@ using System.Text;
 
 namespace HypersWebshop.ServiceLib
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IProductService
+    public interface IWebService
     {
-        [OperationContract]
-        void UpdateProduct(CompositeProduct composite);
-
-        [OperationContract]
-        int CreateProduct(CompositeProduct composite);
+        
 
         [OperationContract]
         CompositeProduct FindProduct(int id);
@@ -31,13 +26,8 @@ namespace HypersWebshop.ServiceLib
         void CreateCustomer(CompositeCustomer composite);
         [OperationContract]
         string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer);
-
-
-        // TODO: Add your service operations here
     }
 
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "HypersWebshop.ServiceLib.ContractType".
     [DataContract]
     public class CompositeProduct
     {

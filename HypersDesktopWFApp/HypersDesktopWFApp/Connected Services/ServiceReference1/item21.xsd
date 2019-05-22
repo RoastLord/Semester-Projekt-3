@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
+  <xs:import schemaLocation="http://localhost:8734/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:complexType name="CompositeProduct">
     <xs:sequence>
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />

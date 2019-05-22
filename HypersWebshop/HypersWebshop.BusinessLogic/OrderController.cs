@@ -13,16 +13,9 @@ namespace HypersWebshop.BusinessLogic
     {
         DBOrder dBOrder = new DBOrder();
         ProductController productController = new ProductController();
+        PersonController personController = new PersonController();
 
-        public void RemoveProductFromShoppingcart(int orderNo, int productId)
-        {
-            dBOrder.RemoveProductFromOrder(orderNo, productId);
-        }
 
-        public int RemoveAllProducts(int orderNo)
-        {
-            return dBOrder.RemoveAllProductsFromOrder(orderNo);
-        }
         public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
         {   
             dBOrder.CreateOrderline(orderNo, orderLine);
@@ -51,7 +44,7 @@ namespace HypersWebshop.BusinessLogic
             {
                 if(!IsProductPublished(order.OrderLines))
                 {
-                    throw new FaultException();
+                    throw new FaultException("The product isnt published");
                 }
                 if (IsPaid(order))
                 {
@@ -59,9 +52,13 @@ namespace HypersWebshop.BusinessLogic
                     Console.WriteLine(orderLines.Count);
                     foreach(OrderLine orderLine in orderLines)
                     {
-                        productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
+                        Product p = orderLine.Product;
+                        p.ProductStatus = Product_Status.Sold;
+                        productController.UpdateProduct(p);
                     }
                     Console.WriteLine("Salg gik igennem");
+
+                    personController.AddOrderToCustomer(order.OrderNo, order.Customer);
                 
                 }
                 return PrintReceipt(order);
@@ -104,6 +101,16 @@ namespace HypersWebshop.BusinessLogic
             //NETS logik
             return true;
         }
+
+        //public void RemoveProductFromShoppingcart(int orderNo, int productId)
+        //{
+        //    dBOrder.RemoveProductFromOrder(orderNo, productId);
+        //}
+        //
+        //public int RemoveAllProducts(int orderNo)
+        //{
+        //    return dBOrder.RemoveAllProductsFromOrder(orderNo);
+        //}
 
         //private bool CheckAmount(List<OrderLine> orderLines)
         //{

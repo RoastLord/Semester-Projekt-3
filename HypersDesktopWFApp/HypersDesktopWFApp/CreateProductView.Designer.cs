@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.txtPurchasePrice = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
@@ -40,6 +38,10 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.cmbDescription = new System.Windows.Forms.ComboBox();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.numCreateprice = new System.Windows.Forms.NumericUpDown();
+            this.numCreatePurchasePrice = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numCreateprice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCreatePurchasePrice)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
@@ -48,20 +50,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 20);
             this.txtName.TabIndex = 0;
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(113, 123);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(100, 20);
-            this.txtPrice.TabIndex = 1;
-            // 
-            // txtPurchasePrice
-            // 
-            this.txtPurchasePrice.Location = new System.Drawing.Point(113, 162);
-            this.txtPurchasePrice.Name = "txtPurchasePrice";
-            this.txtPurchasePrice.Size = new System.Drawing.Size(100, 20);
-            this.txtPurchasePrice.TabIndex = 2;
             // 
             // btnCancel
             // 
@@ -130,6 +118,7 @@
             // 
             // cmbDescription
             // 
+            this.cmbDescription.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDescription.FormattingEnabled = true;
             this.cmbDescription.Items.AddRange(new object[] {
             "Harddisk",
@@ -145,10 +134,10 @@
             this.cmbDescription.Name = "cmbDescription";
             this.cmbDescription.Size = new System.Drawing.Size(121, 21);
             this.cmbDescription.TabIndex = 12;
-            this.cmbDescription.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             // 
             // cmbStatus
             // 
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Items.AddRange(new object[] {
             "Sold",
@@ -161,13 +150,38 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(121, 21);
             this.cmbStatus.TabIndex = 13;
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            // 
+            // numCreateprice
+            // 
+            this.numCreateprice.Location = new System.Drawing.Point(113, 123);
+            this.numCreateprice.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.numCreateprice.Name = "numCreateprice";
+            this.numCreateprice.Size = new System.Drawing.Size(120, 20);
+            this.numCreateprice.TabIndex = 16;
+            // 
+            // numCreatePurchasePrice
+            // 
+            this.numCreatePurchasePrice.Location = new System.Drawing.Point(113, 162);
+            this.numCreatePurchasePrice.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.numCreatePurchasePrice.Name = "numCreatePurchasePrice";
+            this.numCreatePurchasePrice.Size = new System.Drawing.Size(120, 20);
+            this.numCreatePurchasePrice.TabIndex = 17;
             // 
             // CreateProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numCreatePurchasePrice);
+            this.Controls.Add(this.numCreateprice);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.cmbDescription);
             this.Controls.Add(this.lblStatus);
@@ -177,11 +191,11 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.txtPurchasePrice);
-            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtName);
             this.Name = "CreateProductView";
             this.Text = "CreateProductView";
+            ((System.ComponentModel.ISupportInitialize)(this.numCreateprice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCreatePurchasePrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,8 +204,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.TextBox txtPurchasePrice;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Label lblName;
@@ -201,5 +213,7 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbDescription;
         private System.Windows.Forms.ComboBox cmbStatus;
+        public System.Windows.Forms.NumericUpDown numCreateprice;
+        public System.Windows.Forms.NumericUpDown numCreatePurchasePrice;
     }
 }

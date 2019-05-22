@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,13 +14,11 @@ namespace HypersDesktopWFApp
 {
     public partial class ProductView : Form
     {
-        ServiceReference1.IProductService service = new ServiceReference1.ProductServiceClient();
-        
+        ServiceReference1.IDesktopService service = new DesktopServiceClient();
         public ProductView()
         {
             InitializeComponent();
             comboBoxProductStatus.SelectedIndex = 1;
-
         }
 
         private void btnRefresh(object sender, EventArgs e)
@@ -29,8 +28,16 @@ namespace HypersDesktopWFApp
 
         private void comboBoxProductStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<CompositeProduct> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
-            dataGridView1.DataSource = products;
+            try
+            {
+
+                List<CompositeProduct> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
+                dataGridView1.DataSource = products;
+            }
+            catch(CommunicationException)
+            {
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

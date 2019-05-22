@@ -62,7 +62,8 @@ namespace ConsoleAppTest
             // Lav OrderLine objekter for hvert produkt, og tilføj dem til lokalvariablen "order" + gem de invidiuelle orderLines i databasen
             foreach (Product p in products)
             {
-                OrderLine orderLine = new OrderLine(p);
+                OrderLine orderLine = new OrderLine();
+                orderLine.Product = p;
                 order.AddToOrderLine(orderLine);
                 orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
             }
