@@ -21,7 +21,7 @@ namespace TestBusinessLogic
             {
                 Name = "Per",
                 Address = "Hadsundvej 30",
-                PhoneNo = "12341234",
+                PhoneNo = "156415234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
@@ -63,7 +63,7 @@ namespace TestBusinessLogic
             {
                 Name = "JensPer",
                 Address = "Hadsundvej 30",
-                PhoneNo = "12341234",
+                PhoneNo = "123412345234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
                 City = "Aalborg"

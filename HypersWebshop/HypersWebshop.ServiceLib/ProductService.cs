@@ -155,7 +155,6 @@ namespace HypersWebshop.ServiceLib
         public void CreateCustomer(CompositeCustomer composite)
         {
             Customer customer = CompositeToCustomer(composite);
-
             personController.CreateCustomer(customer);
         }
     }
