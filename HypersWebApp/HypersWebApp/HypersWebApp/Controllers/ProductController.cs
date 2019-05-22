@@ -13,7 +13,7 @@ namespace HypersWebApp.Controllers
     public class ProductController : Controller
     {
 
-        ProductServiceClient client = new ProductServiceClient();
+        WebServiceClient client = new WebServiceClient();
 
         public ActionResult Harddisk()
         {

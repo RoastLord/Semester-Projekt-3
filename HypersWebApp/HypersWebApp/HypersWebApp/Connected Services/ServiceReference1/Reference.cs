@@ -319,93 +319,65 @@ namespace HypersWebApp.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
-    public interface IProductService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IWebService")]
+    public interface IWebService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
-        void UpdateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/UpdateProduct", ReplyAction="http://tempuri.org/IProductService/UpdateProductResponse")]
-        System.Threading.Tasks.Task UpdateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        int CreateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        System.Threading.Tasks.Task<int> CreateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProduct", ReplyAction="http://tempuri.org/IWebService/FindProductResponse")]
         HypersWebApp.ServiceReference1.CompositeProduct FindProduct(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProduct", ReplyAction="http://tempuri.org/IWebService/FindProductResponse")]
         System.Threading.Tasks.Task<HypersWebApp.ServiceReference1.CompositeProduct> FindProductAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProductsByDescription", ReplyAction="http://tempuri.org/IWebService/FindProductsByDescriptionResponse")]
         System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByDescription(HypersWebApp.ServiceReference1.Product_Description description);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByDescription", ReplyAction="http://tempuri.org/IProductService/FindProductsByDescriptionResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProductsByDescription", ReplyAction="http://tempuri.org/IWebService/FindProductsByDescriptionResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByDescriptionAsync(HypersWebApp.ServiceReference1.Product_Description description);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProductsByStatus", ReplyAction="http://tempuri.org/IWebService/FindProductsByStatusResponse")]
         System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> FindProductsByStatus(HypersWebApp.ServiceReference1.Product_Status status);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductsByStatus", ReplyAction="http://tempuri.org/IProductService/FindProductsByStatusResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/FindProductsByStatus", ReplyAction="http://tempuri.org/IWebService/FindProductsByStatusResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct>> FindProductsByStatusAsync(HypersWebApp.ServiceReference1.Product_Status status);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateCustomer", ReplyAction="http://tempuri.org/IProductService/CreateCustomerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/CreateCustomer", ReplyAction="http://tempuri.org/IWebService/CreateCustomerResponse")]
         void CreateCustomer(HypersWebApp.ServiceReference1.CompositeCustomer composite);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateCustomer", ReplyAction="http://tempuri.org/IProductService/CreateCustomerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/CreateCustomer", ReplyAction="http://tempuri.org/IWebService/CreateCustomerResponse")]
         System.Threading.Tasks.Task CreateCustomerAsync(HypersWebApp.ServiceReference1.CompositeCustomer composite);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ProcessSale", ReplyAction="http://tempuri.org/IProductService/ProcessSaleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/ProcessSale", ReplyAction="http://tempuri.org/IWebService/ProcessSaleResponse")]
         string ProcessSale(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/ProcessSale", ReplyAction="http://tempuri.org/IProductService/ProcessSaleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebService/ProcessSale", ReplyAction="http://tempuri.org/IWebService/ProcessSaleResponse")]
         System.Threading.Tasks.Task<string> ProcessSaleAsync(System.Collections.Generic.List<HypersWebApp.ServiceReference1.CompositeProduct> compProducts, HypersWebApp.ServiceReference1.CompositeCustomer compCustomer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductServiceChannel : HypersWebApp.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
+    public interface IWebServiceChannel : HypersWebApp.ServiceReference1.IWebService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductServiceClient : System.ServiceModel.ClientBase<HypersWebApp.ServiceReference1.IProductService>, HypersWebApp.ServiceReference1.IProductService {
+    public partial class WebServiceClient : System.ServiceModel.ClientBase<HypersWebApp.ServiceReference1.IWebService>, HypersWebApp.ServiceReference1.IWebService {
         
-        public ProductServiceClient() {
+        public WebServiceClient() {
         }
         
-        public ProductServiceClient(string endpointConfigurationName) : 
+        public WebServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ProductServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public WebServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WebServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ProductServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WebServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public void UpdateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite) {
-            base.Channel.UpdateProduct(composite);
-        }
-        
-        public System.Threading.Tasks.Task UpdateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite) {
-            return base.Channel.UpdateProductAsync(composite);
-        }
-        
-        public int CreateProduct(HypersWebApp.ServiceReference1.CompositeProduct composite) {
-            return base.Channel.CreateProduct(composite);
-        }
-        
-        public System.Threading.Tasks.Task<int> CreateProductAsync(HypersWebApp.ServiceReference1.CompositeProduct composite) {
-            return base.Channel.CreateProductAsync(composite);
         }
         
         public HypersWebApp.ServiceReference1.CompositeProduct FindProduct(int id) {

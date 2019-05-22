@@ -10,7 +10,7 @@ namespace HypersWebApp.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        ProductServiceClient client = new ProductServiceClient();
+        WebServiceClient client = new WebServiceClient();
         public ActionResult Delete(int id)
         {
             int index = isExisting(id);

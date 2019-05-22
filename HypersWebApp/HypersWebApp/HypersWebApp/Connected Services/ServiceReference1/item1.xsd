@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Product_Description">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Harddrive" />
+      <xs:enumeration value="RAM" />
+      <xs:enumeration value="Battery" />
+      <xs:enumeration value="Power_Supply" />
+      <xs:enumeration value="GPU" />
+      <xs:enumeration value="CPU_Cooling" />
+      <xs:enumeration value="Motherboard" />
+      <xs:enumeration value="CPU" />
+      <xs:enumeration value="Disk_Drive" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Product_Description" nillable="true" type="tns:Product_Description" />
+  <xs:simpleType name="Product_Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sold" />
+      <xs:enumeration value="Published" />
+      <xs:enumeration value="Unpublished" />
+      <xs:enumeration value="Tested" />
+      <xs:enumeration value="Untested" />
+      <xs:enumeration value="Rejected" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Product_Status" nillable="true" type="tns:Product_Status" />
+</xs:schema>
