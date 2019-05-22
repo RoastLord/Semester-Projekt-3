@@ -1,4 +1,4 @@
-﻿using HypersWebshop.DataAccessLayer;
+﻿    using HypersWebshop.DataAccessLayer;
 using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace HypersWebshop.BusinessLogic
         {
             dBPerson.AddOrderToCustomer(orderNo, customer);
         }
+
         public Customer GetCustomer(string phoneNo)
         {
             return dBPerson.FindCustomer(phoneNo);

@@ -91,23 +91,20 @@
     <EmbeddedResource Include="UpdateProductView.resx">
       <DependentUpon>UpdateProductView.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceReference1\DesktopService.wsdl" />
     <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.CompositeProduct.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\HypersDesktopWFApp.ServiceReference1.Product.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceReference1\HypersWebshop.Domain.xsd">
+    <None Include="Connected Services\ServiceReference1\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\HypersWebshop.ServiceLib.xsd">
+    <None Include="Connected Services\ServiceReference1\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\service.wsdl" />
-    <None Include="Connected Services\ServiceReference1\service.xsd">
+    <None Include="Connected Services\ServiceReference1\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\service1.xsd">
+    <None Include="Connected Services\ServiceReference1\item21.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -128,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />

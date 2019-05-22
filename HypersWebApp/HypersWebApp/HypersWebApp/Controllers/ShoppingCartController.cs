@@ -10,8 +10,7 @@ namespace HypersWebApp.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        ProductServiceClient client = new ProductServiceClient();
-
+        WebServiceClient client = new WebServiceClient();
         public ActionResult Delete(int id)
         {
             int index = isExisting(id);
@@ -52,5 +51,55 @@ namespace HypersWebApp.Controllers
             }
             return View("Cart");
         }
+
+        public ActionResult BuyView()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BuyView(FormCollection collection)
+        {
+            string name = collection["Name"];
+            string lAdress = collection["LAdress"];
+            string phone = collection["Phone"];
+            string email = collection["Email"];
+            string zip = collection["Zip"];
+            string city = collection["City"];
+            int intZip = int.Parse(zip);
+            List<ProductViewModel> cart = (List<ProductViewModel>)Session["cart"];
+            List<CompositeProduct> compProductList = new List<CompositeProduct>();
+            foreach (ProductViewModel p in cart)
+            {
+                CompositeProduct compProduct = p.compositeProduct;
+                compProductList.Add(compProduct);
+            }
+            CompositeCustomer compCustomer = CustumerCreation(name, lAdress, phone, email, intZip, city);
+            string saleString = client.ProcessSale(compProductList , compCustomer);
+            return RedirectToAction("Payment", new { saleString });
+        }
+
+        public CompositeCustomer CustumerCreation(string name, string address, string phoneNo, string email, int zip, string city)
+        {
+            CompositeCustomer compositeCustomer = new CompositeCustomer();
+            compositeCustomer.CustomerName = name;
+            compositeCustomer.CustomerAddress = address;
+            compositeCustomer.CustomerPhoneNo = phoneNo;
+            compositeCustomer.CustomerEmail = email;
+            compositeCustomer.CustomerZipcode = zip;
+            compositeCustomer.CustomerCity = city;
+            return compositeCustomer;
+        }
+
+        public ActionResult Payment(string saleString)
+        {
+
+            ViewBag.saleString = saleString;
+            Session["cart"] = null;
+            return View();
+        }
     }
+
+
 }

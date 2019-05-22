@@ -16,61 +16,63 @@ namespace ConsoleAppTest
             OrderController orderController = new OrderController();
             PersonController personController = new PersonController();
 
-            Customer customer = new Customer()
+            List<Product> products = new List<Product>();
+            Product product1 = productController.FindProduct(1);
+            products.Add(product1);
+            Product product2 = productController.FindProduct(2);
+            products.Add(product2);
+            Product product3 = productController.FindProduct(3);
+            products.Add(product3);
+            Product product4 = productController.FindProduct(9);
+            products.Add(product4);
+
+            
+
+
+            Customer customer = new Customer();
+            customer.Name = "navn";
+            customer.Address = "adrs";
+            customer.PhoneNo = "12333asdfdsfa55";
+            customer.Zipcode = 9000;
+            customer.Email = "email";
+            
+            
+
+            // Lokalvariabel til at holde styr på totalprisen for ordren
+            long totalPrice = 0;
+
+            // Lav listen af Composite Objekter om til en liste af normale Produkter TEST
+            foreach (Product p in products)
             {
-                Name = "JensPer",
-                Address = "Hadsundvej 30",
-                PhoneNo = "123412345",
-                Email = "per@mail.dk",
-                Zipcode = 9000,
-            };
+                totalPrice += p.Price;
+            }
 
+            // Lav en Order lokalvariabel, med 7 dages levering
+            Order order = new Order(totalPrice, DateTime.Now, DateTime.Now.AddDays(7), customer);
 
-            personController.CreateCustomer(customer);
-            Order order = new Order(0, 100, DateTime.Today, DateTime.Today, customer);
+            // Gem ordren i databasen, og hent ID'et ud som databasen generer for os
             order.OrderNo = orderController.CreateOrder(order);
 
-            Product product1 = new Product()
-            {
-                Name = "testRemoveProductproduct",
-                Price = 100,
-                PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
-                ProductStatus = Product_Status.Published
-            };
-            Product product2 = new Product()
-            {
-                Name = "testRemoveProductproduct",
-                Price = 100,
-                PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
-                ProductStatus = Product_Status.Published
-            };
-            Product product3 = new Product()
-            {
-                Name = "testRemoveProductproduct",
-                Price = 100,
-                PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
-                ProductStatus = Product_Status.Published
-            };
-            OrderLine orderLine1 = new OrderLine(product1);
-            OrderLine orderLine2 = new OrderLine(product2);
-            OrderLine orderLine3 = new OrderLine(product3);
+            // Gem Customer i databasen
+            personController.CreateCustomer(customer);
 
-            product1.ProductId = productController.Create(product1);
-            product2.ProductId = productController.Create(product2);
-            product3.ProductId = productController.Create(product3);
+            // Tilknyt ordren til Customer i databasen
+            personController.AddOrderToCustomer(order.OrderNo, customer);
 
-            orderController.AddOrderlineToOrder(order.OrderNo, orderLine1);
-            orderController.AddOrderlineToOrder(order.OrderNo, orderLine2);
-            orderController.AddOrderlineToOrder(order.OrderNo, orderLine3);
-
+            // Lav OrderLine objekter for hvert produkt, og tilføj dem til lokalvariablen "order" + gem de invidiuelle orderLines i databasen
+            foreach (Product p in products)
+            {
+                OrderLine orderLine = new OrderLine();
+                orderLine.Product = p;
+                order.AddToOrderLine(orderLine);
+                orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
+            }
+            // Færdiggør salget, dvs ændre alle produkt statusser til "Solgt" + returner en string (kvitteringen)
+            Console.WriteLine(orderController.ProcessSale(order));
             Console.ReadKey();
-            //Act
-            orderController.RemoveAllProducts(order.OrderNo);
-
-
         }
+
+
     }
+    
 }

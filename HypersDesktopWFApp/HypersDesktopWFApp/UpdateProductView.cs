@@ -13,7 +13,7 @@ namespace HypersDesktopWFApp
 {
     public partial class UpdateProductView : Form
     {
-        ServiceReference1.IProductService service = new ServiceReference1.ProductServiceClient();
+        ServiceReference1.IDesktopService service = new DesktopServiceClient();
         public UpdateProductView()
         {
             InitializeComponent();
@@ -22,15 +22,23 @@ namespace HypersDesktopWFApp
 
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
-            CompositeProduct compositeProduct = new CompositeProduct();
-            compositeProduct.ProductId = Int32.Parse(txtUpdateProductID.Text);
-            compositeProduct.Name = txtUpdateName.Text;
-            compositeProduct.Price = (int) numPrice.Value;
-            compositeProduct.PurchasePrice = 5;
-            compositeProduct.ProductDescription = (Product_Description) cmbUpdateDescription.SelectedIndex;
-            compositeProduct.Product_Status = (Product_Status)cmbUpdateStatus.SelectedIndex;
-            service.UpdateProduct(compositeProduct);
-            this.Hide();
+            try
+            {
+                CompositeProduct compositeProduct = new CompositeProduct();
+                compositeProduct.ProductId = Int32.Parse(txtUpdateProductID.Text);
+                compositeProduct.Name = txtUpdateName.Text;
+                compositeProduct.Price = (long)numPrice.Value;
+                compositeProduct.PurchasePrice = (long)numPurchasePrice.Value;
+                compositeProduct.ProductDescription = (Product_Description)cmbUpdateDescription.SelectedIndex;
+                compositeProduct.Product_Status = (Product_Status)cmbUpdateStatus.SelectedIndex;
+                service.UpdateProduct(compositeProduct);
+                this.Hide();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Something went wrong. Please try again");
+            }
+         
         }
 
         private void btnUpdateCancel_Click(object sender, EventArgs e)

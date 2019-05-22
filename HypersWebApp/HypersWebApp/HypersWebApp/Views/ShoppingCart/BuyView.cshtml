@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+@using HypersWebApp.Controllers
+@using HypersWebApp.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="with" />
+    <title>BuyView</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("Name", "", new { @placeholder = "Navn..." })
+        @Html.TextBox("LAdress", "", new { @placeholder = "LeveringsAdresse..." })
+        <br />
+        @Html.TextBox("Phone", "", new { @placeholder = "Telefon..." })
+        @Html.TextBox("Email", "", new { @placeholder = "Email..." })
+        <br />
+        @Html.TextBox("Zip", "", new { @placeholder = "Postnummer..." })
+        @Html.TextBox("City", "", new { @placeholder = "By..." })
+
+        <table cellpadding="2" cellspacing="2" border="1">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            @{double s = 0; }
+            @foreach (ProductViewModel productViewModel in (List<ProductViewModel>)Session["cart"])
+            {
+                s += productViewModel.compositeProduct.Price;
+                <tr>
+                    <td>@productViewModel.compositeProduct.Name </td>
+                    <td>@productViewModel.compositeProduct.ProductDescription </td>
+                    <td>@productViewModel.compositeProduct.Price </td>
+                </tr>
+            }
+            <tr>
+                <td align="right">Sum</td>
+                <td>@s</td>
+            </tr>
+        </table>
+        <br /><br />
+        <input type="submit" value="Fortsæt" />
+    }
+
+</body>
+</html>
+
+

@@ -27,10 +27,8 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.FindProduct(id);
         }
 
-        // Skal kaldes med en opdateret lokalvariabel
         public int UpdateProduct(Product product)
         {
-            Console.WriteLine("Pris Fra Controller: " + product.Price);
             return dbProduct.Update(product);
         }
 
@@ -44,10 +42,10 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.FindByStatus(status);
         }
 
-        public void ChangeProductStatus(Product product, Product_Status newStatus)
-        {
-            product.ProductStatus = newStatus;
-            dbProduct.Update(product);
-        }
+        //public void ChangeProductStatus(Product product, Product_Status newStatus)
+        //{
+        //    product.ProductStatus = newStatus;
+        //    dbProduct.Update(product);
+        //}
     }
 }

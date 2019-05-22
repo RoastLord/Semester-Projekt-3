@@ -12,7 +12,8 @@ namespace HypersWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        ProductServiceClient client = new ProductServiceClient();
+
+        WebServiceClient client = new WebServiceClient();
 
         public ActionResult Harddisk()
         {
@@ -30,34 +31,42 @@ namespace HypersWebApp.Controllers
         //}
         public ActionResult Ram()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult Batteri()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult CPU()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult CPU_Køling()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult GPU()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult Motherboard()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult Optisk_Drev()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
         public ActionResult Strømforsyning()
         {
+            ViewBag.ListProduct = client.FindProductsByStatus(Product_Status.Published).ToList();
             return View();
         }
     }

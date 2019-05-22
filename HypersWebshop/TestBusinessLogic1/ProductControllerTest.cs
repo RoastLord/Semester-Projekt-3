@@ -18,7 +18,7 @@ namespace TestBusinessLogic1
                 Name = "Seagate Harddisk",
                 Price = 20000,
                 PurchasePrice = 7500,
-                ProductDescription = Product_Description.Harddisk,
+                ProductDescription = Product_Description.Harddrive,
                 ProductStatus = Product_Status.Published
             };
 
@@ -39,7 +39,7 @@ namespace TestBusinessLogic1
                 Name = "Toshiba Harddisk",
                 Price = 19900,
                 PurchasePrice = 7500,
-                ProductDescription = Product_Description.Harddisk,
+                ProductDescription = Product_Description.Harddrive,
                 ProductStatus = Product_Status.Published
             };
             product.ProductId = productController.Create(product);

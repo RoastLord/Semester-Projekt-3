@@ -21,7 +21,7 @@ namespace TestBusinessLogic
             {
                 Name = "Per",
                 Address = "Hadsundvej 30",
-                PhoneNo = "12341234",
+                PhoneNo = "156415234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
@@ -32,11 +32,12 @@ namespace TestBusinessLogic
                 Name = "TestProduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
             product.ProductId = productController.Create(product);
-            OrderLine orderLine = new OrderLine(product);
+            OrderLine orderLine = new OrderLine();
+            orderLine.Product = product;
             Order order = new Order (DateTime.Today, DateTime.Today, customer);
             order.OrderNo = orderController.CreateOrder(order);
             personController.AddOrderToCustomer(order.OrderNo, customer);
@@ -62,7 +63,7 @@ namespace TestBusinessLogic
             {
                 Name = "JensPer",
                 Address = "Hadsundvej 30",
-                PhoneNo = "12341234",
+                PhoneNo = "123412345234",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
                 City = "Aalborg"
@@ -77,10 +78,11 @@ namespace TestBusinessLogic
                 Name = "testRemoveProductproduct",
                 Price = 100,
                 PurchasePrice = 50,
-                ProductDescription = Product_Description.Batteri,
+                ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
-            OrderLine orderLine = new OrderLine(product);
+            OrderLine orderLine = new OrderLine();
+            orderLine.Product = product;
             
             product.ProductId = productController.Create(product);
             order.OrderNo = orderController.CreateOrder(order);

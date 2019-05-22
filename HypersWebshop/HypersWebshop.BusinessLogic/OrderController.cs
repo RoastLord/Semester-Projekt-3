@@ -3,6 +3,7 @@ using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,16 +13,9 @@ namespace HypersWebshop.BusinessLogic
     {
         DBOrder dBOrder = new DBOrder();
         ProductController productController = new ProductController();
+        PersonController personController = new PersonController();
 
-        public void RemoveProductFromShoppingcart(int orderNo, int productId)
-        {
-            dBOrder.RemoveProductFromOrder(orderNo, productId);
-        }
 
-        public int RemoveAllProducts(int orderNo)
-        {
-            return dBOrder.RemoveAllProductsFromOrder(orderNo);
-        }
         public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
         {   
             dBOrder.CreateOrderline(orderNo, orderLine);
@@ -32,21 +26,42 @@ namespace HypersWebshop.BusinessLogic
             return dBOrder.CreateOrder(order);
         }
 
-        public void ProcessSale(Order order)
+        private bool IsProductPublished(List<OrderLine> orderLines)
+        {
+            bool check = true;
+            foreach(OrderLine orderLine in orderLines)
+            {
+                if(orderLine.Product.ProductStatus != Product_Status.Published)
+                {
+                    check= false;
+                }
+            }
+            return check;
+        }
+
+        public string ProcessSale(Order order)
         {
             {
+                if(!IsProductPublished(order.OrderLines))
+                {
+                    throw new FaultException("The product isnt published");
+                }
                 if (IsPaid(order))
                 {
                     List<OrderLine> orderLines = dBOrder.FindOrderLines(order.OrderNo);
                     Console.WriteLine(orderLines.Count);
                     foreach(OrderLine orderLine in orderLines)
                     {
-                        productController.ChangeProductStatus(orderLine.Product, Product_Status.Sold);
-                        Console.WriteLine("Kommer den herind??");
+                        Product p = orderLine.Product;
+                        p.ProductStatus = Product_Status.Sold;
+                        productController.UpdateProduct(p);
                     }
                     Console.WriteLine("Salg gik igennem");
-                //PrintReceipt(order);
+
+                    personController.AddOrderToCustomer(order.OrderNo, order.Customer);
+                
                 }
+                return PrintReceipt(order);
             }
         }
 
@@ -55,21 +70,23 @@ namespace HypersWebshop.BusinessLogic
             StringBuilder stringBuilder = new StringBuilder();
 
             
-            stringBuilder.AppendLine(order.OrderNo.ToString());
-            stringBuilder.AppendLine(order.Customer.Name);
-            stringBuilder.AppendLine(order.Customer.Address);
-            stringBuilder.AppendLine(order.Customer.City);
-            stringBuilder.AppendLine(order.Customer.Email);
-            stringBuilder.AppendLine(order.Customer.PhoneNo);
-            stringBuilder.AppendLine(order.TotalPrice.ToString());
+            stringBuilder.AppendLine("Order Number" + order.OrderNo.ToString());
+            stringBuilder.AppendLine("Name: " + order.Customer.Name);
+            stringBuilder.AppendLine("Address: " + order.Customer.Address);
+            stringBuilder.AppendLine("City: " + order.Customer.City);
+            stringBuilder.AppendLine("Email: " + order.Customer.Email);
+            stringBuilder.AppendLine("Phone Number: " + order.Customer.PhoneNo);
+            
 
             foreach (OrderLine orderLine in order.OrderLines)
             {
 
-                stringBuilder.AppendLine(orderLine.Product.Name);
-                stringBuilder.AppendLine(orderLine.Product.Price.ToString());
+                stringBuilder.AppendLine("Product: " + orderLine.Product.Name);
+                stringBuilder.AppendLine("Description: " + orderLine.Product.ProductDescription);
+                stringBuilder.AppendLine("Price: " + orderLine.Product.Price.ToString());
 
             }
+            stringBuilder.AppendLine("Total Price: " + order.TotalPrice.ToString());
 
             return stringBuilder.ToString();
         }
@@ -84,6 +101,16 @@ namespace HypersWebshop.BusinessLogic
             //NETS logik
             return true;
         }
+
+        //public void RemoveProductFromShoppingcart(int orderNo, int productId)
+        //{
+        //    dBOrder.RemoveProductFromOrder(orderNo, productId);
+        //}
+        //
+        //public int RemoveAllProducts(int orderNo)
+        //{
+        //    return dBOrder.RemoveAllProductsFromOrder(orderNo);
+        //}
 
         //private bool CheckAmount(List<OrderLine> orderLines)
         //{

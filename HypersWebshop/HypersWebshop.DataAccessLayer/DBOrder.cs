@@ -36,11 +36,10 @@ namespace HypersWebshop.DataAccessLayer
             using (SqlConnection con = dBConnection.OpenConnection())
             {
                 SqlCommand command = new SqlCommand(CREATE_ORDER, con);
-                command.Parameters.AddWithValue("totalPrice", 0);
-                command.Parameters.AddWithValue("@date", "Date");
-                command.Parameters.AddWithValue("@deliveryDate", "Delivery Date");
+                command.Parameters.AddWithValue("totalPrice", order.TotalPrice);
+                command.Parameters.AddWithValue("@date", order.Date);
+                command.Parameters.AddWithValue("@deliveryDate", order.DeliveryDate);
                 orderNo = command.ExecuteWithIdentity();
-                Console.WriteLine("wtf?: " + orderNo);
             }
 
             return orderNo;
@@ -62,9 +61,9 @@ namespace HypersWebshop.DataAccessLayer
 
                 }
             }
-            catch
+            catch(SqlException e)
             {
-                throw new Exception();
+                throw e;
             }
         }
         public List<OrderLine> FindOrderLines(int orderNo)
@@ -78,9 +77,8 @@ namespace HypersWebshop.DataAccessLayer
                 DBProduct dBProduct = new DBProduct();
                 while (dr.Read())
                 {
-                    OrderLine orderLine = new OrderLine(
-                        dBProduct.FindProduct(dr.GetInt("pr_id"))
-                        );
+                    OrderLine orderLine = new OrderLine();
+                    orderLine.Product = dBProduct.FindProduct(dr.GetInt("pr_id"));
                     orderLines.Add(orderLine);
                 }
 

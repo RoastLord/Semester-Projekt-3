@@ -10,9 +10,5 @@ namespace HypersWebshop.Domain
     {     
         public Product Product { get; set; }
 
-        public OrderLine(Product product)
-        {
-            Product = product;
-        }
     }
 }
