@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
+  <xs:import schemaLocation="http://localhost:8734/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" />
+  <xs:import schemaLocation="http://localhost:8734/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/HypersWebshop.Domain" />
   <xs:element name="UpdateProduct">
     <xs:complexType>
       <xs:sequence>
@@ -67,33 +67,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="FindProductsByStatusResult" nillable="true" type="q7:ArrayOfCompositeProduct" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateCustomer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="composite" nillable="true" type="q8:CompositeCustomer" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateCustomerResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ProcessSale">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="compProducts" nillable="true" type="q9:ArrayOfCompositeProduct" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" minOccurs="0" name="compCustomer" nillable="true" type="q10:CompositeCustomer" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ProcessSaleResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ProcessSaleResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

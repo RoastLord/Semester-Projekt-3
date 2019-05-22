@@ -13,7 +13,7 @@ namespace HypersDesktopWFApp
 {
     public partial class UpdateProductView : Form
     {
-        ServiceReference1.IProductService service = new ServiceReference1.ProductServiceClient();
+        ServiceReference1.IDesktopService service = new DesktopServiceClient();
         public UpdateProductView()
         {
             InitializeComponent();

@@ -15,12 +15,6 @@ namespace HypersWebshop.ServiceLib
         PersonController personController = new PersonController();
         OrderController orderController = new OrderController();
 
-        public int CreateProduct(CompositeProduct composite)
-        {
-            Product product = CompositeToProduct(composite);
-            return productController.Create(product);
-        }
-
         public CompositeProduct FindProduct(int id)
         {
             Product product = productController.FindProduct(id);
@@ -142,14 +136,6 @@ namespace HypersWebshop.ServiceLib
                 compositeProducts.Add(composite);
             }
             return compositeProducts;
-        }
-
-        public void UpdateProduct(CompositeProduct composite)
-        {
-            Product product = CompositeToProduct(composite);
-
-            productController.UpdateProduct(product);
-
         }
 
         public void CreateCustomer(CompositeCustomer composite)

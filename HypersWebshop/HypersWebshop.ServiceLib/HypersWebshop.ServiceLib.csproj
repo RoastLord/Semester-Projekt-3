@@ -44,12 +44,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesktopService.cs" />
+    <Compile Include="IDesktopService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HypersWebshop.BusinessLogic\HypersWebshop.BusinessLogic.csproj">
