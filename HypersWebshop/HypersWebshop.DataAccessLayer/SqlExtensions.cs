@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Transactions;
 
 namespace HypersWebshop.DataAccessLayer
 {
@@ -13,6 +14,15 @@ namespace HypersWebshop.DataAccessLayer
             {
                 command.Parameters.AddWithValue(val.Key, val.Value);
             }
+        }
+
+        // Util metode til at oprette et Read Comitted transact
+        public static TransactionScope CreateReadComittedTransactionScope()
+        {
+            var transactionOptions = new TransactionOptions();
+            transactionOptions.IsolationLevel = IsolationLevel.ReadCommitted;
+            transactionOptions.Timeout = TransactionManager.MaximumTimeout;
+            return new TransactionScope(TransactionScopeOption.Required, transactionOptions);
         }
 
         //Extension metode til at returnere ID'et på objektet man kalder med SqlCommand.    

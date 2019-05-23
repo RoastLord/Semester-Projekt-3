@@ -32,14 +32,26 @@ namespace HypersWebshop.DataAccessLayer
         public int CreateOrder(Order order)
         {
             int orderNo = -1;
-
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand command = new SqlCommand(CREATE_ORDER, con);
-                command.Parameters.AddWithValue("totalPrice", order.TotalPrice);
-                command.Parameters.AddWithValue("@date", order.Date);
-                command.Parameters.AddWithValue("@deliveryDate", order.DeliveryDate);
-                orderNo = command.ExecuteWithIdentity();
+
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                {
+
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(CREATE_ORDER, con);
+                        command.Parameters.AddWithValue("totalPrice", order.TotalPrice);
+                        command.Parameters.AddWithValue("@date", order.Date);
+                        command.Parameters.AddWithValue("@deliveryDate", order.DeliveryDate);
+                        orderNo = command.ExecuteWithIdentity();
+                    }
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException)
+            {
+
             }
 
             return orderNo;
@@ -61,75 +73,85 @@ namespace HypersWebshop.DataAccessLayer
 
                 }
             }
-            catch(SqlException e)
+            catch (TransactionAbortedException)
             {
-                throw e;
             }
         }
         public List<OrderLine> FindOrderLines(int orderNo)
         {
             List<OrderLine> orderLines = new List<OrderLine>();
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand command = new SqlCommand(FIND_ORDERLINES, con);
-                command.Parameters.AddWithValue("o_id", orderNo);
-                SqlDataReader dr = command.ExecuteReader();
-                DBProduct dBProduct = new DBProduct();
-                while (dr.Read())
+                using (SqlConnection con = dBConnection.OpenConnection())
                 {
-                    OrderLine orderLine = new OrderLine();
-                    orderLine.Product = dBProduct.FindProduct(dr.GetInt("pr_id"));
-                    orderLines.Add(orderLine);
-                }
-
-            }
-            return orderLines;
-        }
-        public int RemoveAllProductsFromOrder(int orderNo)
-            {
-                int NumberOfRowsAffected = 0;
-                try
-                {
-                    using (TransactionScope scope = new TransactionScope())
+                    SqlCommand command = new SqlCommand(FIND_ORDERLINES, con);
+                    command.Parameters.AddWithValue("o_id", orderNo);
+                    SqlDataReader dr = command.ExecuteReader();
+                    DBProduct dBProduct = new DBProduct();
+                    while (dr.Read())
                     {
-                        using (SqlConnection con = dBConnection.OpenConnection())
-                        {
-                            SqlCommand command = new SqlCommand(REMOVE_ALL_PRODUCTS_FROM_ORDER, con);
-                            command.Parameters.AddWithValue("o_id", orderNo);
-                            //Evt returner for at vise den er slettet
-                            NumberOfRowsAffected = command.ExecuteNonQuery();
-                        }
-                        scope.Complete();
+                        OrderLine orderLine = new OrderLine();
+                        orderLine.Product = dBProduct.FindProduct(dr.GetInt("pr_id"));
+                        orderLines.Add(orderLine);
                     }
                 }
-                catch (TransactionAbortedException)
-                {
-
-                }
-                return NumberOfRowsAffected;
+                return orderLines;
             }
-        
+            catch (TransactionAbortedException)
+            {
+
+            }
+            return null;
+        }
+        public int RemoveAllProductsFromOrder(int orderNo)
+        {
+            int NumberOfRowsAffected = 0;
+            try
+            {
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand command = new SqlCommand(REMOVE_ALL_PRODUCTS_FROM_ORDER, con);
+                        command.Parameters.AddWithValue("o_id", orderNo);
+                        //Evt returner for at vise den er slettet
+                        NumberOfRowsAffected = command.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException)
+            {
+
+            }
+            return NumberOfRowsAffected;
+        }
+
         public Order FindOrder(int orderNo)
         {
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand command = new SqlCommand(FIND_ORDER, con);
-                command.Parameters.AddWithValue("orderNo", orderNo);
-                SqlDataReader dr = command.ExecuteReader();
-                DBPerson dBCustomer = new DBPerson();
-                while (dr.Read())
+                using (SqlConnection con = dBConnection.OpenConnection())
                 {
-                    Order order = new Order(
-                        dr.GetInt("id"),
-                        dr.GetLong("totalPrice"),
-                        dr.GetDateTime("date"),
-                        dr.GetDateTime("deliveryDate"),
-                        dBCustomer.FindCustomer(dr.GetString("phoneNo"))
-                        );
-                    return order;
-                    // dr.GetDateTime("date"),
-                    //dr.GetDateTime("deliveryDate"),
+                    SqlCommand command = new SqlCommand(FIND_ORDER, con);
+                    command.Parameters.AddWithValue("orderNo", orderNo);
+                    SqlDataReader dr = command.ExecuteReader();
+                    DBPerson dBCustomer = new DBPerson();
+                    while (dr.Read())
+                    {
+                        Order order = new Order(
+                            dr.GetInt("id"),
+                            dr.GetLong("totalPrice"),
+                            dr.GetDateTime("date"),
+                            dr.GetDateTime("deliveryDate"),
+                            dBCustomer.FindCustomer(dr.GetString("phoneNo"))
+                            );
+                        return order;
+                    }
                 }
+            }
+            catch(TransactionAbortedException)
+            {
 
             }
             return null;
@@ -139,7 +161,7 @@ namespace HypersWebshop.DataAccessLayer
             int NumberOfRowsAffected = 0;
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
                 {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {

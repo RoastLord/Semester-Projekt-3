@@ -21,42 +21,58 @@ namespace HypersWebshop.DataAccessLayer
 
         public Customer FindCustomer(string phoneNo)
         {
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
-                cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    Customer customer = new Customer()
-                    {
-                        Name = dr.GetString("name"),
-                        Address = dr.GetString("address"),
-                        PhoneNo = dr.GetString("phoneNo"),
-                        Email = dr.GetString("email"),
-                        Zipcode = dr.GetInt("zipcode"),
 
-                    };
-                    customer.City = GetCityByZipCode(customer.Zipcode);
-                    return customer;
+                using (SqlConnection con = dBConnection.OpenConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
+                    cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Customer customer = new Customer()
+                        {
+                            Name = dr.GetString("name"),
+                            Address = dr.GetString("address"),
+                            PhoneNo = dr.GetString("phoneNo"),
+                            Email = dr.GetString("email"),
+                            Zipcode = dr.GetInt("zipcode"),
+
+                        };
+                        customer.City = GetCityByZipCode(customer.Zipcode);
+                        return customer;
+                    }
                 }
+            }
+            catch(TransactionAbortedException)
+            {
+
             }
             return null;
         }
 
         public string GetCityByZipCode(int zipcode)
         {
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
-                cmd.Parameters.AddWithValue("zipcode", zipcode);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    string city = dr.GetString("city");
-                    return city;
-                }
 
+                using (SqlConnection con = dBConnection.OpenConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
+                    cmd.Parameters.AddWithValue("zipcode", zipcode);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string city = dr.GetString("city");
+                        return city;
+                    }
+
+                }
+            }
+            catch(TransactionAbortedException)
+            {
+                
             }
             return null;
 
@@ -65,10 +81,14 @@ namespace HypersWebshop.DataAccessLayer
         public void CreateCustomer(Customer customer)
         {
             int tempId = -1;
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand cmd = new SqlCommand(CREATE_PERSON, con);
-                cmd.AddMultipleWithValue(new Dictionary<string, object>()
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                {
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand cmd = new SqlCommand(CREATE_PERSON, con);
+                        cmd.AddMultipleWithValue(new Dictionary<string, object>()
                         {
                             {"@name",           customer.Name },
                             {"@address",        customer.Address },
@@ -76,25 +96,46 @@ namespace HypersWebshop.DataAccessLayer
                             {"@email",          customer.Email },
                             {"@zipcode",        customer.Zipcode }
                         });
-                tempId = cmd.ExecuteWithIdentity();
+                        tempId = cmd.ExecuteWithIdentity();
 
-                SqlCommand cmd2 = new SqlCommand(CREATE_CUSTOMER, con);
-                cmd2.Parameters.AddWithValue("pe_id", tempId);
-                cmd2.ExecuteNonQuery();
+                        SqlCommand cmd2 = new SqlCommand(CREATE_CUSTOMER, con);
+                        cmd2.Parameters.AddWithValue("pe_id", tempId);
+                        cmd2.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
             }
+            catch(TransactionAbortedException)
+            {
+
+            }
+            
         }
 
         public void AddOrderToCustomer(int orderId, Customer customer)
         {
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
-                SqlCommand cmd = new SqlCommand(ADD_ORDER_TO_CUSTOMER, con);
-                cmd.AddMultipleWithValue(new Dictionary<string, object>()
+
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                {
+
+                    using (SqlConnection con = dBConnection.OpenConnection())
+                    {
+                        SqlCommand cmd = new SqlCommand(ADD_ORDER_TO_CUSTOMER, con);
+                        cmd.AddMultipleWithValue(new Dictionary<string, object>()
                         {
                             {"o_id",            orderId },
                             {"@phoneNo",        customer.PhoneNo },
                         });
-                cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
+                    scope.Complete();
+                }
+            }
+            catch(TransactionAbortedException)
+            {
+
             }
         }
     }

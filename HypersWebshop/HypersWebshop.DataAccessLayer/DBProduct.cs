@@ -17,7 +17,7 @@ namespace HypersWebshop.DataAccessLayer
         // I querien "CREATE_PRODUCT" bliver der kaldt en "OUTPUT IDENT_CURRENT" query, som returnerer ID'et på produktet.
         private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @Price, @PurchasePrice, @Description, @Status)";
         private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
-        private string DELETE_PRODUCT = "DELETE FROM Product WHERE ID = (@id)";
+        //private string DELETE_PRODUCT = "DELETE FROM Product WHERE ID = (@id)";
         private string FIND_PRODUCTS_BY_DESCRIPTION = "SELECT * from Product WHERE description = @description";
         private string FIND_PRODUCTS_BY_STATUS = "SELECT * from Product WHERE status = @status";
         private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, " +
@@ -34,7 +34,7 @@ namespace HypersWebshop.DataAccessLayer
             int productId = -1;
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
                 {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
@@ -58,49 +58,57 @@ namespace HypersWebshop.DataAccessLayer
             return productId;
         }
 
-        // Skal evt ikke bruges
-        public void Delete(Product entity)
-        {
-            try
-            {
-                using (TransactionScope scope = new TransactionScope())
-                {
-                    using (SqlConnection con = dBConnection.OpenConnection())
-                    {
-                        SqlCommand command = new SqlCommand(DELETE_PRODUCT, con);
-                        command.Parameters.AddWithValue("id", entity.ProductId);
-                        command.ExecuteNonQuery();
-                    }
-                    scope.Complete();
-                }
-            }
-            catch (TransactionAbortedException)
-            {
-            }
-        }
+        //// Skal evt ikke bruges
+        //public void Delete(Product entity)
+        //{
+        //    try
+        //    {
+        //        using (TransactionScope scope = new TransactionScope())
+        //        {
+        //            using (SqlConnection con = dBConnection.OpenConnection())
+        //            {
+        //                SqlCommand command = new SqlCommand(DELETE_PRODUCT, con);
+        //                command.Parameters.AddWithValue("id", entity.ProductId);
+        //                command.ExecuteNonQuery();
+        //            }
+        //            scope.Complete();
+        //        }
+        //    }
+        //    catch (TransactionAbortedException)
+        //    {
+        //    }
+        //}
 
         public Product FindProduct(int id)
         {
             Product product;
-            using (SqlConnection con = dBConnection.OpenConnection())
+            try
             {
 
-                SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
-                command.Parameters.AddWithValue("id", id);
-                SqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
+                using (SqlConnection con = dBConnection.OpenConnection())
                 {
-                    product = new Product()
+
+                    SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
+                    command.Parameters.AddWithValue("id", id);
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
                     {
-                        ProductId = dr.GetInt("id"),
-                        Name = dr.GetString("name"),
-                        Price = dr.GetLong("price"),
-                        PurchasePrice = dr.GetLong("purchasePrice"),
-                        ProductDescription = (Product_Description)dr.GetInt("description"),
-                        ProductStatus = (Product_Status)dr.GetInt("status")
-                    };
-                    return product;
+                        product = new Product()
+                        {
+                            ProductId = dr.GetInt("id"),
+                            Name = dr.GetString("name"),
+                            Price = dr.GetLong("price"),
+                            PurchasePrice = dr.GetLong("purchasePrice"),
+                            ProductDescription = (Product_Description)dr.GetInt("description"),
+                            ProductStatus = (Product_Status)dr.GetInt("status")
+                        };
+                        return product;
+                    }
                 }
+            }
+            catch(TransactionAbortedException)
+            {
+
             }
             return null;
         }
@@ -110,30 +118,26 @@ namespace HypersWebshop.DataAccessLayer
             List<Product> products = new List<Product>();
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (SqlConnection con = dBConnection.OpenConnection())
                 {
-                    using (SqlConnection con = dBConnection.OpenConnection())
+                    SqlCommand command = new SqlCommand(FIND_PRODUCTS_BY_DESCRIPTION, con);
+                    command.Parameters.AddWithValue("description", productDescription);
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
                     {
-                        SqlCommand command = new SqlCommand(FIND_PRODUCTS_BY_DESCRIPTION, con);
-                        command.Parameters.AddWithValue("description", productDescription);
-                        SqlDataReader dr = command.ExecuteReader();
-                        while (dr.Read())
+                        Product product = new Product()
                         {
-                            Product product = new Product()
-                            {
-                                ProductId = dr.GetInt("id"),
-                                Name = dr.GetString("name"),
-                                Price = dr.GetLong("price"),
-                                PurchasePrice = dr.GetLong("purchasePrice"),
-                                ProductDescription = (Product_Description)dr.GetInt("description"),
-                                ProductStatus = (Product_Status)dr.GetInt("status")
+                            ProductId = dr.GetInt("id"),
+                            Name = dr.GetString("name"),
+                            Price = dr.GetLong("price"),
+                            PurchasePrice = dr.GetLong("purchasePrice"),
+                            ProductDescription = (Product_Description)dr.GetInt("description"),
+                            ProductStatus = (Product_Status)dr.GetInt("status")
 
-                            };
-                            products.Add(product);
-                            return products;
-                        }
+                        };
+                        products.Add(product);
+                        return products;
                     }
-                    scope.Complete();
                 }
             }
             catch (TransactionAbortedException)
@@ -142,55 +146,51 @@ namespace HypersWebshop.DataAccessLayer
             return null;
         }
 
-            public List<Product> FindByStatus(Enum productStatus)
-            {
-                List<Product> productList = new List<Product>();
+        public List<Product> FindByStatus(Enum productStatus)
+        {
+            List<Product> productList = new List<Product>();
 
-                try
+            try
+            {
+                using (SqlConnection con = dBConnection.OpenConnection())
                 {
-                    using (TransactionScope scope = new TransactionScope())
+                    SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
+                    sqlCommand.Parameters.AddWithValue("status", productStatus);
+                    SqlDataReader dr = sqlCommand.ExecuteReader();
+                    while (dr.Read())
                     {
+                        Product product = new Product()
+                        {
+                            ProductId = dr.GetInt("id"),
+                            Name = dr.GetString("name"),
+                            Price = dr.GetLong("price"),
+                            PurchasePrice = dr.GetLong("purchasePrice"),
+                            ProductDescription = (Product_Description)dr.GetInt("description"),
+                            ProductStatus = (Product_Status)dr.GetInt("status")
+                        };
+                        productList.Add(product);
+                    }
+                }
+            }
+            catch (TransactionAbortedException)
+            {
+            }
+            return productList;
+        }
+
+        public int Update(Product product)
+        {
+            int NoOfRowsAffected = 0;
+            try
+            {
+                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
-                        SqlCommand sqlCommand = new SqlCommand(FIND_PRODUCTS_BY_STATUS, con);
-                        sqlCommand.Parameters.AddWithValue("status", productStatus);
-                        SqlDataReader dr = sqlCommand.ExecuteReader();
-                        while (dr.Read())
-                        {
-                            Product product = new Product()
-                            {
-                                ProductId = dr.GetInt("id"),
-                                Name = dr.GetString("name"),
-                                Price = dr.GetLong("price"),
-                                PurchasePrice = dr.GetLong("purchasePrice"),
-                                ProductDescription = (Product_Description)dr.GetInt("description"),
-                                ProductStatus = (Product_Status)dr.GetInt("status")
-                            };
-                            productList.Add(product);
-                        }
-                    }
-                        scope.Complete();
-                    }
-                }
-                catch (TransactionAbortedException)
-                {
-                }
-                return productList;
-            }
-
-            public int Update(Product product)
-            {
-                int NoOfRowsAffected = 0;
-                try
-                {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        using (SqlConnection con = dBConnection.OpenConnection())
-                        {
-                            SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
-                            Console.WriteLine("Pris Fra dBProduct: " + product.Price);
-                            Console.WriteLine(product.ProductId);
-                            command.AddMultipleWithValue(new Dictionary<string, object>() {
+                        SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
+                        Console.WriteLine("Pris Fra dBProduct: " + product.Price);
+                        Console.WriteLine(product.ProductId);
+                        command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
                                 { "price",          product.Price },
                                 { "PurchasePrice",  product.PurchasePrice },
@@ -198,19 +198,18 @@ namespace HypersWebshop.DataAccessLayer
                                 { "status",         product.ProductStatus },
                                 { "id",             product.ProductId },
                         });
-                            //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
-                            NoOfRowsAffected = command.ExecuteNonQuery();
-                        }
-
-                        scope.Complete();
+                        //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
+                        NoOfRowsAffected = command.ExecuteNonQuery();
                     }
+                    scope.Complete();
                 }
-                catch (TransactionAbortedException tae)
-                {
-                    Console.WriteLine(tae.Message);
-                }
-                return NoOfRowsAffected;
             }
-
+            catch (TransactionAbortedException)
+            {
+                
+            }
+            return NoOfRowsAffected;
         }
+
     }
+}

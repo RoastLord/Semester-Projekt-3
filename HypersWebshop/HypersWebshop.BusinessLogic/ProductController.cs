@@ -17,10 +17,10 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Create(entity);
         }
 
-        public void DeleteProduct(Product entity)
-        {
-            dbProduct.Delete(entity);
-        }
+        //public void DeleteProduct(Product entity)
+        //{
+        //    dbProduct.Delete(entity);
+        //}
 
         public Product FindProduct(int id)
         {
