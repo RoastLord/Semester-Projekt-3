@@ -12,13 +12,10 @@ namespace HypersWebshop.ServiceLib
     public interface IDesktopService
     {
         [OperationContract]
-        void UpdateProduct(CompositeProduct composite);
+        int UpdateProduct(CompositeProduct composite);
 
         [OperationContract]
         int CreateProduct(CompositeProduct composite);
-
-        [OperationContract]
-        CompositeProduct FindProduct(int id);
 
         [OperationContract]
         List<CompositeProduct> FindProductsByDescription(Product_Description description);
@@ -26,5 +23,7 @@ namespace HypersWebshop.ServiceLib
         [OperationContract]
         List<CompositeProduct> FindProductsByStatus(Product_Status status);
 
+        //[OperationContract]
+        //CompositeProduct FindProduct(int id);
     }
 }

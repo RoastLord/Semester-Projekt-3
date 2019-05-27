@@ -198,10 +198,10 @@ namespace HypersDesktopWFApp.ServiceReference1 {
     public interface IDesktopService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/UpdateProduct", ReplyAction="http://tempuri.org/IDesktopService/UpdateProductResponse")]
-        void UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
+        int UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/UpdateProduct", ReplyAction="http://tempuri.org/IDesktopService/UpdateProductResponse")]
-        System.Threading.Tasks.Task UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
+        System.Threading.Tasks.Task<int> UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/CreateProduct", ReplyAction="http://tempuri.org/IDesktopService/CreateProductResponse")]
         int CreateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
@@ -255,11 +255,11 @@ namespace HypersDesktopWFApp.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public void UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
-            base.Channel.UpdateProduct(composite);
+        public int UpdateProduct(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
+            return base.Channel.UpdateProduct(composite);
         }
         
-        public System.Threading.Tasks.Task UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
+        public System.Threading.Tasks.Task<int> UpdateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
             return base.Channel.UpdateProductAsync(composite);
         }
         

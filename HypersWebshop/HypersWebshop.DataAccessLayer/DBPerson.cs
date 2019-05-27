@@ -14,77 +14,17 @@ namespace HypersWebshop.DataAccessLayer
         DBConnection dBConnection = new DBConnection();
         private string CREATE_PERSON = "INSERT INTO Person  OUTPUT IDENT_CURRENT('Person') VALUES(@name, @address, @phoneNo, @email, @zipcode)";
         private string CREATE_CUSTOMER = "INSERT INTO Customer (pe_id) VALUES (@pe_id)";
-        //private string CREATE_EMPLOYEE = "INSERT INTO Employee (pe_id) VALUES (@pe_id)";
-        private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
-        private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
+        // private string GET_CUSTOMER = "SELECT * FROM Person JOIN Customer ON Person.id = Customer.pe_id WHERE Person.PhoneNo = @PhoneNo";
+        // private string GET_CITY_BY_ZIPCODE = "SELECT * From ZipCity WHERE zipcode = @zipcode";
         private string ADD_ORDER_TO_CUSTOMER = "UPDATE Customer SET o_id = @o_id FROM Person WHERE Customer.pe_id = Person.id AND Person.phoneNo = @PhoneNo";
 
-        public Customer FindCustomer(string phoneNo)
-        {
-            try
-            {
 
-                using (SqlConnection con = dBConnection.OpenConnection())
-                {
-                    SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
-                    cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        Customer customer = new Customer()
-                        {
-                            Name = dr.GetString("name"),
-                            Address = dr.GetString("address"),
-                            PhoneNo = dr.GetString("phoneNo"),
-                            Email = dr.GetString("email"),
-                            Zipcode = dr.GetInt("zipcode"),
-
-                        };
-                        customer.City = GetCityByZipCode(customer.Zipcode);
-                        return customer;
-                    }
-                }
-            }
-            catch(TransactionAbortedException)
-            {
-
-            }
-            return null;
-        }
-
-        public string GetCityByZipCode(int zipcode)
-        {
-            try
-            {
-
-                using (SqlConnection con = dBConnection.OpenConnection())
-                {
-                    SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
-                    cmd.Parameters.AddWithValue("zipcode", zipcode);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        string city = dr.GetString("city");
-                        return city;
-                    }
-
-                }
-            }
-            catch(TransactionAbortedException)
-            {
-                
-            }
-            return null;
-
-        }
 
         public void CreateCustomer(Customer customer)
         {
             int tempId = -1;
             try
             {
-                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
-                {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand cmd = new SqlCommand(CREATE_PERSON, con);
@@ -102,24 +42,16 @@ namespace HypersWebshop.DataAccessLayer
                         cmd2.Parameters.AddWithValue("pe_id", tempId);
                         cmd2.ExecuteNonQuery();
                     }
-                    scope.Complete();
-                }
             }
             catch(TransactionAbortedException)
             {
-
             }
-            
         }
 
         public void AddOrderToCustomer(int orderId, Customer customer)
         {
             try
             {
-
-                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
-                {
-
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand cmd = new SqlCommand(ADD_ORDER_TO_CUSTOMER, con);
@@ -130,13 +62,65 @@ namespace HypersWebshop.DataAccessLayer
                         });
                         cmd.ExecuteNonQuery();
                     }
-                    scope.Complete();
-                }
             }
             catch(TransactionAbortedException)
             {
-
             }
         }
+
+        //public Customer FindCustomer(string phoneNo)
+        //{
+        //    try
+        //    {
+        //        using (SqlConnection con = dBConnection.OpenConnection())
+        //        {
+        //            SqlCommand cmd = new SqlCommand(GET_CUSTOMER, con);
+        //            cmd.Parameters.AddWithValue("PhoneNo", phoneNo);
+        //            SqlDataReader dr = cmd.ExecuteReader();
+        //            while (dr.Read())
+        //            {
+        //                Customer customer = new Customer()
+        //                {
+        //                    Name = dr.GetString("name"),
+        //                    Address = dr.GetString("address"),
+        //                    PhoneNo = dr.GetString("phoneNo"),
+        //                    Email = dr.GetString("email"),
+        //                    Zipcode = dr.GetInt("zipcode"),
+
+        //                };
+        //                customer.City = GetCityByZipCode(customer.Zipcode);
+        //                return customer;
+        //            }
+        //        }
+        //    }
+        //    catch(TransactionAbortedException)
+        //    {
+        //    }
+        //    return null;
+        //}
+
+        //public string GetCityByZipCode(int zipcode)
+        //{
+        //    string city = "";
+        //    try
+        //    {
+        //        using (SqlConnection con = dBConnection.OpenConnection())
+        //        {
+        //            SqlCommand cmd = new SqlCommand(GET_CITY_BY_ZIPCODE, con);
+        //            cmd.Parameters.AddWithValue("zipcode", zipcode);
+        //            SqlDataReader dr = cmd.ExecuteReader();
+        //            while (dr.Read())
+        //            {
+        //                city = dr.GetString("city");
+
+        //            }
+        //        }
+        //        return city;
+        //    }
+        //    catch(TransactionAbortedException)
+        //    {
+        //    }
+        //    return null;
+        //}
     }
 }

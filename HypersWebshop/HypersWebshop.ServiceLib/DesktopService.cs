@@ -19,11 +19,6 @@ namespace HypersWebshop.ServiceLib
             return productController.Create(CompositeToProduct(composite));
         }
 
-        public CompositeProduct FindProduct(int id)
-        {
-            return ProductToComposite(productController.FindProduct(id));
-        }
-
         public List<CompositeProduct> FindProductsByDescription(Product_Description description)
         {
             List<Product> products = productController.FindProductsByDescription(description);
@@ -48,9 +43,9 @@ namespace HypersWebshop.ServiceLib
             return compositeProducts;
         }
 
-        public void UpdateProduct(CompositeProduct composite)
+        public int UpdateProduct(CompositeProduct composite)
         {
-            productController.UpdateProduct(CompositeToProduct(composite));
+            return productController.UpdateProduct(CompositeToProduct(composite));
         }
 
         private Product CompositeToProduct(CompositeProduct comp)
@@ -101,5 +96,9 @@ namespace HypersWebshop.ServiceLib
             };
         }
 
+        //public CompositeProduct FindProduct(int id)
+        //{
+        //    return ProductToComposite(productController.FindProduct(id));
+        //}
     }
 }

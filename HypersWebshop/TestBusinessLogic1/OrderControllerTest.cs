@@ -51,63 +51,63 @@ namespace TestBusinessLogic
         }
 
 
-        [TestMethod]
-        public void TestRemoveProductFromOrderline()
-        {
-            //Arrange
-            ProductController productController = new ProductController();
-            OrderController orderController = new OrderController();
-            PersonController personController = new PersonController();
+        //[TestMethod]
+        //public void TestRemoveProductFromOrderline()
+        //{
+        //    //Arrange
+        //    ProductController productController = new ProductController();
+        //    OrderController orderController = new OrderController();
+        //    PersonController personController = new PersonController();
 
-            Customer customer = new Customer()
-            {
-                Name = "JensPer",
-                Address = "Hadsundvej 30",
-                PhoneNo = "123412345234",
-                Email = "per@mail.dk",
-                Zipcode = 9000,
-                City = "Aalborg"
-            };
+        //    Customer customer = new Customer()
+        //    {
+        //        Name = "JensPer",
+        //        Address = "Hadsundvej 30",
+        //        PhoneNo = "123412345234",
+        //        Email = "per@mail.dk",
+        //        Zipcode = 9000,
+        //        City = "Aalborg"
+        //    };
 
             
-            personController.CreateCustomer(customer);
-            Order order = new Order(0, 100, DateTime.Today, DateTime.Today, customer);
+        //    personController.CreateCustomer(customer);
+        //    Order order = new Order(0, 100, DateTime.Today, DateTime.Today, customer);
             
-            Product product = new Product()
-            {
-                Name = "testRemoveProductproduct",
-                Price = 100,
-                PurchasePrice = 50,
-                ProductDescription = Product_Description.Battery,
-                ProductStatus = Product_Status.Published
-            };
-            OrderLine orderLine = new OrderLine();
-            orderLine.Product = product;
+        //    Product product = new Product()
+        //    {
+        //        Name = "testRemoveProductproduct",
+        //        Price = 100,
+        //        PurchasePrice = 50,
+        //        ProductDescription = Product_Description.Battery,
+        //        ProductStatus = Product_Status.Published
+        //    };
+        //    OrderLine orderLine = new OrderLine();
+        //    orderLine.Product = product;
             
-            product.ProductId = productController.Create(product);
-            order.OrderNo = orderController.CreateOrder(order);
-            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
+        //    product.ProductId = productController.Create(product);
+        //    order.OrderNo = orderController.CreateOrder(order);
+        //    orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
 
-            //Act
-            orderController.RemoveProductFromShoppingcart(order.OrderNo, product.ProductId);
+        //    //Act
+        //    orderController.RemoveProductFromShoppingcart(order.OrderNo, product.ProductId);
 
-            //Assert
+        //    //Assert
 
-            List<OrderLine> list = orderController.GetOrderLines(order.OrderNo);
-            bool check = false;
-            foreach (OrderLine o in list)
-            {
+        //    List<OrderLine> list = orderController.FindOrderLines(order.OrderNo);
+        //    bool check = false;
+        //    foreach (OrderLine o in list)
+        //    {
                 
-                if(o.Product.Name == product.Name)
-                {
+        //        if(o.Product.Name == product.Name)
+        //        {
 
-                    check = true;
-                }
-            }
+        //            check = true;
+        //        }
+        //    }
 
 
-            Assert.AreEqual(false, check);
-        }
+        //    Assert.AreEqual(false, check);
+        //}
     }
 }
 

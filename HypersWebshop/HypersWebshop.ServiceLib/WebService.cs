@@ -32,13 +32,13 @@ namespace HypersWebshop.ServiceLib
             long totalPrice = 0;
 
             // Lav listen af Composite Objekter om til en liste af normale Produkter TEST
-            foreach(CompositeProduct compP in compProducts)
+            foreach (CompositeProduct compP in compProducts)
             {
                 products.Add(CompositeToProduct(compP));
                 // For hvert produkt, + prisen til totalprisen
                 totalPrice += compP.Price;
             }
-            
+
             // Lav en Order lokalvariabel, med 7 dages levering
             Order order = new Order(totalPrice, DateTime.Now, DateTime.Now.AddDays(7), customer);
 
@@ -117,7 +117,7 @@ namespace HypersWebshop.ServiceLib
             List<Product> products = productController.FindProductsByDescription(description);
             List<CompositeProduct> compositeProducts = new List<CompositeProduct>();
 
-            foreach(Product product in products)
+            foreach (Product product in products)
             {
                 CompositeProduct composite = ProductToComposite(product);
                 compositeProducts.Add(composite);
@@ -130,7 +130,7 @@ namespace HypersWebshop.ServiceLib
             List<Product> products = productController.FindProductsByStatus(status);
             List<CompositeProduct> compositeProducts = new List<CompositeProduct>();
 
-            foreach(Product product in products)
+            foreach (Product product in products)
             {
                 CompositeProduct composite = ProductToComposite(product);
                 compositeProducts.Add(composite);

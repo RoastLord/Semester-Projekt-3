@@ -17,16 +17,6 @@ namespace HypersWebshop.BusinessLogic
             return dbProduct.Create(entity);
         }
 
-        //public void DeleteProduct(Product entity)
-        //{
-        //    dbProduct.Delete(entity);
-        //}
-
-        public Product FindProduct(int id)
-        {
-            return dbProduct.FindProduct(id);
-        }
-
         public int UpdateProduct(Product product)
         {
             return dbProduct.Update(product);
@@ -41,6 +31,19 @@ namespace HypersWebshop.BusinessLogic
         {
             return dbProduct.FindByStatus(status);
         }
+
+        public Product FindProduct(int id)
+        {
+            return dbProduct.FindProduct(id);
+        }
+
+
+        //public void DeleteProduct(Product entity)
+        //{
+        //    dbProduct.Delete(entity);
+        //}
+
+
 
         //public void ChangeProductStatus(Product product, Product_Status newStatus)
         //{

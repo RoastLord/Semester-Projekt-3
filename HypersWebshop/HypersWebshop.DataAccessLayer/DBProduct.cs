@@ -15,14 +15,14 @@ namespace HypersWebshop.DataAccessLayer
         DBConnection dBConnection;
 
         // I querien "CREATE_PRODUCT" bliver der kaldt en "OUTPUT IDENT_CURRENT" query, som returnerer ID'et på produktet.
-        private string CREATE_PRODUCT = "INSERT INTO Product OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @Price, @PurchasePrice, @Description, @Status)";
+        private string CREATE_PRODUCT = "INSERT INTO Product (name, price, purchaseprice, description, status) OUTPUT IDENT_CURRENT('Product') VALUES (@Name, @Price, @PurchasePrice, @Description, @Status)";
         private string FIND_PRODUCT_BY_ID = "SELECT * FROM Product WHERE id = (@id)";
-        //private string DELETE_PRODUCT = "DELETE FROM Product WHERE ID = (@id)";
         private string FIND_PRODUCTS_BY_DESCRIPTION = "SELECT * from Product WHERE description = @description";
         private string FIND_PRODUCTS_BY_STATUS = "SELECT * from Product WHERE status = @status";
+        private string GET_ROWID = "Select rowId FROM Product WHERE id = @id";
         private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, " +
                                         " price = @price, purchasePrice = @PurchasePrice, " +
-                                        "description = @description, status = @status WHERE id = @id;";
+                                        "description = @description, status = @status WHERE rowId = @rowId AND id = @id;";
         public DBProduct()
         {
             dBConnection = new DBConnection();
@@ -34,8 +34,6 @@ namespace HypersWebshop.DataAccessLayer
             int productId = -1;
             try
             {
-                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
-                {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
                         SqlCommand command = new SqlCommand(CREATE_PRODUCT, con);
@@ -48,9 +46,6 @@ namespace HypersWebshop.DataAccessLayer
                         });
                         productId = command.ExecuteWithIdentity();
                     }
-                    scope.Complete();
-
-                }
             }
             catch (TransactionAbortedException)
             {
@@ -58,60 +53,7 @@ namespace HypersWebshop.DataAccessLayer
             return productId;
         }
 
-        //// Skal evt ikke bruges
-        //public void Delete(Product entity)
-        //{
-        //    try
-        //    {
-        //        using (TransactionScope scope = new TransactionScope())
-        //        {
-        //            using (SqlConnection con = dBConnection.OpenConnection())
-        //            {
-        //                SqlCommand command = new SqlCommand(DELETE_PRODUCT, con);
-        //                command.Parameters.AddWithValue("id", entity.ProductId);
-        //                command.ExecuteNonQuery();
-        //            }
-        //            scope.Complete();
-        //        }
-        //    }
-        //    catch (TransactionAbortedException)
-        //    {
-        //    }
-        //}
 
-        public Product FindProduct(int id)
-        {
-            Product product;
-            try
-            {
-
-                using (SqlConnection con = dBConnection.OpenConnection())
-                {
-
-                    SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
-                    command.Parameters.AddWithValue("id", id);
-                    SqlDataReader dr = command.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        product = new Product()
-                        {
-                            ProductId = dr.GetInt("id"),
-                            Name = dr.GetString("name"),
-                            Price = dr.GetLong("price"),
-                            PurchasePrice = dr.GetLong("purchasePrice"),
-                            ProductDescription = (Product_Description)dr.GetInt("description"),
-                            ProductStatus = (Product_Status)dr.GetInt("status")
-                        };
-                        return product;
-                    }
-                }
-            }
-            catch(TransactionAbortedException)
-            {
-
-            }
-            return null;
-        }
 
         public List<Product> FindByDescription(Enum productDescription)
         {
@@ -183,23 +125,39 @@ namespace HypersWebshop.DataAccessLayer
             int NoOfRowsAffected = 0;
             try
             {
-                using (TransactionScope scope = SqlExtensions.CreateReadComittedTransactionScope())
+                using (TransactionScope scope = DALExtensions.CreateReadComittedTransactionScope())
                 {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
-                        SqlCommand command = new SqlCommand(UPDATE_PRODUCT, con);
-                        Console.WriteLine("Pris Fra dBProduct: " + product.Price);
-                        Console.WriteLine(product.ProductId);
-                        command.AddMultipleWithValue(new Dictionary<string, object>() {
+                        //Lav en lokalvariabel til at holde styr op om rækken er blevet ændret
+                        byte[] rowId = null;
+                        // LAv en sqlCommand uden en query, fordi vi skal bruge 2 forskellige queries i denne metode
+                        using (SqlCommand command = con.CreateCommand())
+                        {
+                            //Tilføjer den første query til SqlCommanden, at få rowId inden man begynder at lave ændringer
+                            command.CommandText = GET_ROWID;
+                            command.Parameters.AddWithValue("id", product.ProductId);
+                            // Lav en SqlDataReader som kan hente rowId'et ud fra DB
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                rowId = (byte[])reader["rowId"];
+                            }
+                            reader.Close();
+                            // Bruges til testing: System.Threading.Thread.Sleep(5000);
+                            // Update_product har en WHERE clause, hvor der bliver tjekket om rowId er blevet ændret i mellemtiden
+                            command.CommandText = UPDATE_PRODUCT;
+                            command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
                                 { "price",          product.Price },
                                 { "PurchasePrice",  product.PurchasePrice },
                                 { "description",    product.ProductDescription },
                                 { "status",         product.ProductStatus },
-                                { "id",             product.ProductId },
+                                {"rowId",           rowId}
                         });
-                        //Kan evt returneres så man kan se hvor mange elementer der er blevet opdateret.
-                        NoOfRowsAffected = command.ExecuteNonQuery();
+                            //Returneres så man kan se hvor mange elementer der er blevet opdateret.
+                            NoOfRowsAffected = command.ExecuteNonQuery();
+                        }
                     }
                     scope.Complete();
                 }
@@ -211,5 +169,36 @@ namespace HypersWebshop.DataAccessLayer
             return NoOfRowsAffected;
         }
 
+        public Product FindProduct(int id)
+        {
+            Product product;
+            try
+            {
+                using (SqlConnection con = dBConnection.OpenConnection())
+                {
+                    SqlCommand command = new SqlCommand(FIND_PRODUCT_BY_ID, con);
+                    command.Parameters.AddWithValue("id", id);
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        product = new Product()
+                        {
+                            ProductId = dr.GetInt("id"),
+                            Name = dr.GetString("name"),
+                            Price = dr.GetLong("price"),
+                            PurchasePrice = dr.GetLong("purchasePrice"),
+                            ProductDescription = (Product_Description)dr.GetInt("description"),
+                            ProductStatus = (Product_Status)dr.GetInt("status")
+                        };
+                        return product;
+                    }
+                }
+            }
+            catch (TransactionAbortedException)
+            {
+
+            }
+            return null;
+        }
     }
 }
