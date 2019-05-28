@@ -131,7 +131,7 @@ namespace HypersWebshop.DataAccessLayer
                     {
                         //Lav en lokalvariabel til at holde styr op om rækken er blevet ændret
                         byte[] rowId = null;
-                        // LAv en sqlCommand uden en query, fordi vi skal bruge 2 forskellige queries i denne metode
+                        // Lav en sqlCommand uden en query, fordi vi skal bruge 2 forskellige queries i denne metode
                         using (SqlCommand command = con.CreateCommand())
                         {
                             //Tilføjer den første query til SqlCommanden, at få rowId inden man begynder at lave ændringer
@@ -153,7 +153,7 @@ namespace HypersWebshop.DataAccessLayer
                                 { "PurchasePrice",  product.PurchasePrice },
                                 { "description",    product.ProductDescription },
                                 { "status",         product.ProductStatus },
-                                {"rowId",           rowId}
+                                { "rowId",          rowId}
                         });
                             //Returneres så man kan se hvor mange elementer der er blevet opdateret.
                             NoOfRowsAffected = command.ExecuteNonQuery();
