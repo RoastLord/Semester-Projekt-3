@@ -22,6 +22,7 @@ namespace HypersDesktopWFApp
 
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
+            int rowsAffected = 0;
             try
             {
                 CompositeProduct compositeProduct = new CompositeProduct();
@@ -31,12 +32,21 @@ namespace HypersDesktopWFApp
                 compositeProduct.PurchasePrice = (long)numPurchasePrice.Value;
                 compositeProduct.ProductDescription = (Product_Description)cmbUpdateDescription.SelectedIndex;
                 compositeProduct.Product_Status = (Product_Status)cmbUpdateStatus.SelectedIndex;
-                service.UpdateProduct(compositeProduct);
-                this.Hide();
+                rowsAffected = service.UpdateProduct(compositeProduct);
+                
             }
             catch(Exception)
             {
                 MessageBox.Show("Something went wrong. Please try again");
+            }
+
+            if(rowsAffected > 0)
+            {
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Another user has already updated the product. Please try again");
             }
          
         }

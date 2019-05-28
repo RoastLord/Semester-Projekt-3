@@ -30,7 +30,6 @@ namespace HypersDesktopWFApp
         {
             try
             {
-
                 List<CompositeProduct> products = service.FindProductsByStatus((Product_Status)comboBoxProductStatus.SelectedIndex);
                 dataGridView1.DataSource = products;
             }

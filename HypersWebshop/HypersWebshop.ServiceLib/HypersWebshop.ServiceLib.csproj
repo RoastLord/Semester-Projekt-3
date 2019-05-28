@@ -47,6 +47,7 @@
     <Compile Include="DesktopService.cs" />
     <Compile Include="IDesktopService.cs" />
     <Compile Include="IWebService.cs" />
+    <Compile Include="CompositeTypes.cs" />
     <Compile Include="WebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

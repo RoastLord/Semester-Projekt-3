@@ -59,7 +59,6 @@
             this.lblUpdateName.Location = new System.Drawing.Point(56, 149);
             this.lblUpdateName.Name = "lblUpdateName";
             this.lblUpdateName.Size = new System.Drawing.Size(35, 13);
-            this.lblUpdateName.TabIndex = 3;
             this.lblUpdateName.Text = "Name";
             // 
             // lblUpdatePrice
@@ -68,7 +67,6 @@
             this.lblUpdatePrice.Location = new System.Drawing.Point(56, 205);
             this.lblUpdatePrice.Name = "lblUpdatePrice";
             this.lblUpdatePrice.Size = new System.Drawing.Size(31, 13);
-            this.lblUpdatePrice.TabIndex = 4;
             this.lblUpdatePrice.Text = "Price";
             // 
             // lblUpdatePurchasePrice
@@ -77,7 +75,6 @@
             this.lblUpdatePurchasePrice.Location = new System.Drawing.Point(263, 95);
             this.lblUpdatePurchasePrice.Name = "lblUpdatePurchasePrice";
             this.lblUpdatePurchasePrice.Size = new System.Drawing.Size(76, 13);
-            this.lblUpdatePurchasePrice.TabIndex = 5;
             this.lblUpdatePurchasePrice.Text = "PurchasePrice";
             // 
             // cmbUpdateDescription
@@ -97,7 +94,7 @@
             this.cmbUpdateDescription.Location = new System.Drawing.Point(264, 165);
             this.cmbUpdateDescription.Name = "cmbUpdateDescription";
             this.cmbUpdateDescription.Size = new System.Drawing.Size(121, 21);
-            this.cmbUpdateDescription.TabIndex = 12;
+            this.cmbUpdateDescription.TabIndex = 3;
             // 
             // cmbUpdateStatus
             // 
@@ -113,14 +110,14 @@
             this.cmbUpdateStatus.Location = new System.Drawing.Point(264, 220);
             this.cmbUpdateStatus.Name = "cmbUpdateStatus";
             this.cmbUpdateStatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbUpdateStatus.TabIndex = 7;
+            this.cmbUpdateStatus.TabIndex = 4;
             // 
             // btnUpdateCancel
             // 
             this.btnUpdateCancel.Location = new System.Drawing.Point(59, 256);
             this.btnUpdateCancel.Name = "btnUpdateCancel";
             this.btnUpdateCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateCancel.TabIndex = 8;
+            this.btnUpdateCancel.TabIndex = 5;
             this.btnUpdateCancel.Text = "Cancel";
             this.btnUpdateCancel.UseVisualStyleBackColor = true;
             this.btnUpdateCancel.Click += new System.EventHandler(this.btnUpdateCancel_Click);
@@ -130,7 +127,7 @@
             this.btnUpdateProduct.Location = new System.Drawing.Point(264, 256);
             this.btnUpdateProduct.Name = "btnUpdateProduct";
             this.btnUpdateProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateProduct.TabIndex = 9;
+            this.btnUpdateProduct.TabIndex = 6;
             this.btnUpdateProduct.Text = "Update";
             this.btnUpdateProduct.UseVisualStyleBackColor = true;
             this.btnUpdateProduct.Click += new System.EventHandler(this.btnUpdateProduct_Click);
@@ -141,7 +138,6 @@
             this.lblUpdateDescription.Location = new System.Drawing.Point(261, 143);
             this.lblUpdateDescription.Name = "lblUpdateDescription";
             this.lblUpdateDescription.Size = new System.Drawing.Size(60, 13);
-            this.lblUpdateDescription.TabIndex = 10;
             this.lblUpdateDescription.Text = "Description";
             // 
             // lblUpdateProductStatus
@@ -150,7 +146,6 @@
             this.lblUpdateProductStatus.Location = new System.Drawing.Point(261, 204);
             this.lblUpdateProductStatus.Name = "lblUpdateProductStatus";
             this.lblUpdateProductStatus.Size = new System.Drawing.Size(74, 13);
-            this.lblUpdateProductStatus.TabIndex = 11;
             this.lblUpdateProductStatus.Text = "ProductStatus";
             // 
             // txtUpdateProductID
@@ -159,7 +154,7 @@
             this.txtUpdateProductID.Name = "txtUpdateProductID";
             this.txtUpdateProductID.ReadOnly = true;
             this.txtUpdateProductID.Size = new System.Drawing.Size(100, 20);
-            this.txtUpdateProductID.TabIndex = 13;
+            this.txtUpdateProductID.TabStop = false;
             // 
             // lblUpdateId
             // 
@@ -167,8 +162,8 @@
             this.lblUpdateId.Location = new System.Drawing.Point(59, 95);
             this.lblUpdateId.Name = "lblUpdateId";
             this.lblUpdateId.Size = new System.Drawing.Size(58, 13);
-            this.lblUpdateId.TabIndex = 14;
             this.lblUpdateId.Text = "Product ID";
+            this.txtUpdateProductID.TabStop = false;
             // 
             // numPrice
             // 
@@ -180,7 +175,7 @@
             0});
             this.numPrice.Name = "numPrice";
             this.numPrice.Size = new System.Drawing.Size(120, 20);
-            this.numPrice.TabIndex = 15;
+            this.numPrice.TabIndex = 1;
             // 
             // numPurchasePrice
             // 
@@ -192,7 +187,7 @@
             0});
             this.numPurchasePrice.Name = "numPurchasePrice";
             this.numPurchasePrice.Size = new System.Drawing.Size(120, 20);
-            this.numPurchasePrice.TabIndex = 16;
+            this.numPurchasePrice.TabIndex = 2;
             // 
             // UpdateProductView
             // 

@@ -48,7 +48,7 @@ namespace HypersWebshop.BusinessLogic
                 }
                 if (IsPaid(order))
                 {
-                    List<OrderLine> orderLines = dBOrder.FindOrderLines(order.OrderNo);
+                    List<OrderLine> orderLines = FindOrderLines(order.OrderNo);
                     Console.WriteLine(orderLines.Count);
                     foreach(OrderLine orderLine in orderLines)
                     {
@@ -91,7 +91,7 @@ namespace HypersWebshop.BusinessLogic
             return stringBuilder.ToString();
         }
 
-        public List<OrderLine> GetOrderLines(int orderNo)
+        public List<OrderLine> FindOrderLines(int orderNo)
         {
             return dBOrder.FindOrderLines(orderNo);
         }

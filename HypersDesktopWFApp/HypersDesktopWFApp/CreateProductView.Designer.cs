@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnCreate = new System.Windows.Forms.Button();
+           this.numCreateprice = new System.Windows.Forms.NumericUpDown();
+            this.numCreatePurchasePrice = new System.Windows.Forms.NumericUpDown();
             this.lblName = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblPurchasePrice = new System.Windows.Forms.Label();
@@ -38,8 +38,9 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.cmbDescription = new System.Windows.Forms.ComboBox();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.numCreateprice = new System.Windows.Forms.NumericUpDown();
-            this.numCreatePurchasePrice = new System.Windows.Forms.NumericUpDown();
+            
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numCreateprice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCreatePurchasePrice)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             this.btnCancel.Location = new System.Drawing.Point(113, 240);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -66,7 +67,7 @@
             this.btnCreate.Location = new System.Drawing.Point(272, 240);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 6;
+            this.btnCreate.TabIndex = 7;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -133,7 +134,7 @@
             this.cmbDescription.Location = new System.Drawing.Point(275, 82);
             this.cmbDescription.Name = "cmbDescription";
             this.cmbDescription.Size = new System.Drawing.Size(121, 21);
-            this.cmbDescription.TabIndex = 12;
+            this.cmbDescription.TabIndex = 4;
             // 
             // cmbStatus
             // 
@@ -149,7 +150,7 @@
             this.cmbStatus.Location = new System.Drawing.Point(275, 123);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbStatus.TabIndex = 13;
+            this.cmbStatus.TabIndex = 5;
             // 
             // numCreateprice
             // 
@@ -161,7 +162,7 @@
             0});
             this.numCreateprice.Name = "numCreateprice";
             this.numCreateprice.Size = new System.Drawing.Size(120, 20);
-            this.numCreateprice.TabIndex = 16;
+            this.numCreateprice.TabIndex = 2;
             // 
             // numCreatePurchasePrice
             // 
@@ -173,7 +174,7 @@
             0});
             this.numCreatePurchasePrice.Name = "numCreatePurchasePrice";
             this.numCreatePurchasePrice.Size = new System.Drawing.Size(120, 20);
-            this.numCreatePurchasePrice.TabIndex = 17;
+            this.numCreatePurchasePrice.TabIndex = 3;
             // 
             // CreateProductView
             // 
@@ -204,6 +205,8 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.NumericUpDown numCreateprice;
+        public System.Windows.Forms.NumericUpDown numCreatePurchasePrice;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Label lblName;
@@ -213,7 +216,7 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbDescription;
         private System.Windows.Forms.ComboBox cmbStatus;
-        public System.Windows.Forms.NumericUpDown numCreateprice;
-        public System.Windows.Forms.NumericUpDown numCreatePurchasePrice;
+        
+        
     }
 }
