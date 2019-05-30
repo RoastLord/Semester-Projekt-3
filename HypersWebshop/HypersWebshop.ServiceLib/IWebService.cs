@@ -27,5 +27,4 @@ namespace HypersWebshop.ServiceLib
         string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer);
 
     }
-
 }

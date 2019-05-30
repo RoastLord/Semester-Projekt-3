@@ -29,4 +29,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CompositeCustomer" nillable="true" type="tns:CompositeCustomer" />
+  <xs:complexType name="ServiceFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceFault" nillable="true" type="tns:ServiceFault" />
 </xs:schema>

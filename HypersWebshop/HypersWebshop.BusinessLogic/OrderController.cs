@@ -17,7 +17,7 @@ namespace HypersWebshop.BusinessLogic
 
 
         public void AddOrderlineToOrder(int orderNo, OrderLine orderLine)
-        {   
+        {
             dBOrder.CreateOrderline(orderNo, orderLine);
         }
 
@@ -26,57 +26,73 @@ namespace HypersWebshop.BusinessLogic
             return dBOrder.CreateOrder(order);
         }
 
-        private bool IsProductPublished(List<OrderLine> orderLines)
+        private void IsProductPublished(List<OrderLine> orderLines)
         {
-            bool check = true;
-            foreach(OrderLine orderLine in orderLines)
+            foreach (OrderLine orderLine in orderLines)
             {
-                if(orderLine.Product.ProductStatus != Product_Status.Published)
+                if (productController.FindProduct(orderLine.Product.ProductId).ProductStatus != Product_Status.Published)
                 {
-                    check= false;
+                    throw new ProductAlreadySoldException(orderLine.Product.Name + " has already been purchased");
                 }
             }
-            return check;
         }
 
         public string ProcessSale(Order order)
         {
+            try
             {
-                if(!IsProductPublished(order.OrderLines))
-                {
-                    throw new FaultException("The product isnt published");
-                }
+                IsProductPublished(order.OrderLines);
                 if (IsPaid(order))
                 {
-                    List<OrderLine> orderLines = FindOrderLines(order.OrderNo);
-                    Console.WriteLine(orderLines.Count);
-                    foreach(OrderLine orderLine in orderLines)
+                    List<OrderLine> orderLines = order.OrderLines;
+                    foreach (OrderLine orderLine in orderLines)
                     {
-                        Product p = orderLine.Product;
+                        Product p = productController.FindProduct(orderLine.Product.ProductId);
                         p.ProductStatus = Product_Status.Sold;
-                        productController.UpdateProduct(p);
+                        int rows = productController.UpdateProduct(p);
                     }
-                    Console.WriteLine("Salg gik igennem");
-
+                    // Save all information in the database
+                    personController.CreateCustomer(order.Customer);
+                    order.OrderNo = CreateOrder(order);
+                    foreach (OrderLine orderLine in order.OrderLines)
+                    {
+                        AddOrderlineToOrder(order.OrderNo, orderLine);
+                    }
                     personController.AddOrderToCustomer(order.OrderNo, order.Customer);
-                
                 }
                 return PrintReceipt(order);
             }
+            catch(ProductAlreadySoldException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        private bool IsRowsAffected(int rows)
+        {
+            bool check = true;
+            if (rows == 0)
+                check = false;
+
+            return check;
         }
 
         private string PrintReceipt(Order order)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            
+
             stringBuilder.AppendLine("Order Number" + order.OrderNo.ToString());
             stringBuilder.AppendLine("Name: " + order.Customer.Name);
             stringBuilder.AppendLine("Address: " + order.Customer.Address);
             stringBuilder.AppendLine("City: " + order.Customer.City);
             stringBuilder.AppendLine("Email: " + order.Customer.Email);
             stringBuilder.AppendLine("Phone Number: " + order.Customer.PhoneNo);
-            
+
 
             foreach (OrderLine orderLine in order.OrderLines)
             {

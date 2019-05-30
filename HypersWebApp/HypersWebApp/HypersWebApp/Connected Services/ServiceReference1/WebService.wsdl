@@ -38,6 +38,9 @@
   <wsdl:message name="IWebService_ProcessSale_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProcessSaleResponse" />
   </wsdl:message>
+  <wsdl:message name="IWebService_ProcessSale_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/HypersWebshop.ServiceLib" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IWebService">
     <wsdl:operation name="FindProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IWebService/FindProduct" message="tns:IWebService_FindProduct_InputMessage" />
@@ -58,6 +61,7 @@
     <wsdl:operation name="ProcessSale">
       <wsdl:input wsaw:Action="http://tempuri.org/IWebService/ProcessSale" message="tns:IWebService_ProcessSale_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWebService/ProcessSaleResponse" message="tns:IWebService_ProcessSale_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IWebService/ProcessSaleServiceFaultFault" name="ServiceFaultFault" message="tns:IWebService_ProcessSale_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebEndpoint" type="tns:IWebService">
@@ -106,6 +110,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="WebService">

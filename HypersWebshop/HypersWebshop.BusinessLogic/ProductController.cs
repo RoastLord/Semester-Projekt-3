@@ -3,6 +3,7 @@ using HypersWebshop.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,14 @@ namespace HypersWebshop.BusinessLogic
 
         public int UpdateProduct(Product product)
         {
-            return dbProduct.Update(product);
+            try
+            {
+                return dbProduct.Update(product);
+            }
+            catch(FaultException e)
+            {
+                throw e;
+            }
         }
 
         public List<Product> FindProductsByDescription(Enum productDescription)

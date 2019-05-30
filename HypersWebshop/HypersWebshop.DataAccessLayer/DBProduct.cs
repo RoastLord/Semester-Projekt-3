@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -22,7 +23,7 @@ namespace HypersWebshop.DataAccessLayer
         private string GET_ROWID = "Select rowId FROM Product WHERE id = @id";
         private string UPDATE_PRODUCT = "UPDATE Product SET name = @name, " +
                                         " price = @price, purchasePrice = @PurchasePrice, " +
-                                        "description = @description, status = @status WHERE rowId = @rowId AND id = @id;";
+                                        "description = @description, status = @status WHERE rowId = @rowId AND id = @id";
         public DBProduct()
         {
             dBConnection = new DBConnection();
@@ -129,23 +130,17 @@ namespace HypersWebshop.DataAccessLayer
                 {
                     using (SqlConnection con = dBConnection.OpenConnection())
                     {
-                        //Lav en lokalvariabel til at holde styr op om rækken er blevet ændret
                         byte[] rowId = null;
-                        // Lav en sqlCommand uden en query, fordi vi skal bruge 2 forskellige queries i denne metode
                         using (SqlCommand command = con.CreateCommand())
                         {
-                            //Tilføjer den første query til SqlCommanden, at få rowId inden man begynder at lave ændringer
                             command.CommandText = GET_ROWID;
                             command.Parameters.AddWithValue("id", product.ProductId);
-                            // Lav en SqlDataReader som kan hente rowId'et ud fra DB
                             SqlDataReader reader = command.ExecuteReader();
                             while (reader.Read())
                             {
                                 rowId = (byte[])reader["rowId"];
                             }
                             reader.Close();
-                            // Bruges til testing: System.Threading.Thread.Sleep(5000);
-                            // Update_product har en WHERE clause, hvor der bliver tjekket om rowId er blevet ændret i mellemtiden
                             command.CommandText = UPDATE_PRODUCT;
                             command.AddMultipleWithValue(new Dictionary<string, object>() {
                                 { "name",           product.Name },
@@ -155,7 +150,6 @@ namespace HypersWebshop.DataAccessLayer
                                 { "status",         product.ProductStatus },
                                 { "rowId",          rowId}
                         });
-                            //Returneres så man kan se hvor mange elementer der er blevet opdateret.
                             NoOfRowsAffected = command.ExecuteNonQuery();
                         }
                     }
@@ -164,8 +158,12 @@ namespace HypersWebshop.DataAccessLayer
             }
             catch (TransactionAbortedException)
             {
-                
             }
+            if(NoOfRowsAffected == 0)
+            {
+                throw new ProductAlreadySoldException(product.Name + " has already been purchased by another user");
+            }
+
             return NoOfRowsAffected;
         }
 

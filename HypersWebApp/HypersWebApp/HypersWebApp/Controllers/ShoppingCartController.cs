@@ -76,7 +76,7 @@ namespace HypersWebApp.Controllers
                 compProductList.Add(compProduct);
             }
             CompositeCustomer compCustomer = CustumerCreation(name, lAdress, phone, email, intZip, city);
-            string saleString = client.ProcessSale(compProductList , compCustomer);
+            string saleString = client.ProcessSale(compProductList, compCustomer);
             return RedirectToAction("Payment", new { saleString });
         }
 
@@ -94,7 +94,6 @@ namespace HypersWebApp.Controllers
 
         public ActionResult Payment(string saleString)
         {
-
             ViewBag.saleString = saleString;
             Session["cart"] = null;
             return View();
