@@ -22,14 +22,14 @@ namespace HypersWebshop.BusinessLogic
             dBPerson.AddOrderToCustomer(orderNo, customer);
         }
 
-        //public Customer GetCustomer(string phoneNo)
-        //{
-        //    return dBPerson.FindCustomer(phoneNo);
-        //}
+        public Customer GetCustomer(string phoneNo)
+        {
+            return dBPerson.FindCustomer(phoneNo);
+        }
 
-        //public string GetCityByZipCode(int zipcode)
-        //{
-        //    return dBPerson.GetCityByZipCode(zipcode);
-        //}
+        public string GetCityByZipCode(int zipcode)
+        {
+            return dBPerson.GetCityByZipCode(zipcode);
+        }
     }
 }

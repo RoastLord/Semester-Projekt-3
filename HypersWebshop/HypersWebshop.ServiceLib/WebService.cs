@@ -105,7 +105,7 @@ namespace HypersWebshop.ServiceLib
             {
                 return orderController.ProcessSale(order);
             }
-            catch(ProductAlreadySoldException e)
+            catch(ProductAlreadyUpdatedException e)
             {
                 return e.Message;
             }

@@ -32,7 +32,7 @@ namespace HypersWebshop.BusinessLogic
             {
                 if (productController.FindProduct(orderLine.Product.ProductId).ProductStatus != Product_Status.Published)
                 {
-                    throw new ProductAlreadySoldException(orderLine.Product.Name + " has already been purchased");
+                    throw new ProductAlreadyUpdatedException(orderLine.Product.Name);
                 }
             }
         }
@@ -52,8 +52,12 @@ namespace HypersWebshop.BusinessLogic
                         int rows = productController.UpdateProduct(p);
                     }
                     // Save all information in the database
-                    personController.CreateCustomer(order.Customer);
                     order.OrderNo = CreateOrder(order);
+                    if (personController.GetCustomer(order.Customer.PhoneNo) == null)
+                    {
+                        personController.CreateCustomer(order.Customer);
+                    }
+                    
                     foreach (OrderLine orderLine in order.OrderLines)
                     {
                         AddOrderlineToOrder(order.OrderNo, orderLine);
@@ -62,7 +66,7 @@ namespace HypersWebshop.BusinessLogic
                 }
                 return PrintReceipt(order);
             }
-            catch(ProductAlreadySoldException e)
+            catch(ProductAlreadyUpdatedException e)
             {
                 throw e;
             }

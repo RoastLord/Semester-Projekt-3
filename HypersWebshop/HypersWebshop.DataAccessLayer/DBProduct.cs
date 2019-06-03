@@ -161,7 +161,7 @@ namespace HypersWebshop.DataAccessLayer
             }
             if(NoOfRowsAffected == 0)
             {
-                throw new ProductAlreadySoldException(product.Name + " has already been purchased by another user");
+                throw new ProductAlreadyUpdatedException(product.Name);
             }
 
             return NoOfRowsAffected;

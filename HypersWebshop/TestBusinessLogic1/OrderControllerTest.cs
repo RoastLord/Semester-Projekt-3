@@ -10,44 +10,60 @@ namespace TestBusinessLogic
     [TestClass]
     public class OrderControllerTest
     {
+        OrderController orderController = new OrderController();
+        ProductController productController = new ProductController();
+        PersonController personController = new PersonController();
         [TestMethod]
         public void TestProcessSale()
         {
             // Arrange
-            OrderController orderController = new OrderController();
-            ProductController productController = new ProductController();
-            PersonController personController = new PersonController();
             Customer customer = new Customer()
             {
-                Name = "Per",
+                Name = "test",
                 Address = "Hadsundvej 30",
-                PhoneNo = "156415234",
+                PhoneNo = "14212",
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
-            personController.CreateCustomer(customer);
 
             Product product = new Product()
             {
-                Name = "TestProduct",
+                Name = "TestProductyeet",
                 Price = 100,
                 PurchasePrice = 50,
                 ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
-            product.ProductId = productController.Create(product);
-            OrderLine orderLine = new OrderLine();
-            orderLine.Product = product;
-            Order order = new Order (DateTime.Today, DateTime.Today, customer);
-            order.OrderNo = orderController.CreateOrder(order);
-            personController.AddOrderToCustomer(order.OrderNo, customer);
-            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
 
+            Product product2 = new Product()
+            {
+                Name = "TestProduct2yeet",
+                Price = 100,
+                PurchasePrice = 50,
+                ProductDescription = Product_Description.RAM,
+                ProductStatus = Product_Status.Published
+            };
+            List<Product> products = new List<Product>();
+            products.Add(product);
+            products.Add(product2);
+            product.ProductId = productController.Create(product);
+            product2.ProductId = productController.Create(product2);
+            Order order = new Order (DateTime.Today, DateTime.Today, customer);
+
+            foreach(Product p in products)
+            {
+                OrderLine orderLine = new OrderLine();
+                orderLine.Product = p;
+                order.OrderLines.Add(orderLine);
+            }
             // Act
             orderController.ProcessSale(order);
 
             // Assert
-            Assert.AreEqual(Product_Status.Sold, productController.FindProduct(product.ProductId).ProductStatus);
+            foreach(OrderLine ol in order.OrderLines)
+            {
+                Assert.AreEqual(Product_Status.Sold, productController.FindProduct(ol.Product.ProductId).ProductStatus);
+            }
         }
 
 
