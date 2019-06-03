@@ -25,7 +25,6 @@ namespace TestBusinessLogic
                 Email = "per@mail.dk",
                 Zipcode = 9000,
             };
-
             Product product = new Product()
             {
                 Name = "TestProductyeet",
@@ -34,7 +33,6 @@ namespace TestBusinessLogic
                 ProductDescription = Product_Description.Battery,
                 ProductStatus = Product_Status.Published
             };
-
             Product product2 = new Product()
             {
                 Name = "TestProduct2yeet",
@@ -49,7 +47,6 @@ namespace TestBusinessLogic
             product.ProductId = productController.Create(product);
             product2.ProductId = productController.Create(product2);
             Order order = new Order (DateTime.Today, DateTime.Today, customer);
-
             foreach(Product p in products)
             {
                 OrderLine orderLine = new OrderLine();

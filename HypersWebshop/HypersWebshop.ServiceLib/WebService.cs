@@ -24,57 +24,6 @@ namespace HypersWebshop.ServiceLib
             return composite;
         }
 
-        //public string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer)
-        //{
-
-        //        // Lav Composite objekt om til et "normalt" objekt
-        //        Customer customer = CompositeToCustomer(compCustomer);
-        //        List<Product> products = new List<Product>();
-
-        //        // Lokalvariabel til at holde styr på totalprisen for ordren
-        //        long totalPrice = 0;
-
-        //        // Lav listen af Composite Objekter om til en liste af normale Produkter TEST
-        //        foreach (CompositeProduct compP in compProducts)
-        //        {
-        //            products.Add(CompositeToProduct(compP));
-        //            // For hvert produkt, + prisen til totalprisen
-        //            totalPrice += compP.Price;
-        //        }
-
-        //        // Lav en Order lokalvariabel, med 7 dages levering
-        //        Order order = new Order(totalPrice, DateTime.Now, DateTime.Now.AddDays(7), customer);
-
-        //        // Gem ordren i databasen, og hent ID'et ud som databasen generer for os
-        //        order.OrderNo = orderController.CreateOrder(order);
-
-        //        // Gem Customer i databasen
-        //        personController.CreateCustomer(customer);
-
-        //        // Tilknyt ordren til Customer i databasen
-        //        personController.AddOrderToCustomer(order.OrderNo, customer);
-
-        //        // Lav OrderLine objekter for hvert produkt, og tilføj dem til lokalvariablen "order" + gem de invidiuelle orderLines i databasen
-        //        foreach (Product p in products)
-        //        {
-        //            OrderLine orderLine = new OrderLine();
-        //            orderLine.Product = p;
-        //            order.AddToOrderLine(orderLine);
-        //            orderController.AddOrderlineToOrder(order.OrderNo, orderLine);
-        //        }
-
-        //    try
-        //    {
-        //        // Færdiggør salget, dvs ændre alle produkt statusser til "Solgt" + returner en string (kvitteringen)
-        //        return orderController.ProcessSale(order);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return e.Message;
-        //    }
-
-        //}
-
         public string ProcessSale(List<CompositeProduct> compProducts, CompositeCustomer compCustomer)
         {
             // Lav Composite objekt om til et "normalt" objekt
