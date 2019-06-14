@@ -24,7 +24,7 @@ namespace HypersWebshop.BusinessLogic
             {
                 return dbProduct.Update(product);
             }
-            catch(FaultException e)
+            catch(ProductAlreadyUpdatedException e)
             {
                 throw e;
             }

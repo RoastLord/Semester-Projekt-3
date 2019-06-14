@@ -10,7 +10,7 @@ namespace HypersWebshop.DataAccessLayer
         }
 
         public ProductAlreadyUpdatedException(string message)
-            : base(message)
+            : base(message  + " has already been purchased by someone else.")
         {
         }
     }

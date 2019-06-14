@@ -209,12 +209,6 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/CreateProduct", ReplyAction="http://tempuri.org/IDesktopService/CreateProductResponse")]
         System.Threading.Tasks.Task<int> CreateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/FindProduct", ReplyAction="http://tempuri.org/IDesktopService/FindProductResponse")]
-        HypersDesktopWFApp.ServiceReference1.CompositeProduct FindProduct(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/FindProduct", ReplyAction="http://tempuri.org/IDesktopService/FindProductResponse")]
-        System.Threading.Tasks.Task<HypersDesktopWFApp.ServiceReference1.CompositeProduct> FindProductAsync(int id);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDesktopService/FindProductsByDescription", ReplyAction="http://tempuri.org/IDesktopService/FindProductsByDescriptionResponse")]
         System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeProduct> FindProductsByDescription(HypersDesktopWFApp.ServiceReference1.Product_Description description);
         
@@ -269,14 +263,6 @@ namespace HypersDesktopWFApp.ServiceReference1 {
         
         public System.Threading.Tasks.Task<int> CreateProductAsync(HypersDesktopWFApp.ServiceReference1.CompositeProduct composite) {
             return base.Channel.CreateProductAsync(composite);
-        }
-        
-        public HypersDesktopWFApp.ServiceReference1.CompositeProduct FindProduct(int id) {
-            return base.Channel.FindProduct(id);
-        }
-        
-        public System.Threading.Tasks.Task<HypersDesktopWFApp.ServiceReference1.CompositeProduct> FindProductAsync(int id) {
-            return base.Channel.FindProductAsync(id);
         }
         
         public System.Collections.Generic.List<HypersDesktopWFApp.ServiceReference1.CompositeProduct> FindProductsByDescription(HypersDesktopWFApp.ServiceReference1.Product_Description description) {

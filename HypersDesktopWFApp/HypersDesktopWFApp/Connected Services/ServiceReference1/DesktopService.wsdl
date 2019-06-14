@@ -20,12 +20,6 @@
   <wsdl:message name="IDesktopService_CreateProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateProductResponse" />
   </wsdl:message>
-  <wsdl:message name="IDesktopService_FindProduct_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindProduct" />
-  </wsdl:message>
-  <wsdl:message name="IDesktopService_FindProduct_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindProductResponse" />
-  </wsdl:message>
   <wsdl:message name="IDesktopService_FindProductsByDescription_InputMessage">
     <wsdl:part name="parameters" element="tns:FindProductsByDescription" />
   </wsdl:message>
@@ -46,10 +40,6 @@
     <wsdl:operation name="CreateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IDesktopService/CreateProduct" message="tns:IDesktopService_CreateProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDesktopService/CreateProductResponse" message="tns:IDesktopService_CreateProduct_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="FindProduct">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopService/FindProduct" message="tns:IDesktopService_FindProduct_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopService/FindProductResponse" message="tns:IDesktopService_FindProduct_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindProductsByDescription">
       <wsdl:input wsaw:Action="http://tempuri.org/IDesktopService/FindProductsByDescription" message="tns:IDesktopService_FindProductsByDescription_InputMessage" />
@@ -73,15 +63,6 @@
     </wsdl:operation>
     <wsdl:operation name="CreateProduct">
       <soap:operation soapAction="http://tempuri.org/IDesktopService/CreateProduct" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="FindProduct">
-      <soap:operation soapAction="http://tempuri.org/IDesktopService/FindProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

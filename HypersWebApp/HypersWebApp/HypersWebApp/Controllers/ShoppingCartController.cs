@@ -94,7 +94,7 @@ namespace HypersWebApp.Controllers
 
         public ActionResult Payment(string saleString)
         {
-            saleString = saleString + " could not be purchased at the time. Please try again";
+            // saleString = saleString + " could not be purchased at the time. Please try again";
             ViewBag.saleString = saleString;
             Session["cart"] = null;
             return View();
